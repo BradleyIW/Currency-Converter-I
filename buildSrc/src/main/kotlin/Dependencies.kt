@@ -15,6 +15,7 @@ object BuildPlugins {
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.buildToolsVersion}"
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     const val androidApplication = "com.android.application"
+    const val androidLibrary = "com.android.library"
     const val kotlinAndroid = "kotlin-android"
     const val kotlinAndroidExtensions = "kotlin-android-extensions"
 }
@@ -40,4 +41,9 @@ object TestLibraries {
 
     const val junit4 = "junit:junit:${Versions.junit4}"
     const val testRunner = "androidx.test:runner:${Versions.testRunner}"
+}
+
+object ScriptPlugins {
+    const val configApplication = "scripts.application.config"
+    const val configLibrary = "scripts.library.config"
 }

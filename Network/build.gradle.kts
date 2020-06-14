@@ -1,23 +1,21 @@
 plugins {
     //Application plugins
-    id(BuildPlugins.androidApplication)
+    id(BuildPlugins.androidLibrary)
     id(BuildPlugins.kotlinAndroid)
     id(BuildPlugins.kotlinAndroidExtensions)
 
     //Script plugins
-    id(ScriptPlugins.configApplication)
+    id(ScriptPlugins.configLibrary)
 }
 
 android {
     compileSdkVersion(AndroidSdk.compile)
 
     defaultConfig {
-        applicationId = appId
         minSdkVersion(AndroidSdk.min)
         targetSdkVersion(AndroidSdk.target)
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = TestLibraries.testRunner
     }
 }
