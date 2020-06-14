@@ -8,7 +8,7 @@ object AndroidSdk {
 }
 
 object BuildPlugins {
-    object Versions {
+    private object Versions {
         const val buildToolsVersion = "4.0.0"
     }
 
