@@ -1,6 +1,9 @@
 plugins {
+    //Application plugins
     id(BuildPlugins.kotlin)
     id(BuildPlugins.javaLibrary)
+
+    //Script plugins
     id(ScriptPlugins.pureKotlin)
 }
 
