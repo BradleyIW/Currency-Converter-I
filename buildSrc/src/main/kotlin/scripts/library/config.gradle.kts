@@ -6,7 +6,7 @@ object BuildTypes {
 }
 
 plugins {
-    id("scripts.library.android")
+    id("com.android.library") apply false
 }
 
 android {
@@ -25,5 +25,14 @@ android {
         }
     }
 
-    sourceSets { map { it.java.srcDir("src/${it.name}/kotlin") } }
+    sourceSets {
+        map {
+            it.java.srcDir("src/${it.name}/kotlin")
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 }

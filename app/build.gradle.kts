@@ -5,7 +5,7 @@ plugins {
     id(BuildPlugins.kotlinAndroidExtensions)
 
     //Script plugins
-    id(ScriptPlugins.configApplication)
+    id(ScriptPlugins.buildConfigApplication)
 }
 
 android {
@@ -23,6 +23,9 @@ android {
 }
 
 dependencies {
+    api(project(Modules.core))
+    implementation(project(Modules.network))
+
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.appCompat)
     implementation(Libraries.ktxCore)

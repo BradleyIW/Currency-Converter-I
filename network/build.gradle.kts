@@ -1,11 +1,9 @@
 plugins {
-    //Application plugins
     id(BuildPlugins.androidLibrary)
     id(BuildPlugins.kotlinAndroid)
     id(BuildPlugins.kotlinAndroidExtensions)
 
-    //Script plugins
-    id(ScriptPlugins.configLibrary)
+    id(ScriptPlugins.buildConfigLibrary)
 }
 
 android {
@@ -21,10 +19,17 @@ android {
 }
 
 dependencies {
+    api(project(Modules.core))
+    testImplementation(project(Modules.core, Core.configName))
+
     implementation(Libraries.kotlinStdLib)
-    implementation(Libraries.appCompat)
     implementation(Libraries.ktxCore)
-    implementation(Libraries.constraint)
+    implementation(Libraries.retrofitCore)
+    implementation(Libraries.retrofitConverter)
+    implementation(Libraries.coroutines)
 
     testImplementation(TestLibraries.junit4)
+    testImplementation(TestLibraries.coroutines)
+    testImplementation(TestLibraries.mockito)
+    testImplementation(TestLibraries.mockitoInline)
 }

@@ -1,1 +1,5 @@
-include(":app", ":network")
+include(
+    ":app",
+    ":network",
+    ":core"
+)
