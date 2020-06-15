@@ -1,7 +1,11 @@
 plugins {
+    //Application plugins
     id(BuildPlugins.androidApplication)
     id(BuildPlugins.kotlinAndroid)
     id(BuildPlugins.kotlinAndroidExtensions)
+
+    //Script plugins
+    id(ScriptPlugins.buildConfigApplication)
 }
 
 android {
@@ -16,20 +20,12 @@ android {
 
         testInstrumentationRunner = TestLibraries.testRunner
     }
-
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-
 }
 
 dependencies {
+    api(project(Modules.core))
+    implementation(project(Modules.network))
+
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.appCompat)
     implementation(Libraries.ktxCore)
