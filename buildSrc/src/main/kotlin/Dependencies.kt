@@ -9,7 +9,7 @@ private object Versions {
     const val coroutines = "1.3.7"
     const val buildToolsVersion = "4.0.0"
     const val junit4 = "4.13"
-    const val mockito = "2.7.22"
+    const val mockito = "3.1.0"
     const val robolectric = "4.3.1"
     const val assertJ = "3.16.1"
     const val testRunner = "1.1.0"
@@ -25,36 +25,48 @@ object AndroidSdk {
 }
 
 object BuildPlugins {
-    const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.buildToolsVersion}"
-    const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-    const val androidApplication = "com.android.application"
-    const val androidLibrary = "com.android.library"
-    const val kotlinAndroid = "kotlin-android"
-    const val kotlinAndroidExtensions = "kotlin-android-extensions"
-    const val kotlin = "kotlin"
+    object Android {
+        const val application = "com.android.application"
+        const val library = "com.android.library"
+        const val gradlePlugin = "com.android.tools.build:gradle:${Versions.buildToolsVersion}"
+    }
+
+    object Kotlin {
+        const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        const val android = "kotlin-android"
+        const val androidExtensions = "kotlin-android-extensions"
+        const val plugin = "kotlin"
+    }
+
     const val javaLibrary = "java-library"
 }
 
 object Libraries {
+    object Retrofit {
+        const val core = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+        const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
+    }
+
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     const val appCompat = "androidx.appcompat:appcompat:${Versions.jetpack}"
     const val constraint = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     const val ktxCore = "androidx.core:core-ktx:${Versions.ktx}"
-    const val retrofitCore = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
-    const val retrofitConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
 }
 
 object TestLibraries {
+    object Mockito {
+        const val core = "org.mockito:mockito-core:${Versions.mockito}"
+        const val inline = "org.mockito:mockito-inline:${Versions.mockito}"
+    }
+
     const val junit4 = "junit:junit:${Versions.junit4}"
-    const val mockito = "org.mockito:mockito-core:${Versions.mockito}"
     const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
     const val assertJ = "org.assertj:assertj-core:${Versions.assertJ}"
     const val testRunner = "androidx.test:runner:${Versions.testRunner}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
     const val testExtJunit = "androidx.test.ext:junit:${Versions.testExtensions}"
     const val testRules = "androidx.test:rules:${Versions.testRules}"
-    const val mockitoInline = "org.mockito:mockito-inline:${Versions.mockito}"
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
 }
 
@@ -65,6 +77,12 @@ object ScriptPlugins {
 }
 
 object Modules {
-    const val network = ":network"
-    const val core = ":core"
+    object Core {
+        const val network = ":network"
+        const val core = ":core"
+    }
+
+    object Feature {
+        const val currency = ":currency-converter"
+    }
 }

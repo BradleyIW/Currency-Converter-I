@@ -89,7 +89,6 @@ class ApiServiceTest : UnitTest() {
             validateHttpError(411, ServerError)
         }
 
-
     private fun validateSuccessError(failure: NetworkFailure) = runBlocking {
         val request = apiService.request { mockEmptySuccessResponse() }
         request.onFailure {

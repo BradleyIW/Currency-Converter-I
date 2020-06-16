@@ -1,3 +1,5 @@
+@file:Suppress("LeakingThis")
+
 package com.bradley.wilson.core
 
 import org.junit.Rule
