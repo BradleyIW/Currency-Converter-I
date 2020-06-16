@@ -1,5 +1,6 @@
 include(
     ":app",
     ":network",
-    ":core"
+    ":core",
+    ":currency-converter"
 )

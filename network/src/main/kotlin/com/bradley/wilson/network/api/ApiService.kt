@@ -11,13 +11,12 @@ import java.net.SocketTimeoutException
 
 class ConnectionException : Exception()
 
-class ApiService {
+open class ApiService {
 
-    suspend fun <T> request(
-        call: suspend () -> Response<T>
-    ): Either<Failure, T> = withContext(Dispatchers.IO) {
-        performRequest(call)
-    }
+    suspend fun <T> request(call: suspend () -> Response<T>): Either<Failure, T> =
+        withContext(Dispatchers.IO) {
+            performRequest(call)
+        }
 
     private suspend fun <T> performRequest(
         call: suspend () -> Response<T>

@@ -1,4 +1,4 @@
 object Core {
     const val configArtifactName = "testJar"
-    const val configName = "testArtifacts"
+    const val configTestArtifacts = "testArtifacts"
 }
