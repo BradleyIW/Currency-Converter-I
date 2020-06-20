@@ -40,6 +40,5 @@ dependencies {
     testImplementation(TestLibraries.junit4)
     testImplementation(TestLibraries.coroutines)
     testImplementation(TestLibraries.Mockito.core)
-    testImplementation(TestLibraries.Mockito.inline)
     testImplementation(TestLibraries.room)
 }

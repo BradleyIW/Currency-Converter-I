@@ -19,6 +19,7 @@ private object Versions {
     const val lifecycle = "2.2.0"
     const val koin = "2.1.6"
     const val room = "2.2.5"
+    const val gson = "2.8.6"
 }
 
 object AndroidSdk {
@@ -71,6 +72,7 @@ object Libraries {
         const val extensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
     }
 
+    const val gson = "com.google.code.gson:gson:${Versions.gson}"
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     const val appCompat = "androidx.appcompat:appcompat:${Versions.jetpack}"
     const val constraint = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
@@ -81,7 +83,6 @@ object Libraries {
 object TestLibraries {
     object Mockito {
         const val core = "org.mockito:mockito-core:${Versions.mockito}"
-        const val inline = "org.mockito:mockito-inline:${Versions.mockito}"
     }
 
     const val junit4 = "junit:junit:${Versions.junit4}"
@@ -105,6 +106,7 @@ object Modules {
         const val network = ":core-network"
         const val android = ":core-android"
         const val storage = ":core-storage"
+        const val test = ":core-test"
     }
 
     object Feature {
