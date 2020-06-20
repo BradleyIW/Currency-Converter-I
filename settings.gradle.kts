@@ -1,6 +1,7 @@
 include(
     ":app",
-    ":network",
-    ":core",
-    ":currency-converter"
+    ":core-network",
+    ":core-storage",
+    ":core-android",
+    ":feature-currency-feed"
 )

@@ -1,15 +1,14 @@
 plugins {
-    id(BuildPlugins.Android.application)
+    id(BuildPlugins.Android.library)
     id(BuildPlugins.Kotlin.android)
     id(BuildPlugins.Kotlin.androidExtensions)
-    id(ScriptPlugins.buildConfigApplication)
+    id(ScriptPlugins.buildConfigLibrary)
 }
 
 android {
     compileSdkVersion(AndroidSdk.compile)
 
     defaultConfig {
-        applicationId = appId
         minSdkVersion(AndroidSdk.min)
         targetSdkVersion(AndroidSdk.target)
         versionCode = 1
@@ -18,18 +17,19 @@ android {
     }
 }
 
+
 dependencies {
     api(project(Modules.Core.android))
-    implementation(project(Modules.Core.network))
-    implementation(project(Modules.Core.storage))
-    implementation(project(Modules.Feature.currency))
 
-    implementation(Libraries.Koin.core)
-    implementation(Libraries.Koin.viewModel)
     implementation(Libraries.kotlinStdLib)
-    implementation(Libraries.appCompat)
     implementation(Libraries.Ktx.core)
-    implementation(Libraries.constraint)
+    implementation(Libraries.Retrofit.core)
+    implementation(Libraries.Retrofit.gsonConverter)
+    implementation(Libraries.coroutines)
+    implementation(Libraries.Koin.core)
 
     testImplementation(TestLibraries.junit4)
+    testImplementation(TestLibraries.coroutines)
+    testImplementation(TestLibraries.Mockito.core)
+    testImplementation(TestLibraries.Mockito.inline)
 }

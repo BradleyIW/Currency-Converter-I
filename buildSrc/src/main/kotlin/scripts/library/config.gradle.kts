@@ -7,6 +7,7 @@ object BuildTypes {
 
 plugins {
     id("com.android.library") apply false
+    id("kotlin-android")  apply false
 }
 
 android {
@@ -25,14 +26,14 @@ android {
         }
     }
 
-    sourceSets {
-        map {
-            it.java.srcDir("src/${it.name}/kotlin")
-        }
-    }
+    sourceSets { map { it.java.srcDir("src/${it.name}/kotlin") } }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
