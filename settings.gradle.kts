@@ -1,6 +1,10 @@
+rootProject.name = "RxCurrency"
+
 include(
     ":app",
-    ":network",
-    ":core",
-    ":currency-converter"
+    ":core-network",
+    ":core-storage",
+    ":core-android",
+    ":core-test",
+    ":feature-currency-feed"
 )

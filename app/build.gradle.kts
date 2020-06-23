@@ -1,10 +1,7 @@
 plugins {
-    //Application plugins
     id(BuildPlugins.Android.application)
     id(BuildPlugins.Kotlin.android)
     id(BuildPlugins.Kotlin.androidExtensions)
-
-    //Script plugins
     id(ScriptPlugins.buildConfigApplication)
 }
 
@@ -17,18 +14,21 @@ android {
         targetSdkVersion(AndroidSdk.target)
         versionCode = 1
         versionName = "1.0"
-        testInstrumentationRunner = TestLibraries.testRunner
+        testInstrumentationRunner = Instrumentation.testRunner
     }
 }
 
 dependencies {
-    api(project(Modules.Core.core))
+    api(project(Modules.Core.android))
     implementation(project(Modules.Core.network))
+    implementation(project(Modules.Core.storage))
     implementation(project(Modules.Feature.currency))
 
+    implementation(Libraries.Koin.core)
+    implementation(Libraries.Koin.viewModel)
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.appCompat)
-    implementation(Libraries.ktxCore)
+    implementation(Libraries.Ktx.core)
     implementation(Libraries.constraint)
 
     testImplementation(TestLibraries.junit4)
