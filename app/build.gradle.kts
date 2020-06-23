@@ -14,7 +14,7 @@ android {
         targetSdkVersion(AndroidSdk.target)
         versionCode = 1
         versionName = "1.0"
-        testInstrumentationRunner = TestLibraries.testRunner
+        testInstrumentationRunner = Instrumentation.testRunner
     }
 }
 

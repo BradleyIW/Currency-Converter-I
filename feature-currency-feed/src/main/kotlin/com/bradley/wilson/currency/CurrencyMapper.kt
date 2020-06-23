@@ -8,17 +8,16 @@ import com.bradley.wilson.database.currency.rates.RatesEntity
 class CurrencyMapper {
 
     fun toCurrencyList(currencyResponse: CurrencyResponse?) = currencyResponse?.let {
-        currencyResponse.rates.map { rates ->
-            Currency(rates.key, rates.value)
+        currencyResponse.rates.map { rateEntry ->
+            Currency(rateEntry.key, rateEntry.value)
         }
     } ?: emptyList()
 
-    fun toCurrencyList(ratesEntity: RatesEntity?) =
-        ratesEntity?.let {
-            ratesEntity.rates.map {
-                Currency(it.countryCode, it.value)
-            }
-        } ?: emptyList()
+    fun toCurrencyList(ratesEntity: RatesEntity?) = ratesEntity?.let {
+        ratesEntity.rates.map {
+            Currency(it.countryCode, it.value)
+        }
+    } ?: emptyList()
 
     fun toRatesEntity(baseCurrency: String, rates: List<Currency>) =
         RatesEntity(baseCurrency, rates.map {

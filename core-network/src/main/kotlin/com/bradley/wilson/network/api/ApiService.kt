@@ -11,7 +11,7 @@ import java.net.SocketTimeoutException
 
 class ConnectionException : Exception()
 
-open class ApiService {
+abstract class ApiService {
 
     suspend fun <T> request(call: suspend () -> Response<T>): Either<Failure, T> =
         withContext(Dispatchers.IO) {

@@ -42,6 +42,12 @@ object BuildPlugins {
         const val plugin = "kotlin"
         const val kapt = "kotlin-kapt"
     }
+
+    const val javaLibrary = "java-library"
+}
+
+object Instrumentation {
+    const val testRunner = "androidx.test.runner.AndroidJUnitRunner"
 }
 
 object Libraries {
@@ -72,7 +78,6 @@ object Libraries {
         const val extensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
     }
 
-    const val gson = "com.google.code.gson:gson:${Versions.gson}"
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     const val appCompat = "androidx.appcompat:appcompat:${Versions.jetpack}"
     const val constraint = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
@@ -83,6 +88,12 @@ object Libraries {
 object TestLibraries {
     object Mockito {
         const val core = "org.mockito:mockito-core:${Versions.mockito}"
+        const val android = "org.mockito:mockito-android:${Versions.mockito}"
+    }
+
+    object Android {
+        const val core = "androidx.test:core:1.2.0"
+        const val junit = "androidx.test.ext:junit:1.1.0"
     }
 
     const val junit4 = "junit:junit:${Versions.junit4}"
@@ -99,6 +110,7 @@ object TestLibraries {
 object ScriptPlugins {
     const val buildConfigApplication = "scripts.application.config"
     const val buildConfigLibrary = "scripts.library.config"
+    const val buildConfigKotlin = "scripts.kotlin.config"
 }
 
 object Modules {

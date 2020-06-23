@@ -1,3 +1,5 @@
+rootProject.name = "RxCurrency"
+
 include(
     ":app",
     ":core-network",

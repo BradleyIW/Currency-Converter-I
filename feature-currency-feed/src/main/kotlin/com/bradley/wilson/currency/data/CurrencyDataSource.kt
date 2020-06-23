@@ -16,7 +16,7 @@ class CurrencyDataSource(
 ) : CurrencyRepository {
 
     override suspend fun latestCurrencyRates(baseCurrency: String) =
-        getLatestCurrenciesLocally(baseCurrency)
+        getLatestCurrenciesRemotely(baseCurrency)
             .fallback {
                 localDataSource.latestCurrencyRates(baseCurrency).map {
                     currencyMapper.toCurrencyList(it)
@@ -25,10 +25,11 @@ class CurrencyDataSource(
                 localDataSource.saveRates(currencyMapper.toRatesEntity(baseCurrency, it))
             }.execute()
 
-    private suspend fun getLatestCurrenciesLocally(baseCurrency: String): suspend () -> (Either<Failure, List<Currency>>) =
+    private suspend fun getLatestCurrenciesRemotely(baseCurrency: String): suspend () -> (Either<Failure, List<Currency>>) =
         {
-            remoteDataSource.latestCurrencyRates(baseCurrency)
-                .map { currencyMapper.toCurrencyList(it) }
+            remoteDataSource.latestCurrencyRates(baseCurrency).map {
+                currencyMapper.toCurrencyList(it)
+            }
         }
 
 }

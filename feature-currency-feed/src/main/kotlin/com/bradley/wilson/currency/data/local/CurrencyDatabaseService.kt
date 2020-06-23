@@ -6,11 +6,11 @@ import com.bradley.wilson.database.service.DatabaseService
 
 class CurrencyDatabaseService(private val ratesDao: RatesDao) : DatabaseService() {
 
-    suspend fun latestCurrencyRates(baseCurrency: String) = requestDatabase {
+    suspend fun latestCurrencyRates(baseCurrency: String) = request {
         ratesDao.getLatestRatesFromBase(baseCurrency)
     }
 
-    suspend fun updateRates(ratesEntity: RatesEntity) = requestDatabase {
+    suspend fun updateRates(ratesEntity: RatesEntity) = request {
         ratesDao.insertRate(ratesEntity)
     }
 }

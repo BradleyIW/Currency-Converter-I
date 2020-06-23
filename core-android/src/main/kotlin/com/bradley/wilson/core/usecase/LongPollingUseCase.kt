@@ -4,29 +4,24 @@ import com.bradley.wilson.core.exceptions.Failure
 import com.bradley.wilson.core.functional.Either
 import kotlinx.coroutines.*
 
-interface LongPollingUseCase<in Params, Type> {
+abstract class LongPollingUseCase<Params, Type> : UseCase<Params, Type> {
 
-    suspend fun run(params: Params): Either<Failure, Type>
-
-    suspend operator fun invoke(
-        scope: CoroutineScope,
+    fun execute(
         params: Params,
+        scope: CoroutineScope,
+        intervalMillis: Long,
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
-        delay: Long = DEFAULT_DELAY_INTERVAL,
-        onResult: (Either<Failure, Type>) -> Unit = {}
+        result: (Either<Failure, Type>) -> Unit
     ) {
         scope.launch {
             while (isActive) {
-                val backgroundJob = scope.async(dispatcher) { run(params) }
-                onResult(backgroundJob.await())
+                val backgroundJob = async(dispatcher) { run(params) }
+                result(backgroundJob.await())
+
                 withContext(Dispatchers.Default) {
-                    delay(delay)
+                    delay(intervalMillis)
                 }
             }
         }
-    }
-
-    companion object {
-        private const val DEFAULT_DELAY_INTERVAL = 1000L
     }
 }

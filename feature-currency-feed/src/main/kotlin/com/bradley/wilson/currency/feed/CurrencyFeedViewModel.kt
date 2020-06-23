@@ -11,12 +11,12 @@ import com.bradley.wilson.currency.usecase.GetLatestRatesParams
 import com.bradley.wilson.currency.usecase.GetLatestRatesUseCase
 import com.bradley.wilson.network.error.NoConnection
 import com.bradley.wilson.network.error.ServerError
-import kotlinx.coroutines.runBlocking
 
-class CurrencyFeedViewModel(private val latestRatesUseCase: GetLatestRatesUseCase) : ViewModel() {
+class CurrencyFeedViewModel(
+    private val latestRatesUseCase: GetLatestRatesUseCase
+) : ViewModel() {
 
     private val _currencyRatesFeedLiveData = MutableLiveData<List<Currency>>()
-
     val currencyFeedLiveData: LiveData<List<Currency>> = _currencyRatesFeedLiveData
 
     init {
@@ -24,14 +24,13 @@ class CurrencyFeedViewModel(private val latestRatesUseCase: GetLatestRatesUseCas
     }
 
     private fun startFeed(baseCurrency: String = DEFAULT_BASE_CURRENCY) =
-        runBlocking {
-            latestRatesUseCase(viewModelScope, GetLatestRatesParams(baseCurrency)) {
-                it.fold(::handleFailure, ::handleSuccess)
-            }
-        }
+        getLatestCurrencyRates(baseCurrency)
 
-    private fun handleSuccess(currencyRates: List<Currency>) {
-        _currencyRatesFeedLiveData.postValue(currencyRates)
+    private fun getLatestCurrencyRates(baseCurrency: String) {
+        val params = GetLatestRatesParams(baseCurrency)
+        latestRatesUseCase.execute(params, viewModelScope, POLLING_INTERVAL_MILLIS) {
+            it.fold(::handleFailure, ::handleSuccess)
+        }
     }
 
     private fun handleFailure(failure: Failure) {
@@ -43,8 +42,13 @@ class CurrencyFeedViewModel(private val latestRatesUseCase: GetLatestRatesUseCas
         Log.e(TAG, log)
     }
 
+    private fun handleSuccess(currencyRates: List<Currency>) {
+        _currencyRatesFeedLiveData.postValue(currencyRates)
+    }
+
     companion object {
         private const val TAG = "CurrencyFeedViewModel"
+        private const val POLLING_INTERVAL_MILLIS = 1000L
         private const val DEFAULT_BASE_CURRENCY = "EUR"
     }
 }

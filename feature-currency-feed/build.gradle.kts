@@ -14,7 +14,7 @@ android {
         targetSdkVersion(AndroidSdk.target)
         versionCode = 1
         versionName = "1.0"
-        testInstrumentationRunner = TestLibraries.testRunner
+        testInstrumentationRunner = Instrumentation.testRunner
     }
 }
 
@@ -37,6 +37,7 @@ dependencies {
     implementation(Libraries.Lifecycle.extensions)
     implementation(Libraries.recyclerView)
 
+    testImplementation(project(path = Modules.Core.test, configuration = Core.configTestArtifacts))
     testImplementation(TestLibraries.junit4)
     testImplementation(TestLibraries.coroutines)
     testImplementation(TestLibraries.Mockito.core)

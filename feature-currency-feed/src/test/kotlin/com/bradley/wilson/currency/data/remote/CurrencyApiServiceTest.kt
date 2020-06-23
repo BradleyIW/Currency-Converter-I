@@ -1,7 +1,7 @@
 package com.bradley.wilson.currency.data.remote
 
 import com.bradley.wilson.core.UnitTest
-import com.bradley.wilson.core.eq
+import com.bradley.wilson.core.mockito.eq
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -24,7 +24,11 @@ class CurrencyApiServiceTest : UnitTest() {
     fun `given EUR currency is passed into getCurrenciesForBase, then verify api is requested with same base currency`() {
         runBlocking {
             currencyApiService.latestCurrencyRates(EURO_BASE_CURRENCY)
-            verify(api).latestCurrencyRates(eq(EURO_BASE_CURRENCY))
+            verify(api).latestCurrencyRates(
+                eq(
+                    EURO_BASE_CURRENCY
+                )
+            )
         }
     }
 

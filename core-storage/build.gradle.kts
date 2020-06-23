@@ -14,7 +14,7 @@ android {
         targetSdkVersion(AndroidSdk.target)
         versionCode = 1
         versionName = "1.0"
-        testInstrumentationRunner = TestLibraries.testRunner
+        testInstrumentationRunner = Instrumentation.testRunner
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -39,7 +39,17 @@ dependencies {
 
     kapt(Libraries.Room.compiler)
 
+    testImplementation(project(path = Modules.Core.test, configuration = Core.configTestArtifacts))
     testImplementation(TestLibraries.junit4)
     testImplementation(TestLibraries.coroutines)
     testImplementation(TestLibraries.Mockito.core)
+
+    androidTestImplementation(TestLibraries.Android.core)
+    androidTestImplementation(TestLibraries.room)
+    androidTestImplementation(TestLibraries.Android.junit)
+    androidTestImplementation(TestLibraries.junit4)
+    androidTestImplementation(TestLibraries.espresso)
+    androidTestImplementation(TestLibraries.testRunner)
+    androidTestImplementation(TestLibraries.Mockito.android)
+
 }

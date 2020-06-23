@@ -13,7 +13,7 @@ android {
         targetSdkVersion(AndroidSdk.target)
         versionCode = 1
         versionName = "1.0"
-        testInstrumentationRunner = TestLibraries.testRunner
+        testInstrumentationRunner = Instrumentation.testRunner
     }
 }
 
@@ -22,10 +22,10 @@ dependencies {
     implementation(Libraries.coroutines)
     implementation(Libraries.appCompat)
     implementation(Libraries.Ktx.core)
-    implementation(Libraries.Lifecycle.runtime)
     implementation(Libraries.Lifecycle.extensions)
 
-    testImplementation(TestLibraries.testRunner)
+    testImplementation(project(path = Modules.Core.test, configuration = Core.configTestArtifacts))
     testImplementation(TestLibraries.junit4)
+    testImplementation(TestLibraries.coroutines)
     testImplementation(TestLibraries.Mockito.core)
 }

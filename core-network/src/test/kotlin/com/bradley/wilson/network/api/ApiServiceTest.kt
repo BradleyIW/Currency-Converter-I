@@ -22,7 +22,7 @@ class ApiServiceTest : UnitTest() {
 
     @Before
     fun setup() {
-        apiService = ApiService()
+        apiService = object : ApiService() {}
     }
 
     @Test
@@ -92,7 +92,7 @@ class ApiServiceTest : UnitTest() {
     private fun validateSuccessError(failure: NetworkFailure) = runBlocking {
         val request = apiService.request { mockEmptySuccessResponse() }
         request.onFailure {
-            assertEquals(it, EmptyResponseBody)
+            assertEquals(it, failure)
         }
         assertTrue(request.isLeft)
     }

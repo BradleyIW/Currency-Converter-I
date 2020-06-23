@@ -6,7 +6,7 @@ import com.bradley.wilson.core.usecase.LongPollingUseCase
 import com.bradley.wilson.currency.data.CurrencyRepository
 
 class GetLatestRatesUseCase(private val repository: CurrencyRepository) :
-    LongPollingUseCase<GetLatestRatesParams, List<Currency>> {
+    LongPollingUseCase<GetLatestRatesParams, List<Currency>>() {
 
     override suspend fun run(params: GetLatestRatesParams): Either<Failure, List<Currency>> =
         repository.latestCurrencyRates(params.baseCurrency)
