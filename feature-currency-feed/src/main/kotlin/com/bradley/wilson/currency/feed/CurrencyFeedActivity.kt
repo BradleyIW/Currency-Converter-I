@@ -16,3 +16,4 @@ class CurrencyFeedActivity : AppCompatActivity(R.layout.activity_currency_feed) 
         )
     }
 }
+

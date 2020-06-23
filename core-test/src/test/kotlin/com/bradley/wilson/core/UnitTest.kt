@@ -8,8 +8,7 @@ import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-abstract class UnitTest {
+open class UnitTest {
     @Rule
-    @JvmField
     val injectMocks = InjectMocksRule.create(this@UnitTest)
 }

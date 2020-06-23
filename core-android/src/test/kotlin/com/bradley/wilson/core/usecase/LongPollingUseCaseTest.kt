@@ -75,3 +75,4 @@ class LongPollingUseCaseTest : UnitTest() {
         private const val TEST_RATE = 1.234664
     }
 }
+

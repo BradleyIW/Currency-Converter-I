@@ -111,6 +111,7 @@ object ScriptPlugins {
     const val buildConfigApplication = "scripts.application.config"
     const val buildConfigLibrary = "scripts.library.config"
     const val buildConfigKotlin = "scripts.kotlin.config"
+    const val detekt = "scripts.detekt"
 }
 
 object Modules {

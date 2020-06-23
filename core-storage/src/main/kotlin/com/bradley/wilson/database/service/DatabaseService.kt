@@ -1,3 +1,4 @@
+@file:Suppress("TooGenericExceptionCaught")
 package com.bradley.wilson.database.service
 
 import android.database.sqlite.SQLiteException
@@ -7,7 +8,7 @@ import com.bradley.wilson.database.error.DatabaseFailure
 import com.bradley.wilson.database.error.DatabaseStateError
 import com.bradley.wilson.database.error.SQLError
 
-abstract class DatabaseService {
+open class DatabaseService {
     suspend fun <R> request(localRequest: suspend () -> R): Either<DatabaseFailure, R> =
         try {
             Either.Right(localRequest())

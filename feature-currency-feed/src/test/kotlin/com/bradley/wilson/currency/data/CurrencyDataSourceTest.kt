@@ -41,7 +41,7 @@ class CurrencyDataSourceTest : UnitTest() {
     }
 
     @Test
-    fun `given getCurrenciesByBase is called, remote data source request succeeds, then propagate list of currencies and save to database`() {
+    fun `given based currency, when latestCurrencyRates succeeds, then propagate list of currencies and save to database`() {
         runBlocking {
             val response = CurrencyResponse(TEST_BASE_EUR_CURRENCY, mapOf(Pair(TEST_COUNTRY, TEST_RATE)))
 
@@ -114,3 +114,4 @@ class CurrencyDataSourceTest : UnitTest() {
         private const val TEST_BASE_EUR_CURRENCY = "EUR"
     }
 }
+

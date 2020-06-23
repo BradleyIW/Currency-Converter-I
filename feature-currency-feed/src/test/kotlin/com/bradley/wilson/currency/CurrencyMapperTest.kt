@@ -57,3 +57,4 @@ class CurrencyMapperTest : UnitTest() {
         private const val GBP_CURRENCY_RATE = 1.1233452
     }
 }
+

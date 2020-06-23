@@ -73,7 +73,7 @@ class FallbackOnFailureTest : UnitTest() {
     }
 
     @Test
-    fun `given a primaryAction with success and null fallbackSuccessAction, when execute called, then does not execute fallbackSuccessAction`() {
+    fun `given a primaryAction with success, when execute called, then does not execute fallbackSuccessAction`() {
         runBlocking {
             `when`(suspendHelper.primaryAction()).thenReturn(Either.Right(Unit))
 

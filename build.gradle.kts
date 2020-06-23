@@ -1,3 +1,8 @@
+plugins {
+    id(ScriptPlugins.detekt)
+}
+
+
 buildscript {
     repositories {
         google()
