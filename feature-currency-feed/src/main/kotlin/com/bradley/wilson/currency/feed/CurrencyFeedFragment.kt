@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bradley.wilson.currency.R
 import com.bradley.wilson.currency.feed.list.CurrencyFeedRecyclerAdapter
 import kotlinx.android.synthetic.main.fragment_currency_feed.*
@@ -25,6 +26,13 @@ class CurrencyFeedFragment : Fragment(R.layout.fragment_currency_feed) {
 
     private fun initCurrencyFeed() {
         currency_feed_recycler_view.adapter = currencyFeedAdapter
+        currencyFeedAdapter.itemClicked {
+            (currency_feed_recycler_view.layoutManager as LinearLayoutManager).scrollToPosition(0)
+            currencyFeedViewModel.updateFeed(it.country, it.rate)
+        }
+        currencyFeedAdapter.rateChanged {
+            currencyFeedViewModel.updateFeed(it.country, it.rate)
+        }
     }
 
     private fun observeFeed() {
@@ -34,6 +42,7 @@ class CurrencyFeedFragment : Fragment(R.layout.fragment_currency_feed) {
     }
 
     companion object {
+        val TAG = "CurrencyFeedFragment"
         fun newInstance() = CurrencyFeedFragment()
     }
 }

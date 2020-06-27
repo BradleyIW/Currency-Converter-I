@@ -8,7 +8,7 @@ import com.bradley.wilson.database.error.DatabaseFailure
 import com.bradley.wilson.database.error.DatabaseStateError
 import com.bradley.wilson.database.error.SQLError
 
-open class DatabaseService {
+abstract class DatabaseService {
     suspend fun <R> request(localRequest: suspend () -> R): Either<DatabaseFailure, R> =
         try {
             Either.Right(localRequest())

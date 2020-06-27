@@ -21,6 +21,8 @@ dependencies {
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.coroutines)
     implementation(Libraries.appCompat)
+    implementation(Libraries.Koin.viewModel)
+    implementation(Libraries.material)
     implementation(Libraries.Ktx.core)
     implementation(Libraries.Lifecycle.extensions)
 

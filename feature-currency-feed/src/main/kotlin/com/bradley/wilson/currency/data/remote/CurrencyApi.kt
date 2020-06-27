@@ -14,6 +14,6 @@ interface CurrencyApi {
 
     companion object {
         private const val LATEST_ENDPOINT = "latest"
-        private const val BASE_CURRENCY = "baseCurrency"
+        private const val BASE_CURRENCY = "base"
     }
 }

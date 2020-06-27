@@ -4,3 +4,8 @@ data class Currency(
     val country: String,
     val rate: Double
 )
+
+data class CurrencyItem(
+    val country: String,
+    val rate: Double
+)

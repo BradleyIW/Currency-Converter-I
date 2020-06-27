@@ -22,6 +22,7 @@ dependencies {
     implementation(project(Modules.Core.network))
     implementation(project(Modules.Core.storage))
 
+    implementation(Libraries.material)
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.appCompat)
     implementation(Libraries.constraint)
@@ -42,4 +43,8 @@ dependencies {
     testImplementation(TestLibraries.coroutines)
     testImplementation(TestLibraries.Mockito.core)
     testImplementation(TestLibraries.room)
+
+    androidTestImplementation(TestLibraries.junit4)
+    androidTestImplementation(TestLibraries.Mockito.android)
+    androidTestImplementation(TestLibraries.espresso)
 }

@@ -48,7 +48,6 @@ dependencies {
     androidTestImplementation(TestLibraries.room)
     androidTestImplementation(TestLibraries.Android.junit)
     androidTestImplementation(TestLibraries.junit4)
-    androidTestImplementation(TestLibraries.espresso)
     androidTestImplementation(TestLibraries.testRunner)
     androidTestImplementation(TestLibraries.Mockito.android)
 

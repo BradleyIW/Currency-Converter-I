@@ -51,6 +51,16 @@ class CurrencyMapperTest : UnitTest() {
 
     }
 
+    @Test
+    fun `given a base currency and list of Currency objects, when toCurrencyItem is called, then map to CurrencyItem`() {
+        val currency = Currency(GBP_COUNTRY_CODE, GBP_CURRENCY_RATE)
+        val ratesEntity = currencyMapper.toCurrencyItem(currency)
+
+        assertEquals(ratesEntity.country, GBP_COUNTRY_CODE)
+        assertEquals(ratesEntity.rate, GBP_CURRENCY_RATE, 0.0)
+
+    }
+
     companion object {
         private const val TEST_BASE_EUR_CURRENCY = "EUR"
         private const val GBP_COUNTRY_CODE = "GBP"
