@@ -22,6 +22,7 @@ dependencies {
     implementation(project(Modules.Core.network))
     implementation(project(Modules.Core.storage))
 
+    implementation(Libraries.emoji)
     implementation(Libraries.material)
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.appCompat)

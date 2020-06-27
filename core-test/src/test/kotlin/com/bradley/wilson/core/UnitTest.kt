@@ -9,6 +9,7 @@ import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 open class UnitTest {
-    @Rule
+
+    @get:Rule
     val injectMocks = InjectMocksRule.create(this@UnitTest)
 }

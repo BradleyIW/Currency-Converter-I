@@ -1,11 +1,10 @@
 package com.bradley.wilson.currency
 
 import com.bradley.wilson.currency.data.remote.responses.CurrencyResponse
-import com.bradley.wilson.currency.usecase.Currency
-import com.bradley.wilson.currency.usecase.CurrencyItem
+import com.bradley.wilson.currency.feed.Currency
+import com.bradley.wilson.currency.feed.CurrencyItem
 import com.bradley.wilson.database.currency.rates.CurrencyRate
 import com.bradley.wilson.database.currency.rates.RatesEntity
-import java.math.BigDecimal
 
 class CurrencyMapper {
 
@@ -26,5 +25,6 @@ class CurrencyMapper {
             CurrencyRate(it.country, it.rate)
         })
 
-    fun toCurrencyItem(it: Currency) = CurrencyItem(it.country, it.rate)
+    fun toCurrencyItem(it: Currency) =
+        CurrencyItem(it.country, it.rate)
 }

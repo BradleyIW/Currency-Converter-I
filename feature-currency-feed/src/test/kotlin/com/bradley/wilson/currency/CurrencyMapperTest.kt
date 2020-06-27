@@ -2,7 +2,7 @@ package com.bradley.wilson.currency
 
 import com.bradley.wilson.core.UnitTest
 import com.bradley.wilson.currency.data.remote.responses.CurrencyResponse
-import com.bradley.wilson.currency.usecase.Currency
+import com.bradley.wilson.currency.feed.Currency
 import com.bradley.wilson.database.currency.rates.CurrencyRate
 import com.bradley.wilson.database.currency.rates.RatesEntity
 import org.junit.Assert.assertEquals
@@ -42,7 +42,12 @@ class CurrencyMapperTest : UnitTest() {
 
     @Test
     fun `given a base currency and list of Currency objects, when toRatesEntity is called, then map to RatesEntity`() {
-        val rates = listOf(Currency(GBP_COUNTRY_CODE, GBP_CURRENCY_RATE))
+        val rates = listOf(
+            Currency(
+                GBP_COUNTRY_CODE,
+                GBP_CURRENCY_RATE
+            )
+        )
         val ratesEntity = currencyMapper.toRatesEntity(TEST_BASE_EUR_CURRENCY, rates)
 
         assertEquals(ratesEntity.baseCurrency, TEST_BASE_EUR_CURRENCY)

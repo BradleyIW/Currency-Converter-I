@@ -3,6 +3,7 @@ package com.bradley.wilson.currency.usecase
 import com.bradley.wilson.core.exceptions.Failure
 import com.bradley.wilson.core.functional.Either
 import com.bradley.wilson.core.usecase.OneShotUseCase
+import com.bradley.wilson.currency.feed.Currency
 
 class ConvertRatesUseCase : OneShotUseCase<ConvertRatesParams, List<Currency>>() {
 

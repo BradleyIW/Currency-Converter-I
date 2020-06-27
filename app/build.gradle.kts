@@ -24,6 +24,8 @@ dependencies {
     implementation(project(Modules.Core.storage))
     implementation(project(Modules.Feature.currency))
 
+    implementation(Libraries.emoji)
+    implementation(Libraries.emojiBundled)
     implementation(Libraries.Koin.core)
     implementation(Libraries.Koin.viewModel)
     implementation(Libraries.kotlinStdLib)

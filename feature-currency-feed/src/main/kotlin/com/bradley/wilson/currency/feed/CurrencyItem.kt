@@ -1,4 +1,4 @@
-package com.bradley.wilson.currency.usecase
+package com.bradley.wilson.currency.feed
 
 data class Currency(
     val country: String,
@@ -7,5 +7,6 @@ data class Currency(
 
 data class CurrencyItem(
     val country: String,
-    val rate: Double
+    val rate: Double,
+    val isBateRate: Boolean = false
 )

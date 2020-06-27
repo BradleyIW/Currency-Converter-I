@@ -14,6 +14,7 @@ private object Versions {
     const val assertJ = "3.16.1"
     const val testRunner = "1.1.0"
     const val material = "1.1.0"
+    const val emoji = "1.1.0"
     const val espresso = "3.2.0"
     const val testExtensions = "1.1.1"
     const val testRules = "1.1.0"
@@ -79,6 +80,8 @@ object Libraries {
         const val extensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
     }
 
+    const val emoji = "androidx.emoji:emoji:${Versions.emoji}"
+    const val emojiBundled = "com.android.support:support-emoji-bundled:${Versions.emoji}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     const val appCompat = "androidx.appcompat:appcompat:${Versions.jetpack}"

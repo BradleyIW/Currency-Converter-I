@@ -18,6 +18,8 @@ class CurrencyFeedFragment : Fragment(R.layout.fragment_currency_feed) {
         CurrencyFeedRecyclerAdapter()
     }
 
+    private var itemClicked: Boolean = false;
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initCurrencyFeed()
@@ -27,7 +29,8 @@ class CurrencyFeedFragment : Fragment(R.layout.fragment_currency_feed) {
     private fun initCurrencyFeed() {
         currency_feed_recycler_view.adapter = currencyFeedAdapter
         currencyFeedAdapter.itemClicked {
-            (currency_feed_recycler_view.layoutManager as LinearLayoutManager).scrollToPosition(0)
+            val layoutManager = currency_feed_recycler_view.layoutManager as LinearLayoutManager
+            layoutManager.smoothScrollToPosition(currency_feed_recycler_view, null, 0)
             currencyFeedViewModel.updateFeed(it.country, it.rate)
         }
         currencyFeedAdapter.rateChanged {

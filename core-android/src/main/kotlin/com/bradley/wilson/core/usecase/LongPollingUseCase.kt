@@ -10,6 +10,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 abstract class LongPollingUseCase<Params, Type> : UseCase<Params, Type> {
 
@@ -27,7 +28,10 @@ abstract class LongPollingUseCase<Params, Type> : UseCase<Params, Type> {
             while (isActive) {
                 val backgroundJob = async(dispatcher) { run(params) }
                 result(backgroundJob.await())
-                delay(intervalMillis)
+
+                withContext(Dispatchers.Default) {
+                    delay(intervalMillis)
+                }
             }
         }
     }

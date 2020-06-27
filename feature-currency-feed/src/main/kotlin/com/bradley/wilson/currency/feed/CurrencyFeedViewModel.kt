@@ -9,8 +9,6 @@ import com.bradley.wilson.core.exceptions.Failure
 import com.bradley.wilson.currency.CurrencyMapper
 import com.bradley.wilson.currency.usecase.ConvertRatesParams
 import com.bradley.wilson.currency.usecase.ConvertRatesUseCase
-import com.bradley.wilson.currency.usecase.Currency
-import com.bradley.wilson.currency.usecase.CurrencyItem
 import com.bradley.wilson.currency.usecase.GetLatestRatesParams
 import com.bradley.wilson.currency.usecase.GetLatestRatesUseCase
 import com.bradley.wilson.network.error.NoConnection
@@ -23,35 +21,39 @@ class CurrencyFeedViewModel(
     private val currencyMapper: CurrencyMapper
 ) : ViewModel() {
 
+    private lateinit var currencyItems: MutableList<CurrencyItem>
+
     private val _currencyRatesFeedLiveData = MutableLiveData<List<CurrencyItem>>()
     val currencyFeedLiveData: LiveData<List<CurrencyItem>> = _currencyRatesFeedLiveData
 
     init {
-        updateFeed(baseCurrency = DEFAULT_BASE_CURRENCY)
+        updateFeed()
     }
 
-    fun updateFeed(baseCurrency: String, amount: Double = DEFAULT_RATE_INPUT) {
+    fun updateFeed(baseCurrency: String = DEFAULT_BASE_CURRENCY, amount: Double = DEFAULT_RATE_INPUT) {
+        currencyItems = mutableListOf()
+        currencyItems.add(
+            0,
+            CurrencyItem(baseCurrency, amount, isBateRate = true)
+        )
         getLatestCurrencyRates(baseCurrency, amount)
     }
 
     private fun getLatestCurrencyRates(baseCurrency: String, amount: Double) {
-        val params = GetLatestRatesParams(baseCurrency)
-        latestRatesUseCase.execute(params, viewModelScope, POLLING_INTERVAL_MILLIS) {
-            it.fold(::handleFailure) { currencies -> handleFetchSuccess(baseCurrency, currencies, amount) }
+        latestRatesUseCase.execute(GetLatestRatesParams(baseCurrency), viewModelScope, POLLING_INTERVAL_MILLIS) {
+            it.fold(::handleFailure) { currencies -> handleFetchSuccess(currencies, amount) }
         }
     }
 
-    private fun handleFetchSuccess(baseCurrency: String, currencyRates: List<Currency>, amount: Double) {
+    private fun handleFetchSuccess(currencyRates: List<Currency>, amount: Double) {
         convertRatesUseCase.execute(ConvertRatesParams(currencyRates, amount), viewModelScope, Dispatchers.Default) {
-            it.fold(::handleFailure) { currencies -> handleConvertSuccess(baseCurrency, currencies, amount) }
+            it.fold(::handleFailure, ::handleConvertSuccess)
         }
     }
 
-    private fun handleConvertSuccess(baseCurrency: String, convertedCurrencies: List<Currency>, amount: Double) {
-        val newCurrencies = mutableListOf<CurrencyItem>()
-        newCurrencies.add(0, CurrencyItem(baseCurrency, amount))
-        newCurrencies.addAll(convertedCurrencies.map { currencyMapper.toCurrencyItem(it) })
-        _currencyRatesFeedLiveData.postValue(newCurrencies)
+    private fun handleConvertSuccess(convertedCurrencies: List<Currency>) {
+        cleanupAndMapCurrencyItems(convertedCurrencies)
+        _currencyRatesFeedLiveData.postValue(currencyItems)
     }
 
     private fun handleFailure(failure: Failure) {
@@ -61,6 +63,12 @@ class CurrencyFeedViewModel(
             else -> "Unknown error, we're sorry for the inconvenience"
         }
         Log.e(TAG, log)
+    }
+
+    private fun cleanupAndMapCurrencyItems(convertedCurrencies: List<Currency>) {
+        currencyItems.distinct()
+        currencyItems.removeAll { !it.isBateRate }
+        currencyItems.addAll(convertedCurrencies.map { currencyMapper.toCurrencyItem(it) })
     }
 
     companion object {

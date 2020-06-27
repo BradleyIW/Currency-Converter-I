@@ -7,7 +7,7 @@ import com.bradley.wilson.core.functional.map
 import com.bradley.wilson.currency.CurrencyMapper
 import com.bradley.wilson.currency.data.local.CurrencyLocalDataSource
 import com.bradley.wilson.currency.data.remote.CurrencyRemoteDataSource
-import com.bradley.wilson.currency.usecase.Currency
+import com.bradley.wilson.currency.feed.Currency
 
 class CurrencyDataSource(
     private val remoteDataSource: CurrencyRemoteDataSource,
