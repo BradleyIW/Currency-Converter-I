@@ -10,30 +10,23 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bradley.wilson.core.extensions.primitives.empty
 import com.bradley.wilson.core.extensions.primitives.equalTo
 import com.bradley.wilson.core.extensions.primitives.notEqualTo
-import com.bradley.wilson.core.extensions.primitives.toCurrencyRate
 import com.bradley.wilson.currency.R
 import com.bradley.wilson.currency.feed.CurrencyItem
 import com.bradley.wilson.currency.utils.CurrencyFlags
+import com.bradley.wilson.currency.utils.CurrencyFormatter
 import kotlinx.android.synthetic.main.item_view_currency_feed.view.*
-import java.math.RoundingMode
-import java.text.NumberFormat
-import java.util.*
 
 class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAdapter.CurrencyFeedViewHolder>() {
 
     private var currencyFeedItems = mutableListOf<CurrencyItem>()
 
-    private val currencyFormatter by lazy {
-        NumberFormat.getCurrencyInstance().apply {
-            minimumFractionDigits = 2
-            maximumFractionDigits = 2
-            roundingMode = RoundingMode.FLOOR
-        }
-    }
-
     private lateinit var onItemClicked: (currencyItem: CurrencyItem) -> Unit
 
     private lateinit var onRateChanged: (currencyItem: CurrencyItem) -> Unit
+
+    private val currencyFormatter by lazy {
+        CurrencyFormatter()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyFeedViewHolder =
         CurrencyFeedViewHolder(
@@ -75,14 +68,15 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
     }
 
     inner class CurrencyFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         private val currencyAmount = itemView.findViewById<EditText>(R.id.currency_amount)
         private val baseCurrencyTextWatcher = BaseTextWatcher {
             currencyAmount.setSelection(it.length)
             val currencyItem = currencyFeedItems[adapterPosition]
             if (it.isEmpty()) {
-                onRateChanged(currencyItem.copy(rate = 0.00))
+                onRateChanged(currencyItem.copy(rate = ZERO_RATE_VALUE))
             } else {
-                val newRate = it.toCurrencyRate()
+                val newRate = currencyFormatter.formatCurrencyToRate(it)
                 if (currencyItem.rate.notEqualTo(newRate)) {
                     onRateChanged(currencyItem.copy(rate = newRate))
                 }
@@ -91,21 +85,22 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
 
         fun bindAll(currencyItem: CurrencyItem) {
             with(itemView) {
-                val currency = currencyInstance(currencyItem.country)
+                val currency = currencyFormatter.currency(currencyItem.country)
                 currency_title.text = currencyItem.country
                 currency_description.text = currency?.displayName ?: String.empty()
                 currency_icon.text = CurrencyFlags.getFlagEmojiForCurrency(currency)
+
                 bindRate(currencyItem)
+
                 setOnClickListener { moveItemToTop() }
             }
         }
 
-        fun bindRate(currency: CurrencyItem) {
+        fun bindRate(currencyItem: CurrencyItem) {
             with(currencyAmount) {
                 removeTextChangedListener(baseCurrencyTextWatcher)
-                bindCurrencyData(currency)
-
-                inputType = if (currency.isBateRate) {
+                bindCurrencyData(currencyItem)
+                inputType = if (currencyItem.isBateRate) {
                     addTextChangedListener(baseCurrencyTextWatcher)
                     InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
                 } else {
@@ -115,30 +110,24 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
             }
         }
 
+        private fun bindCurrencyData(currencyItem: CurrencyItem) {
+            currencyAmount.setText(
+                if (currencyItem.rate.equalTo(ZERO_RATE_VALUE)) {
+                    String.empty()
+                } else {
+                    currencyFormatter.formatRateToCurrency(currencyItem)
+                }
+            )
+        }
+
         private fun moveItemToTop() {
             layoutPosition.takeIf { it > 0 }?.also { position ->
                 onItemClicked(currencyFeedItems[position])
             }
         }
+    }
 
-        private fun currencyInstance(countryCode: String) =
-            try {
-                Currency.getInstance(countryCode)
-            } catch (exception: IllegalStateException) {
-                null
-            }
-
-        private fun bindCurrencyData(currencyItem: CurrencyItem) {
-            val currency = currencyInstance(currencyItem.country)
-            currencyFormatter.currency = currency
-            currencyAmount.setText(
-                if (currencyItem.rate.equalTo(0.00)) {
-                    String.empty()
-                } else {
-                    currencyFormatter.format(currencyItem.rate)
-                        .replace(currency?.symbol ?: String.empty(), String.empty())
-                }
-            )
-        }
+    companion object {
+        private const val ZERO_RATE_VALUE = 0.00
     }
 }

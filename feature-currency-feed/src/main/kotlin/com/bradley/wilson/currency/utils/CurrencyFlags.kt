@@ -5,7 +5,10 @@ import java.util.*
 class CurrencyFlags private constructor() {
 
     companion object {
-        private val flags = mutableMapOf(
+
+        private const val UNKNOWN_COUNTRY_CODE = "UKN"
+
+        private val FLAGS = mutableMapOf(
             Pair("EUR", "\uD83C\uDDEA\uD83C\uDDFA"),
             Pair("AUD", "\uD83C\uDDE6\uD83C\uDDFA"),
             Pair("BGN", "\uD83C\uDDE7\uD83C\uDDEC"),
@@ -38,14 +41,12 @@ class CurrencyFlags private constructor() {
             Pair("THB", "\uD83C\uDDF9\uD83C\uDDED"),
             Pair("USD", "\uD83C\uDDFA\uD83C\uDDF2"),
 
-            //Unknown flag emoji.
-            Pair("UKN", "\uD83C\uDF10")
+            //Generic currency exchange emoji for unknown currencies
+            Pair(UNKNOWN_COUNTRY_CODE, "\uD83D\uDCB1\n")
         )
 
-        private const val UNKNOWN_COUNTRY_CODE = "UKN"
-
         fun getFlagEmojiForCurrency(currency: Currency?): String? =
-            currency?.let { flags[it.currencyCode] ?: flags[UNKNOWN_COUNTRY_CODE] }
+            currency?.let { FLAGS[it.currencyCode] ?: FLAGS[UNKNOWN_COUNTRY_CODE] }
     }
 
 }
