@@ -21,21 +21,28 @@ class CurrencyFeedViewModel(
     private val currencyMapper: CurrencyMapper
 ) : ViewModel() {
 
-    private lateinit var currencyItems: MutableList<CurrencyItem>
+    private var currencyItems = mutableListOf<CurrencyItem>()
+    private lateinit var baseCurrencyItem: CurrencyItem
 
     private val _currencyRatesFeedLiveData = MutableLiveData<List<CurrencyItem>>()
     val currencyFeedLiveData: LiveData<List<CurrencyItem>> = _currencyRatesFeedLiveData
+
+    private val _recyclerScrollerLiveData = MutableLiveData<Unit>()
+    val recyclerScrollerLiveData: LiveData<Unit> = _recyclerScrollerLiveData
+
+    private var onItemClicked: Boolean = false
 
     init {
         updateFeed()
     }
 
+    fun onCurrencyItemClicked(baseCurrency: String, amount: Double) {
+        onItemClicked = true
+        updateFeed(baseCurrency, amount)
+    }
+
     fun updateFeed(baseCurrency: String = DEFAULT_BASE_CURRENCY, amount: Double = DEFAULT_RATE_INPUT) {
-        currencyItems = mutableListOf()
-        currencyItems.add(
-            0,
-            CurrencyItem(baseCurrency, amount, isBateRate = true)
-        )
+        baseCurrencyItem = CurrencyItem(baseCurrency, amount, true)
         getLatestCurrencyRates(baseCurrency, amount)
     }
 
@@ -53,6 +60,11 @@ class CurrencyFeedViewModel(
 
     private fun handleConvertSuccess(convertedCurrencies: List<Currency>) {
         cleanupAndMapCurrencyItems(convertedCurrencies)
+        if (onItemClicked) {
+            _recyclerScrollerLiveData.value = Unit.also {
+                onItemClicked = false
+            }
+        }
         _currencyRatesFeedLiveData.postValue(currencyItems)
     }
 
@@ -66,9 +78,8 @@ class CurrencyFeedViewModel(
     }
 
     private fun cleanupAndMapCurrencyItems(convertedCurrencies: List<Currency>) {
-        currencyItems.distinct()
-        currencyItems.removeAll { !it.isBateRate }
-        currencyItems.addAll(convertedCurrencies.map { currencyMapper.toCurrencyItem(it) })
+        currencyItems = convertedCurrencies.map { currencyMapper.toCurrencyItem(it) }.toMutableList()
+        currencyItems.add(0, baseCurrencyItem)
     }
 
     companion object {

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.bradley.wilson.core.extensions.android.scrollToTop
 import com.bradley.wilson.currency.R
 import com.bradley.wilson.currency.feed.list.CurrencyFeedRecyclerAdapter
 import kotlinx.android.synthetic.main.fragment_currency_feed.*
@@ -18,7 +18,7 @@ class CurrencyFeedFragment : Fragment(R.layout.fragment_currency_feed) {
         CurrencyFeedRecyclerAdapter()
     }
 
-    private var itemClicked: Boolean = false;
+    private var hasBeenClicked = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,9 +29,7 @@ class CurrencyFeedFragment : Fragment(R.layout.fragment_currency_feed) {
     private fun initCurrencyFeed() {
         currency_feed_recycler_view.adapter = currencyFeedAdapter
         currencyFeedAdapter.itemClicked {
-            val layoutManager = currency_feed_recycler_view.layoutManager as LinearLayoutManager
-            layoutManager.smoothScrollToPosition(currency_feed_recycler_view, null, 0)
-            currencyFeedViewModel.updateFeed(it.country, it.rate)
+            currencyFeedViewModel.onCurrencyItemClicked(it.country, it.rate)
         }
         currencyFeedAdapter.rateChanged {
             currencyFeedViewModel.updateFeed(it.country, it.rate)
@@ -39,8 +37,13 @@ class CurrencyFeedFragment : Fragment(R.layout.fragment_currency_feed) {
     }
 
     private fun observeFeed() {
-        currencyFeedViewModel.currencyFeedLiveData.observe(viewLifecycleOwner) {
-            currencyFeedAdapter.updateList(it)
+        with(currencyFeedViewModel) {
+            recyclerScrollerLiveData.observe(viewLifecycleOwner) {
+                currency_feed_recycler_view.scrollToTop()
+            }
+            currencyFeedLiveData.observe(viewLifecycleOwner) {
+                currencyFeedAdapter.updateList(it)
+            }
         }
     }
 

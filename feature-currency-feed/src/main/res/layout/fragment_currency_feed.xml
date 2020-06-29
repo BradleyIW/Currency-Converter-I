@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="@dimen/title_guideline_percentage" />
 
     <TextView
         android:id="@+id/fragment_currency_feed_title_text_view"
@@ -26,8 +26,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/currency_feed_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/screen_title_margin"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"

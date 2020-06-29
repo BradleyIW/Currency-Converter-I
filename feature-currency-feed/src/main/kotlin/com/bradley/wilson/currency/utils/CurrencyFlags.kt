@@ -40,6 +40,7 @@ class CurrencyFlags private constructor() {
             Pair("SGD", "\uD83C\uDDF8\uD83C\uDDEC"),
             Pair("THB", "\uD83C\uDDF9\uD83C\uDDED"),
             Pair("USD", "\uD83C\uDDFA\uD83C\uDDF2"),
+            Pair("ZAR", "\uD83C\uDDFF\uD83C\uDDE6"),
 
             //Generic currency exchange emoji for unknown currencies
             Pair(UNKNOWN_COUNTRY_CODE, "\uD83D\uDCB1\n")

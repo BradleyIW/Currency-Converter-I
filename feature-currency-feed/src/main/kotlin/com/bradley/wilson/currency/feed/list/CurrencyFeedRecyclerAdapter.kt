@@ -24,10 +24,6 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
 
     private lateinit var onRateChanged: (currencyItem: CurrencyItem) -> Unit
 
-    private val currencyFormatter by lazy {
-        CurrencyFormatter()
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyFeedViewHolder =
         CurrencyFeedViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_view_currency_feed, parent, false)
@@ -70,6 +66,11 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
     inner class CurrencyFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val currencyAmount = itemView.findViewById<EditText>(R.id.currency_amount)
+
+        private val currencyFormatter by lazy {
+            CurrencyFormatter()
+        }
+
         private val baseCurrencyTextWatcher = BaseTextWatcher {
             currencyAmount.setSelection(it.length)
             val currencyItem = currencyFeedItems[adapterPosition]
@@ -90,23 +91,33 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
                 currency_description.text = currency?.displayName ?: String.empty()
                 currency_icon.text = CurrencyFlags.getFlagEmojiForCurrency(currency)
 
-                bindRate(currencyItem)
+                bindRateForAll(currencyItem)
 
                 setOnClickListener { moveItemToTop() }
             }
+        }
+
+        private fun bindRateForAll(currencyItem: CurrencyItem) {
+            with(currencyAmount) {
+                val isBaseItem = currencyItem.isBateRate
+                inputType = if (isBaseItem) {
+                    InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+                } else {
+                    InputType.TYPE_NULL
+                }
+                isFocusable = isBaseItem
+                isClickable = isBaseItem
+                movementMethod = if (isBaseItem) movementMethod else null
+                keyListener = if (isBaseItem) keyListener else null
+            }
+            bindRate(currencyItem)
         }
 
         fun bindRate(currencyItem: CurrencyItem) {
             with(currencyAmount) {
                 removeTextChangedListener(baseCurrencyTextWatcher)
                 bindCurrencyData(currencyItem)
-                inputType = if (currencyItem.isBateRate) {
-                    addTextChangedListener(baseCurrencyTextWatcher)
-                    InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
-                } else {
-                    InputType.TYPE_NULL
-                }
-
+                addTextChangedListener(baseCurrencyTextWatcher)
             }
         }
 
