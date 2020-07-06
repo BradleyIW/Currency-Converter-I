@@ -1,7 +1,7 @@
 package com.bradley.wilson.currency.data.local
 
-import com.bradley.wilson.database.currency.rates.RatesDao
 import com.bradley.wilson.database.currency.rates.CurrencyEntity
+import com.bradley.wilson.database.currency.rates.RatesDao
 import com.bradley.wilson.database.service.DatabaseService
 
 class CurrencyDatabaseService(private val ratesDao: RatesDao) : DatabaseService() {
@@ -11,6 +11,6 @@ class CurrencyDatabaseService(private val ratesDao: RatesDao) : DatabaseService(
     }
 
     suspend fun updateRates(currencyEntity: CurrencyEntity) = request {
-        ratesDao.insertRate(currencyEntity)
+        ratesDao.insertOrUpdate(currencyEntity)
     }
 }

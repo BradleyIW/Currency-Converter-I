@@ -66,7 +66,7 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
 
     inner class CurrencyFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val currencyAmount = itemView.findViewById<EditText>(R.id.currency_amount)
+        private val currencyAmount = itemView.findViewById<EditText>(R.id.currency_feed_item_view_currency_input)
 
         private val currencyFormatter by lazy {
             CurrencyFormatter()
@@ -88,9 +88,9 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
         fun bindAll(currencyItem: CurrencyItem) {
             with(itemView) {
                 val currency = currencyFormatter.currency(currencyItem.country)
-                currency_title.text = currencyItem.country
-                currency_description.text = currency?.displayName ?: String.empty()
-                currency_icon.text = CurrencyFlags.getFlagEmojiForCurrency(currency)
+                currency_feed_item_view_currency_code.text = currencyItem.country
+                currency_feed_item_view_currency_display_name.text = currency?.displayName ?: String.empty()
+                currency_feed_item_view_flag.text = CurrencyFlags.getFlagEmojiForCurrency(currency)
 
                 bindRateForAll(currencyItem)
 

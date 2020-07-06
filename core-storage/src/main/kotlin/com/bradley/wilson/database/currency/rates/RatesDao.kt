@@ -4,12 +4,36 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 
 @Dao
-interface RatesDao {
+abstract class RatesDao {
+
     @Query("SELECT * FROM Rates WHERE baseCurrency = :baseCurrency")
-    fun getLatestRatesFromBase(baseCurrency: String): CurrencyEntity
+    abstract fun getLatestRatesFromBase(baseCurrency: String): CurrencyEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertRate(currencyEntity: CurrencyEntity)
+    abstract fun insertRate(currencyEntity: CurrencyEntity)
+
+    @Update
+    abstract fun updateRate(CurrencyEntity: CurrencyEntity)
+
+    fun insertOrUpdate(currencyEntity: CurrencyEntity) {
+        val entity = getLatestRatesFromBase(currencyEntity.baseCurrency)
+        entity?.let {
+            updateWithTimestamp(currencyEntity)
+        } ?: insertWithTimestamp(currencyEntity)
+    }
+
+    private fun insertWithTimestamp(CurrencyEntity: CurrencyEntity) {
+        insertRate(CurrencyEntity.apply {
+            modifiedAt = System.currentTimeMillis()
+        })
+    }
+
+    private fun updateWithTimestamp(CurrencyEntity: CurrencyEntity) {
+        updateRate(CurrencyEntity.apply {
+            modifiedAt = System.currentTimeMillis()
+        })
+    }
 }

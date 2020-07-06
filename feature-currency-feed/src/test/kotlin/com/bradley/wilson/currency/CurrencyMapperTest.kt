@@ -32,7 +32,7 @@ class CurrencyMapperTest : UnitTest() {
 
     @Test
     fun `given a rates entity, when toCurrencyList is called, then map to rates to list of currency objects`() {
-        val rates = listOf(CurrencyRate(GBP_COUNTRY_CODE, GBP_CURRENCY_RATE.toPlainString()))
+        val rates = listOf(CurrencyRate(GBP_COUNTRY_CODE, GBP_CURRENCY_RATE))
         val ratesEntity = CurrencyEntity(TEST_BASE_EUR_CURRENCY, rates)
         val list = currencyMapper.toCurrencyList(ratesEntity)
 
@@ -53,7 +53,7 @@ class CurrencyMapperTest : UnitTest() {
 
         assertEquals(ratesEntity.baseCurrency, TEST_BASE_EUR_CURRENCY)
         assertEquals(ratesEntity.rates.first().countryCode, GBP_COUNTRY_CODE)
-        assertEquals(ratesEntity.rates.first().value, GBP_CURRENCY_RATE.toPlainString())
+        assertEquals(ratesEntity.rates.first().value, GBP_CURRENCY_RATE)
 
     }
 

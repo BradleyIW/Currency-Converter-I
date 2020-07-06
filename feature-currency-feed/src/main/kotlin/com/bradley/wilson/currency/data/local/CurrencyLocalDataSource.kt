@@ -6,7 +6,7 @@ import com.bradley.wilson.database.currency.rates.CurrencyEntity
 
 class CurrencyLocalDataSource(private val currencyDatabaseService: CurrencyDatabaseService) {
 
-    suspend fun latestCurrencyRates(baseCurrency: String): Either<Failure, CurrencyEntity> =
+    suspend fun latestCurrencyRates(baseCurrency: String): Either<Failure, CurrencyEntity?> =
         currencyDatabaseService.latestCurrencyRates(baseCurrency)
 
     suspend fun saveRates(currencyEntity: CurrencyEntity): Either<Failure, Unit> =

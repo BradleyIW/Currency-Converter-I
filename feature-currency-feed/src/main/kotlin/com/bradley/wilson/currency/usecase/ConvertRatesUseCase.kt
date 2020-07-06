@@ -14,7 +14,11 @@ class ConvertRatesUseCase : OneShotUseCase<ConvertRatesParams, List<Currency>>()
 
     private fun convertCurrencies(params: ConvertRatesParams): List<Currency> =
         params.currencies.map {
-            it.copy(rate = it.rate.multiply(if (params.amount.equalsZero()) BigDecimal.ZERO else params.amount))
+            if (params.amount.equalsZero()) {
+                it.copy(rate = params.amount)
+            } else {
+                it.copy(rate = it.rate.multiply(params.amount))
+            }
         }
 }
 

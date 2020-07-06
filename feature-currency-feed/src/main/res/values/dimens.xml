@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="currency_item_height">72dp</dimen>
     <dimen name="currency_flag_size">48sp</dimen>
     <dimen name="screen_title_margin">16dp</dimen>
-    <dimen name="currency_title_text_size">16sp</dimen>
-    <dimen name="currency_subtitle_text_size">14sp</dimen>
     <dimen name="currency_input_text_size">20sp</dimen>
     <dimen name="title_guideline_percentage" type="float">0.2</dimen>
     <dimen name="item_image_guideline_percentage" type="float">0.2</dimen>
+    <dimen name="currency_input_margin_end">16dp</dimen>
 </resources>

@@ -2,9 +2,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/currency_item_height"
+    android:layout_height="?attr/listPreferredItemHeight"
     android:background="@android:color/white"
-    android:padding="4dp">
+    android:padding="@dimen/recycler_item_padding">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/item_image_guideline"
@@ -14,10 +14,9 @@
         app:layout_constraintGuide_percent="@dimen/item_image_guideline_percentage" />
 
     <androidx.emoji.widget.EmojiTextView
-        android:id="@+id/currency_icon"
+        android:id="@+id/currency_feed_item_view_flag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="centerInside"
         android:textColor="@color/black"
         android:textSize="@dimen/currency_flag_size"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,44 +26,40 @@
         tools:text="🇪🇺" />
 
     <TextView
-        android:id="@+id/currency_title"
+        android:id="@+id/currency_feed_item_view_currency_code"
+        style="@style/RecyclerView.Item.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/currency_title_text_size"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/currency_description"
+        app:layout_constraintBottom_toTopOf="@id/currency_feed_item_view_currency_display_name"
         app:layout_constraintStart_toStartOf="@+id/item_image_guideline"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="EUR" />
 
     <TextView
-        android:id="@+id/currency_description"
+        android:id="@id/currency_feed_item_view_currency_display_name"
+        style="@style/RecyclerView.Item.Subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="US dollar"
-        android:textSize="@dimen/currency_subtitle_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/item_image_guideline"
-        app:layout_constraintTop_toBottomOf="@+id/currency_title"
+        app:layout_constraintTop_toBottomOf="@+id/currency_feed_item_view_currency_code"
         tools:text="Euro" />
 
     <EditText
-        android:id="@+id/currency_amount"
+        android:id="@+id/currency_feed_item_view_currency_input"
+        style="@style/RecyclerView.Item.Input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:digits="0123456789."
-        android:hint="0.00"
-        android:imeOptions="actionDone"
+        android:layout_marginEnd="@dimen/currency_input_margin_end"
+        android:hint="@string/currency_amount_hint"
         android:importantForAutofill="no"
         android:textSize="@dimen/currency_input_text_size"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/currency_description"
+        app:layout_constraintStart_toEndOf="@+id/currency_feed_item_view_currency_display_name"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="100" />
+        tools:ignore="TextFields"
+        tools:text="1.00" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

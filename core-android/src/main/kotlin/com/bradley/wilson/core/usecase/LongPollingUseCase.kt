@@ -19,7 +19,7 @@ abstract class LongPollingUseCase<Params, Type> : UseCase<Params, Type> {
     fun execute(
         params: Params,
         scope: CoroutineScope,
-        intervalMillis: Long,
+        intervalMillis: Long = POLLING_INTERVAL_MILLIS,
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
         result: (Either<Failure, Type>) -> Unit
     ) {
@@ -34,5 +34,10 @@ abstract class LongPollingUseCase<Params, Type> : UseCase<Params, Type> {
                 }
             }
         }
+    }
+
+    companion object {
+        private const val POLLING_INTERVAL_MILLIS = 1000L
+
     }
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="RecyclerView" />
+
+    <style name="RecyclerView.Item.Title" parent="@style/TextView.Subtitle1">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="RecyclerView.Item.Subtitle" parent="@style/TextView.Body1">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="RecyclerView.Item.Input.Number" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:digits">0123456789.</item>
+        <item name="android:imeOptions">actionDone</item>
+    </style>
+
+    <style name="RecyclerView.Item.Input" parent="RecyclerView.Item.Input.Number">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxWidth">@dimen/recycler_item_input_max_width</item>
+    </style>
+
+</resources>

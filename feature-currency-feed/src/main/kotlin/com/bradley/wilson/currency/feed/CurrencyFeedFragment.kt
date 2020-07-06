@@ -27,10 +27,10 @@ class CurrencyFeedFragment : Fragment(R.layout.fragment_currency_feed) {
     private fun initCurrencyFeed() {
         currency_feed_recycler_view.adapter = currencyFeedAdapter
         currencyFeedAdapter.itemClicked {
-            currencyFeedViewModel.onCurrencyItemClicked(it.country, it.rate)
+            currencyFeedViewModel.onCurrencyItemClicked(it)
         }
         currencyFeedAdapter.rateChanged {
-            currencyFeedViewModel.updateFeed(it.country, it.rate)
+            currencyFeedViewModel.updateFeed(it)
         }
     }
 

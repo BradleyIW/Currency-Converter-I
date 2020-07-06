@@ -20,6 +20,7 @@ class CurrencyFeedViewModel(
 ) : ViewModel() {
 
     private var currencyItems = mutableListOf<CurrencyItem>()
+
     private lateinit var baseCurrencyItem: CurrencyItem
 
     private val _currencyRatesFeedLiveData = MutableLiveData<List<CurrencyItem>>()
@@ -31,30 +32,28 @@ class CurrencyFeedViewModel(
     private var onItemClicked: Boolean = false
 
     init {
-        updateFeed()
+        updateFeed(CurrencyItem.EMPTY)
     }
 
-    fun onCurrencyItemClicked(baseCurrency: String, amount: BigDecimal) {
+    fun onCurrencyItemClicked(updatedItem: CurrencyItem) {
         onItemClicked = true
-        updateFeed(baseCurrency, amount)
+        updateFeed(updatedItem)
     }
 
-    fun updateFeed(
-        baseCurrency: String = DEFAULT_BASE_CURRENCY,
-        amount: BigDecimal = BigDecimal(DEFAULT_RATE_INPUT)
-    ) {
-        baseCurrencyItem = CurrencyItem(baseCurrency, amount, isBateRate = true)
-        latestCurrencyRates(baseCurrency, amount)
+    fun updateFeed(updatedItem: CurrencyItem) {
+        baseCurrencyItem = CurrencyItem(updatedItem.country, updatedItem.rate, true, updatedItem.lastUpdatedAt)
+        latestCurrencyRates(updatedItem.country, updatedItem.rate)
     }
 
     private fun latestCurrencyRates(baseCurrency: String, amount: BigDecimal) {
-        latestRatesUseCase.execute(GetLatestRatesParams(baseCurrency), viewModelScope, POLLING_INTERVAL_MILLIS) {
+        latestRatesUseCase.execute(GetLatestRatesParams(baseCurrency), viewModelScope) {
             it.fold(::handleFailure) { currencies -> handleFetchSuccess(currencies, amount) }
         }
     }
 
     private fun handleFetchSuccess(currencyRates: List<Currency>, amount: BigDecimal) {
-        convertRatesUseCase.execute(ConvertRatesParams(currencyRates, amount), viewModelScope, Dispatchers.Default) {
+        val convertCurrencyParams = ConvertRatesParams(currencyRates, amount)
+        convertRatesUseCase.execute(convertCurrencyParams, viewModelScope, Dispatchers.Default) {
             it.fold(::handleFailure, ::handleConvertSuccess)
         }
     }
@@ -78,13 +77,9 @@ class CurrencyFeedViewModel(
     }
 
     private fun cleanupAndMapCurrencyItems(convertedCurrencies: List<Currency>) {
-        currencyItems = convertedCurrencies.map { currencyMapper.toCurrencyItem(it) }.toMutableList()
+        currencyItems = convertedCurrencies.map {
+            currencyMapper.toCurrencyItem(it)
+        }.toMutableList()
         currencyItems.add(0, baseCurrencyItem)
-    }
-
-    companion object {
-        private const val POLLING_INTERVAL_MILLIS = 1000L
-        private const val DEFAULT_BASE_CURRENCY = "EUR"
-        private const val DEFAULT_RATE_INPUT = 1.00
     }
 }
