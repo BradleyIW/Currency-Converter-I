@@ -7,14 +7,15 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bradley.wilson.core.extensions.math.equalsZero
+import com.bradley.wilson.core.extensions.math.notEqualTo
 import com.bradley.wilson.core.extensions.primitives.empty
-import com.bradley.wilson.core.extensions.primitives.equalTo
-import com.bradley.wilson.core.extensions.primitives.notEqualTo
 import com.bradley.wilson.currency.R
 import com.bradley.wilson.currency.feed.CurrencyItem
 import com.bradley.wilson.currency.utils.CurrencyFlags
 import com.bradley.wilson.currency.utils.CurrencyFormatter
 import kotlinx.android.synthetic.main.item_view_currency_feed.view.*
+import java.math.BigDecimal
 
 class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAdapter.CurrencyFeedViewHolder>() {
 
@@ -75,7 +76,7 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
             currencyAmount.setSelection(it.length)
             val currencyItem = currencyFeedItems[adapterPosition]
             if (it.isEmpty()) {
-                onRateChanged(currencyItem.copy(rate = ZERO_RATE_VALUE))
+                onRateChanged(currencyItem.copy(rate = BigDecimal.ZERO))
             } else {
                 val newRate = currencyFormatter.formatCurrencyToRate(it)
                 if (currencyItem.rate.notEqualTo(newRate)) {
@@ -124,7 +125,7 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
 
         private fun bindCurrencyData(currencyItem: CurrencyItem) {
             currencyAmount.setText(
-                if (currencyItem.rate.equalTo(ZERO_RATE_VALUE)) {
+                if (currencyItem.rate.equalsZero()) {
                     String.empty()
                 } else {
                     currencyFormatter.formatRateToCurrency(currencyItem)
@@ -137,9 +138,5 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
                 onItemClicked(currencyFeedItems[position])
             }
         }
-    }
-
-    companion object {
-        private const val ZERO_RATE_VALUE = 0.00
     }
 }

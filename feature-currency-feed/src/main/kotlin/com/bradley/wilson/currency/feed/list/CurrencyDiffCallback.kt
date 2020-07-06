@@ -1,7 +1,7 @@
 package com.bradley.wilson.currency.feed.list
 
 import androidx.recyclerview.widget.DiffUtil
-import com.bradley.wilson.core.extensions.primitives.notEqualTo
+import com.bradley.wilson.core.extensions.math.notEqualTo
 import com.bradley.wilson.currency.feed.CurrencyItem
 
 class CurrencyDiffCallback(

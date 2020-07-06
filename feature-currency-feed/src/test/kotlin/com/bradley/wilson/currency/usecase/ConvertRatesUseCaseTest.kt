@@ -7,6 +7,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import java.math.BigDecimal
 
 class ConvertRatesUseCaseTest : UnitTest() {
 
@@ -19,9 +20,9 @@ class ConvertRatesUseCaseTest : UnitTest() {
 
     @Test
     fun `given a multiplier of 10 and a set of rates, then each rate should be multiplied by 10`() {
-        val ukTestRate = 1.12455
-        val usTestRate = 2.75784
-        val multiplier = 10.0
+        val ukTestRate = BigDecimal(1.1245547747747444)
+        val usTestRate = BigDecimal(2.7578444456544456)
+        val multiplier = BigDecimal.TEN
 
 
         val dummyList = listOf(
@@ -33,8 +34,8 @@ class ConvertRatesUseCaseTest : UnitTest() {
         runBlocking {
             val response = convertRatesUseCase.run(params)
             response.onSuccess {
-                assertEquals(it.first().rate, ukTestRate * multiplier, 0.0)
-                assertEquals(it[1].rate, usTestRate * multiplier, 0.0)
+                assertEquals(it.first().rate, ukTestRate.multiply(multiplier))
+                assertEquals(it[1].rate, usTestRate.multiply(multiplier))
             }
         }
     }

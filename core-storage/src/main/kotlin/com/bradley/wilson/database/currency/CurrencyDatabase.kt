@@ -2,11 +2,11 @@ package com.bradley.wilson.database.currency
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.bradley.wilson.database.currency.rates.CurrencyEntity
 import com.bradley.wilson.database.currency.rates.RatesDao
-import com.bradley.wilson.database.currency.rates.RatesEntity
 
 @Database(
-    entities = [RatesEntity::class],
+    entities = [CurrencyEntity::class],
     version = CurrencyDatabase.VERSION
 )
 abstract class CurrencyDatabase : RoomDatabase() {

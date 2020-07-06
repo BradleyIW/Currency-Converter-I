@@ -33,7 +33,7 @@ class RateDaoTest {
     fun givenOneRateValueInserted_whenBaseCurrencyIsEUR_thenAssertValuesAreStoredAndRetrievedProperly() {
         val baseCurrency = "EUR"
         val currencyRate = CurrencyRate(TEST_COUNTRY_CODE, TEST_RATE)
-        val rateEntity = RatesEntity(baseCurrency, listOf(currencyRate))
+        val rateEntity = CurrencyEntity(baseCurrency, listOf(currencyRate))
 
         dao.insertRate(rateEntity)
 

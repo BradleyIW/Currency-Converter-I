@@ -8,8 +8,8 @@ import androidx.room.Query
 @Dao
 interface RatesDao {
     @Query("SELECT * FROM Rates WHERE baseCurrency = :baseCurrency")
-    fun getLatestRatesFromBase(baseCurrency: String): RatesEntity
+    fun getLatestRatesFromBase(baseCurrency: String): CurrencyEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertRate(ratesEntity: RatesEntity)
+    fun insertRate(currencyEntity: CurrencyEntity)
 }

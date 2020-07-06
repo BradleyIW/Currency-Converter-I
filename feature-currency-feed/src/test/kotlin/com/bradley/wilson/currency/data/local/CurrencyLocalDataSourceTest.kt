@@ -2,7 +2,7 @@ package com.bradley.wilson.currency.data.local
 
 import com.bradley.wilson.core.UnitTest
 import com.bradley.wilson.core.mockito.eq
-import com.bradley.wilson.database.currency.rates.RatesEntity
+import com.bradley.wilson.database.currency.rates.CurrencyEntity
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -34,11 +34,11 @@ class CurrencyLocalDataSourceTest : UnitTest() {
     @Test
     fun `given rates eneity, when save rates is requested, then update database service with new rates`() {
         runBlocking {
-            val ratesEntity: RatesEntity = mock(RatesEntity::class.java)
+            val currencyEntity: CurrencyEntity = mock(CurrencyEntity::class.java)
 
-            currencyLocalDataSource.saveRates(ratesEntity)
+            currencyLocalDataSource.saveRates(currencyEntity)
 
-            verify(currencyDatabaseService).updateRates(eq(ratesEntity))
+            verify(currencyDatabaseService).updateRates(eq(currencyEntity))
         }
     }
 

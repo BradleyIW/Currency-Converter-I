@@ -3,26 +3,27 @@ package com.bradley.wilson.currency
 import com.bradley.wilson.currency.data.remote.responses.CurrencyResponse
 import com.bradley.wilson.currency.feed.Currency
 import com.bradley.wilson.currency.feed.CurrencyItem
+import com.bradley.wilson.database.currency.rates.CurrencyEntity
 import com.bradley.wilson.database.currency.rates.CurrencyRate
-import com.bradley.wilson.database.currency.rates.RatesEntity
+import java.math.BigDecimal
 
 class CurrencyMapper {
 
     fun toCurrencyList(currencyResponse: CurrencyResponse?) = currencyResponse?.let {
         currencyResponse.rates.map { rateEntry ->
-            Currency(rateEntry.key, rateEntry.value)
+            Currency(rateEntry.key, BigDecimal(rateEntry.value))
         }
     } ?: emptyList()
 
-    fun toCurrencyList(ratesEntity: RatesEntity?) = ratesEntity?.let {
-        ratesEntity.rates.map {
-            Currency(it.countryCode, it.value)
+    fun toCurrencyList(currencyEntity: CurrencyEntity?) = currencyEntity?.let {
+        currencyEntity.rates.map {
+            Currency(it.countryCode, BigDecimal(it.value))
         }
     } ?: emptyList()
 
     fun toRatesEntity(baseCurrency: String, rates: List<Currency>) =
-        RatesEntity(baseCurrency, rates.map {
-            CurrencyRate(it.country, it.rate)
+        CurrencyEntity(baseCurrency, rates.map {
+            CurrencyRate(it.country, it.rate.toPlainString())
         })
 
     fun toCurrencyItem(it: Currency) =

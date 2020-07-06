@@ -11,6 +11,7 @@ import com.bradley.wilson.currency.usecase.ConvertRatesUseCase
 import com.bradley.wilson.currency.usecase.GetLatestRatesParams
 import com.bradley.wilson.currency.usecase.GetLatestRatesUseCase
 import kotlinx.coroutines.Dispatchers
+import java.math.BigDecimal
 
 class CurrencyFeedViewModel(
     private val latestRatesUseCase: GetLatestRatesUseCase,
@@ -33,23 +34,26 @@ class CurrencyFeedViewModel(
         updateFeed()
     }
 
-    fun onCurrencyItemClicked(baseCurrency: String, amount: Double) {
+    fun onCurrencyItemClicked(baseCurrency: String, amount: BigDecimal) {
         onItemClicked = true
         updateFeed(baseCurrency, amount)
     }
 
-    fun updateFeed(baseCurrency: String = DEFAULT_BASE_CURRENCY, amount: Double = DEFAULT_RATE_INPUT) {
-        baseCurrencyItem = CurrencyItem(baseCurrency, amount, isBateRate = true, updatedAt = System.currentTimeMillis())
-        getLatestCurrencyRates(baseCurrency, amount)
+    fun updateFeed(
+        baseCurrency: String = DEFAULT_BASE_CURRENCY,
+        amount: BigDecimal = BigDecimal(DEFAULT_RATE_INPUT)
+    ) {
+        baseCurrencyItem = CurrencyItem(baseCurrency, amount, isBateRate = true)
+        latestCurrencyRates(baseCurrency, amount)
     }
 
-    private fun getLatestCurrencyRates(baseCurrency: String, amount: Double) {
+    private fun latestCurrencyRates(baseCurrency: String, amount: BigDecimal) {
         latestRatesUseCase.execute(GetLatestRatesParams(baseCurrency), viewModelScope, POLLING_INTERVAL_MILLIS) {
             it.fold(::handleFailure) { currencies -> handleFetchSuccess(currencies, amount) }
         }
     }
 
-    private fun handleFetchSuccess(currencyRates: List<Currency>, amount: Double) {
+    private fun handleFetchSuccess(currencyRates: List<Currency>, amount: BigDecimal) {
         convertRatesUseCase.execute(ConvertRatesParams(currencyRates, amount), viewModelScope, Dispatchers.Default) {
             it.fold(::handleFailure, ::handleConvertSuccess)
         }
@@ -74,8 +78,8 @@ class CurrencyFeedViewModel(
     }
 
     private fun cleanupAndMapCurrencyItems(convertedCurrencies: List<Currency>) {
+        currencyItems = convertedCurrencies.map { currencyMapper.toCurrencyItem(it) }.toMutableList()
         currencyItems.add(0, baseCurrencyItem)
-        currencyItems.sortedByDescending { it.updatedAt }
     }
 
     companion object {

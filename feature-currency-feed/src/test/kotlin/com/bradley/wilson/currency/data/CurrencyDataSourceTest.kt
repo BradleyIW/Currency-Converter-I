@@ -10,8 +10,8 @@ import com.bradley.wilson.currency.CurrencyMapper
 import com.bradley.wilson.currency.data.local.CurrencyLocalDataSource
 import com.bradley.wilson.currency.data.remote.CurrencyRemoteDataSource
 import com.bradley.wilson.currency.data.remote.responses.CurrencyResponse
+import com.bradley.wilson.database.currency.rates.CurrencyEntity
 import com.bradley.wilson.database.currency.rates.CurrencyRate
-import com.bradley.wilson.database.currency.rates.RatesEntity
 import com.bradley.wilson.network.error.ServerError
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -21,6 +21,7 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
+import java.math.BigDecimal
 
 class CurrencyDataSourceTest : UnitTest() {
 
@@ -43,7 +44,7 @@ class CurrencyDataSourceTest : UnitTest() {
     @Test
     fun `given based currency, when latestCurrencyRates succeeds, then propagate list of currencies and save to database`() {
         runBlocking {
-            val response = CurrencyResponse(TEST_BASE_EUR_CURRENCY, mapOf(Pair(TEST_COUNTRY, TEST_RATE)))
+            val response = CurrencyResponse(TEST_BASE_EUR_CURRENCY, mapOf(Pair(TEST_COUNTRY, TEST_RATE.toDouble())))
 
             `when`(remoteDataSource.latestCurrencyRates(TEST_BASE_EUR_CURRENCY)).thenReturn(Either.Right(response))
 
@@ -56,7 +57,7 @@ class CurrencyDataSourceTest : UnitTest() {
             repoResponse.onSuccess {
                 it.map { currency ->
                     assertEquals(currency.country, TEST_COUNTRY)
-                    assertEquals(currency.rate, TEST_RATE, 0.0)
+                    assertEquals(currency.rate, TEST_RATE)
                 }
             }
             assertTrue(repoResponse.isRight)
@@ -66,7 +67,8 @@ class CurrencyDataSourceTest : UnitTest() {
     @Test
     fun `given getCurrenciesByBase is called, remote data source request fails and local data source succeeds, then propagate list`() {
         runBlocking {
-            val entity = RatesEntity(TEST_BASE_EUR_CURRENCY, listOf(CurrencyRate(TEST_COUNTRY, TEST_RATE)))
+            val entity =
+                CurrencyEntity(TEST_BASE_EUR_CURRENCY, listOf(CurrencyRate(TEST_COUNTRY, TEST_RATE.toPlainString())))
 
             `when`(remoteDataSource.latestCurrencyRates(TEST_BASE_EUR_CURRENCY)).thenReturn(Either.Left(ServerError))
             `when`(localDataSource.latestCurrencyRates(TEST_BASE_EUR_CURRENCY)).thenReturn(Either.Right(entity))
@@ -80,7 +82,7 @@ class CurrencyDataSourceTest : UnitTest() {
             repoResponse.onSuccess {
                 it.map { currency ->
                     assertEquals(currency.country, TEST_COUNTRY)
-                    assertEquals(currency.rate, TEST_RATE, 0.0)
+                    assertEquals(currency.rate, TEST_RATE)
                 }
             }
             assertTrue(repoResponse.isRight)
@@ -110,7 +112,7 @@ class CurrencyDataSourceTest : UnitTest() {
 
     companion object {
         private const val TEST_COUNTRY = "USD"
-        private const val TEST_RATE = 1.224646
+        private val TEST_RATE = BigDecimal(1.224646)
         private const val TEST_BASE_EUR_CURRENCY = "EUR"
     }
 }
