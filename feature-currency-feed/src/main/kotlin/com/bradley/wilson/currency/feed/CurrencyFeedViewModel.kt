@@ -1,6 +1,5 @@
 package com.bradley.wilson.currency.feed
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,8 +10,6 @@ import com.bradley.wilson.currency.usecase.ConvertRatesParams
 import com.bradley.wilson.currency.usecase.ConvertRatesUseCase
 import com.bradley.wilson.currency.usecase.GetLatestRatesParams
 import com.bradley.wilson.currency.usecase.GetLatestRatesUseCase
-import com.bradley.wilson.network.error.NoConnection
-import com.bradley.wilson.network.error.ServerError
 import kotlinx.coroutines.Dispatchers
 
 class CurrencyFeedViewModel(
@@ -42,7 +39,7 @@ class CurrencyFeedViewModel(
     }
 
     fun updateFeed(baseCurrency: String = DEFAULT_BASE_CURRENCY, amount: Double = DEFAULT_RATE_INPUT) {
-        baseCurrencyItem = CurrencyItem(baseCurrency, amount, true)
+        baseCurrencyItem = CurrencyItem(baseCurrency, amount, isBateRate = true)
         getLatestCurrencyRates(baseCurrency, amount)
     }
 
@@ -69,12 +66,7 @@ class CurrencyFeedViewModel(
     }
 
     private fun handleFailure(failure: Failure) {
-        val log = when (failure) {
-            is NoConnection -> "Connection lost"
-            is ServerError -> "Something is wrong with the network, pull down to try again."
-            else -> "Unknown error, we're sorry for the inconvenience"
-        }
-        Log.e(TAG, log)
+        //Do nothing for now
     }
 
     private fun cleanupAndMapCurrencyItems(convertedCurrencies: List<Currency>) {
@@ -83,7 +75,6 @@ class CurrencyFeedViewModel(
     }
 
     companion object {
-        private const val TAG = "CurrencyFeedViewModel"
         private const val POLLING_INTERVAL_MILLIS = 1000L
         private const val DEFAULT_BASE_CURRENCY = "EUR"
         private const val DEFAULT_RATE_INPUT = 1.00

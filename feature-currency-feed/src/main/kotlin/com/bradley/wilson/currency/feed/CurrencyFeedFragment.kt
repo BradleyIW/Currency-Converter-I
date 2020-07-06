@@ -18,8 +18,6 @@ class CurrencyFeedFragment : Fragment(R.layout.fragment_currency_feed) {
         CurrencyFeedRecyclerAdapter()
     }
 
-    private var hasBeenClicked = false
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initCurrencyFeed()
@@ -48,7 +46,6 @@ class CurrencyFeedFragment : Fragment(R.layout.fragment_currency_feed) {
     }
 
     companion object {
-        val TAG = "CurrencyFeedFragment"
         fun newInstance() = CurrencyFeedFragment()
     }
 }

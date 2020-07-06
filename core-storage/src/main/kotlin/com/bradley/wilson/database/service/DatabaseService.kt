@@ -7,6 +7,7 @@ import com.bradley.wilson.core.functional.Either
 import com.bradley.wilson.database.error.DatabaseError
 import com.bradley.wilson.database.error.DatabaseFailure
 import com.bradley.wilson.database.error.DatabaseStateError
+import com.bradley.wilson.database.error.NoResultsError
 import com.bradley.wilson.database.error.SQLError
 
 abstract class DatabaseService {
@@ -14,7 +15,7 @@ abstract class DatabaseService {
         try {
             localRequest()?.let {
                 Either.Right(it)
-            } ?: Either.Left(DatabaseError)
+            } ?: Either.Left(NoResultsError)
         } catch (e: IllegalStateException) {
             Either.Left(DatabaseStateError)
         } catch (e: SQLiteException) {

@@ -93,7 +93,7 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
 
                 bindRateForAll(currencyItem)
 
-                setOnClickListener { moveItemToTop() }
+                setOnClickListener { onItemClicked() }
             }
         }
 
@@ -131,7 +131,7 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
             )
         }
 
-        private fun moveItemToTop() {
+        private fun onItemClicked() {
             layoutPosition.takeIf { it > 0 }?.also { position ->
                 onItemClicked(currencyFeedItems[position])
             }

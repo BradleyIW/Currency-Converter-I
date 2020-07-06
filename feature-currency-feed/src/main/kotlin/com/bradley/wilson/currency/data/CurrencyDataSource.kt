@@ -27,9 +27,10 @@ class CurrencyDataSource(
 
     private suspend fun getLatestCurrenciesRemotely(baseCurrency: String): suspend () -> (Either<Failure, List<Currency>>) =
         {
-            remoteDataSource.latestCurrencyRates(baseCurrency).map {
-                currencyMapper.toCurrencyList(it)
-            }
+            remoteDataSource.latestCurrencyRates(baseCurrency)
+                .map {
+                    currencyMapper.toCurrencyList(it)
+                }
         }
 
 }

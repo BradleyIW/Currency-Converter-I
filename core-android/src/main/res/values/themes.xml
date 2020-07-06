@@ -4,7 +4,6 @@
     <style name="AppTheme" parent="Theme.Base.Material" />
 
     <style name="Theme.Base.Material">
-
         <item name="colorPrimary">@color/black</item>
         <item name="colorPrimaryVariant">#121212</item>
         <item name="colorSecondary">#2492d3</item>
@@ -32,6 +31,8 @@
         <item name="textAppearanceBody2">@style/TextView.Body2</item>
         <item name="textAppearanceCaption">@style/TextView.Caption</item>
         <item name="textAppearanceOverline">@style/TextView.Overline</item>
+
+        <item name="snackbarStyle">@style/Snackbar.Style</item>
     </style>
 
     <style name="Theme.Base" parent="Theme.MaterialComponents.DayNight.NoActionBar">

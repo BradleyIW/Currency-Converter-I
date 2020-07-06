@@ -32,6 +32,7 @@ dependencies {
     implementation(Libraries.appCompat)
     implementation(Libraries.Ktx.core)
     implementation(Libraries.constraint)
+    implementation(Libraries.material)
 
     testImplementation(TestLibraries.junit4)
 }
