@@ -6,8 +6,11 @@ import android.app.Application
 import android.net.ConnectivityManager
 import android.net.Network
 import android.os.Bundle
+import android.view.Gravity
+import android.widget.FrameLayout
 import com.bradley.wilson.R
 import com.bradley.wilson.currency.feed.ConnectivityListener
+import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
 class ActivityLifecycleConnectivityCallback : Application.ActivityLifecycleCallbacks {
@@ -56,6 +59,12 @@ class ActivityLifecycleConnectivityCallback : Application.ActivityLifecycleCallb
                 getString(R.string.no_connection_error_message),
                 Snackbar.LENGTH_INDEFINITE
             )
+            connectionSnackbar.setTextColor(resources.getColor(R.color.white))
+            val view = connectionSnackbar.view
+            val params = view.layoutParams as FrameLayout.LayoutParams
+            params.gravity = Gravity.TOP
+            view.layoutParams = params
+            connectionSnackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_FADE
             showConnectivitySnackbar()
         }
     }

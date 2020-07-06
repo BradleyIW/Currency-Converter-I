@@ -39,7 +39,7 @@ class CurrencyFeedViewModel(
     }
 
     fun updateFeed(baseCurrency: String = DEFAULT_BASE_CURRENCY, amount: Double = DEFAULT_RATE_INPUT) {
-        baseCurrencyItem = CurrencyItem(baseCurrency, amount, isBateRate = true)
+        baseCurrencyItem = CurrencyItem(baseCurrency, amount, isBateRate = true, updatedAt = System.currentTimeMillis())
         getLatestCurrencyRates(baseCurrency, amount)
     }
 
@@ -57,12 +57,16 @@ class CurrencyFeedViewModel(
 
     private fun handleConvertSuccess(convertedCurrencies: List<Currency>) {
         cleanupAndMapCurrencyItems(convertedCurrencies)
+        scrollRecyclerView()
+        _currencyRatesFeedLiveData.postValue(currencyItems)
+    }
+
+    private fun scrollRecyclerView() {
         if (onItemClicked) {
             _recyclerScrollerLiveData.value = Unit.also {
                 onItemClicked = false
             }
         }
-        _currencyRatesFeedLiveData.postValue(currencyItems)
     }
 
     private fun handleFailure(failure: Failure) {
@@ -70,8 +74,8 @@ class CurrencyFeedViewModel(
     }
 
     private fun cleanupAndMapCurrencyItems(convertedCurrencies: List<Currency>) {
-        currencyItems = convertedCurrencies.map { currencyMapper.toCurrencyItem(it) }.toMutableList()
         currencyItems.add(0, baseCurrencyItem)
+        currencyItems.sortedByDescending { it.updatedAt }
     }
 
     companion object {

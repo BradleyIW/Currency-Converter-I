@@ -41,7 +41,7 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
     ) {
         when {
             payloads.isNotEmpty() -> (payloads.first() as CurrencyItem)
-                .also { holder.bindRate(it) }
+                .also { holder.bindRateForAll(it) }
             else -> onBindViewHolder(holder, position)
         }
     }
@@ -97,7 +97,7 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
             }
         }
 
-        private fun bindRateForAll(currencyItem: CurrencyItem) {
+        fun bindRateForAll(currencyItem: CurrencyItem) {
             with(currencyAmount) {
                 val isBaseItem = currencyItem.isBateRate
                 inputType = if (isBaseItem) {
@@ -105,6 +105,7 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
                 } else {
                     InputType.TYPE_NULL
                 }
+                isFocusableInTouchMode = isBaseItem
                 isFocusable = isBaseItem
                 isClickable = isBaseItem
                 movementMethod = if (isBaseItem) movementMethod else null
@@ -113,7 +114,7 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
             bindRate(currencyItem)
         }
 
-        fun bindRate(currencyItem: CurrencyItem) {
+        private fun bindRate(currencyItem: CurrencyItem) {
             with(currencyAmount) {
                 removeTextChangedListener(baseCurrencyTextWatcher)
                 bindCurrencyData(currencyItem)

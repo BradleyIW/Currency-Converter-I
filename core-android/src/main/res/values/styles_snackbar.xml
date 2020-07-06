@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <style name="Snackbar.Style" parent="@style/Widget.MaterialComponents.Snackbar.FullWidth">
-        <item name="android:layout_margin">32dp</item>
         <item name="android:background">?statusBarBackground</item>
     </style>
 </resources>
