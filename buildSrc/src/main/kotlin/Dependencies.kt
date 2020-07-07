@@ -9,9 +9,8 @@ private object Versions {
     const val coroutines = "1.3.7"
     const val buildToolsVersion = "4.0.0"
     const val junit4 = "4.13"
-    const val mockito = "3.1.0"
+    const val mockito = "3.3.0"
     const val robolectric = "4.3.1"
-    const val assertJ = "3.16.1"
     const val testRunner = "1.1.0"
     const val material = "1.1.0"
     const val emoji = "1.1.0"
@@ -21,7 +20,7 @@ private object Versions {
     const val lifecycle = "2.2.0"
     const val koin = "2.1.6"
     const val room = "2.2.5"
-    const val gson = "2.8.6"
+    const val uiAutomator = "2.2.0"
 }
 
 object AndroidSdk {
@@ -44,8 +43,6 @@ object BuildPlugins {
         const val plugin = "kotlin"
         const val kapt = "kotlin-kapt"
     }
-
-    const val javaLibrary = "java-library"
 }
 
 object Instrumentation {
@@ -92,7 +89,7 @@ object Libraries {
 
 object TestLibraries {
     object Mockito {
-        const val core = "org.mockito:mockito-core:${Versions.mockito}"
+        const val inline = "org.mockito:mockito-inline:${Versions.mockito}"
         const val android = "org.mockito:mockito-android:${Versions.mockito}"
     }
 
@@ -103,19 +100,18 @@ object TestLibraries {
 
     const val junit4 = "junit:junit:${Versions.junit4}"
     const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
-    const val assertJ = "org.assertj:assertj-core:${Versions.assertJ}"
     const val testRunner = "androidx.test:runner:${Versions.testRunner}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
     const val testExtJunit = "androidx.test.ext:junit:${Versions.testExtensions}"
     const val testRules = "androidx.test:rules:${Versions.testRules}"
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
+    const val uiAutomator = "androidx.test.uiautomator:uiautomator:${Versions.uiAutomator}"
     const val room = "androidx.room:room-testing:${Versions.room}"
 }
 
 object ScriptPlugins {
     const val buildConfigApplication = "scripts.application.config"
     const val buildConfigLibrary = "scripts.library.config"
-    const val buildConfigKotlin = "scripts.kotlin.config"
     const val detekt = "scripts.detekt"
 }
 

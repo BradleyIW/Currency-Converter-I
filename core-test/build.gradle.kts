@@ -1,27 +1,29 @@
 plugins {
-    id(BuildPlugins.javaLibrary)
-    id(BuildPlugins.Kotlin.plugin)
-    id(ScriptPlugins.buildConfigKotlin)
+    id(BuildPlugins.Android.library)
+    id(BuildPlugins.Kotlin.android)
+    id(BuildPlugins.Kotlin.androidExtensions)
+    id(BuildPlugins.Kotlin.kapt)
+    id(ScriptPlugins.buildConfigLibrary)
 }
 
-tasks.register<Jar>(Core.configArtifactName) {
-    dependsOn("testClasses")
-    archiveBaseName.set("${project.name}-test")
-    from(sourceSets["test"].output.classesDirs)
-}
+android {
+    compileSdkVersion(AndroidSdk.compile)
 
-configurations.create(Core.configTestArtifacts) {
-    extendsFrom(configurations["testCompile"])
-}
-
-artifacts {
-    add(Core.configTestArtifacts, tasks.named<Jar>(Core.configArtifactName))
+    defaultConfig {
+        minSdkVersion(AndroidSdk.min)
+        targetSdkVersion(AndroidSdk.target)
+        versionCode = 1
+        versionName = "1.0"
+        testInstrumentationRunner = Instrumentation.testRunner
+    }
 }
 
 dependencies {
     implementation(Libraries.kotlinStdLib)
-
-    testImplementation(TestLibraries.junit4)
-    testImplementation(TestLibraries.Mockito.core)
-    testImplementation(TestLibraries.coroutines)
+    implementation(TestLibraries.junit4)
+    implementation(TestLibraries.Mockito.android)
+    implementation(TestLibraries.coroutines)
+    implementation(TestLibraries.espresso)
+    implementation(TestLibraries.testRules)
+    implementation(TestLibraries.uiAutomator)
 }

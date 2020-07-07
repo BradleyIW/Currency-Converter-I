@@ -24,11 +24,7 @@ class CurrencyApiServiceTest : UnitTest() {
     fun `given EUR currency is passed into getCurrenciesForBase, then verify api is requested with same base currency`() {
         runBlocking {
             currencyApiService.latestCurrencyRates(EURO_BASE_CURRENCY)
-            verify(api).latestCurrencyRates(
-                eq(
-                    EURO_BASE_CURRENCY
-                )
-            )
+            verify(api).latestCurrencyRates(eq(EURO_BASE_CURRENCY))
         }
     }
 

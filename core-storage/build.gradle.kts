@@ -26,7 +26,7 @@ android {
 
 
 dependencies {
-    api(project(Modules.Core.android))
+    implementation(project(Modules.Core.android))
 
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.Ktx.core)
@@ -39,10 +39,9 @@ dependencies {
 
     kapt(Libraries.Room.compiler)
 
-    testImplementation(project(path = Modules.Core.test, configuration = Core.configTestArtifacts))
     testImplementation(TestLibraries.junit4)
     testImplementation(TestLibraries.coroutines)
-    testImplementation(TestLibraries.Mockito.core)
+    testImplementation(TestLibraries.Mockito.inline)
 
     androidTestImplementation(TestLibraries.Android.core)
     androidTestImplementation(TestLibraries.room)
@@ -51,4 +50,5 @@ dependencies {
     androidTestImplementation(TestLibraries.testRunner)
     androidTestImplementation(TestLibraries.Mockito.android)
 
+    debugImplementation(project(Modules.Core.test))
 }

@@ -21,6 +21,7 @@ android {
 dependencies {
     implementation(project(Modules.Core.network))
     implementation(project(Modules.Core.storage))
+    implementation(project(Modules.Core.android))
 
     implementation(Libraries.emoji)
     implementation(Libraries.material)
@@ -39,13 +40,16 @@ dependencies {
     implementation(Libraries.Lifecycle.extensions)
     implementation(Libraries.recyclerView)
 
-    testImplementation(project(path = Modules.Core.test, configuration = Core.configTestArtifacts))
     testImplementation(TestLibraries.junit4)
     testImplementation(TestLibraries.coroutines)
-    testImplementation(TestLibraries.Mockito.core)
+    testImplementation(TestLibraries.Mockito.inline)
     testImplementation(TestLibraries.room)
 
     androidTestImplementation(TestLibraries.junit4)
     androidTestImplementation(TestLibraries.Mockito.android)
     androidTestImplementation(TestLibraries.espresso)
+    androidTestImplementation(TestLibraries.testRules)
+    androidTestImplementation(TestLibraries.uiAutomator)
+
+    debugImplementation(project(Modules.Core.test))
 }

@@ -32,4 +32,15 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    packagingOptions {
+        exclude("LICENSE.txt")
+        exclude("META-INF/DEPENDENCIES")
+        exclude("META-INF/ASL2.0")
+        exclude("META-INF/NOTICE")
+        exclude("META-INF/AL2.0")
+        exclude("META-INF/licenses/ASM")
+        exclude("META-INF/LGPL2.1")
+        exclude("**/attach_hotspot_windows.dll")
+    }
 }

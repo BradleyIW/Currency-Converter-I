@@ -26,8 +26,9 @@ dependencies {
     implementation(Libraries.Ktx.core)
     implementation(Libraries.Lifecycle.extensions)
 
-    testImplementation(project(path = Modules.Core.test, configuration = Core.configTestArtifacts))
     testImplementation(TestLibraries.junit4)
     testImplementation(TestLibraries.coroutines)
-    testImplementation(TestLibraries.Mockito.core)
+    testImplementation(TestLibraries.Mockito.inline)
+
+    debugImplementation(project(Modules.Core.test))
 }

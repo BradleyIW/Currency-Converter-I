@@ -3,6 +3,7 @@ package com.bradley.wilson.database.currency.rates
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
+import com.bradley.wilson.core.FunctionalTest
 import com.bradley.wilson.core.extensions.math.equalTo
 import com.bradley.wilson.database.currency.CurrencyDatabase
 import org.junit.After
@@ -10,12 +11,9 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.junit.MockitoJUnitRunner
 import java.math.BigDecimal
 
-@RunWith(MockitoJUnitRunner::class)
-class RateDaoTest {
+class RateDaoTest : FunctionalTest() {
 
     private lateinit var database: CurrencyDatabase
     private lateinit var dao: RatesDao
