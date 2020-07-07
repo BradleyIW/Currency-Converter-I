@@ -26,8 +26,8 @@ class ConvertRatesUseCaseTest : UnitTest() {
 
 
         val dummyList = listOf(
-            Currency("GBP", ukTestRate),
-            Currency("USD", usTestRate)
+            Currency("GBP", ukTestRate, 0L),
+            Currency("USD", usTestRate, 0L)
         )
         val params = ConvertRatesParams(dummyList, multiplier)
 

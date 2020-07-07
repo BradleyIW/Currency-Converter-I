@@ -17,6 +17,9 @@ data class CurrencyEntity(
     @ColumnInfo(name = "rates")
     val rates: List<CurrencyRate>,
 
-    @ColumnInfo(name = "modified_at")
+    @ColumnInfo(name = "createdAt")
+    var createdAt: Long,
+
+    @ColumnInfo(name = "modifiedAt")
     var modifiedAt: Long
 )

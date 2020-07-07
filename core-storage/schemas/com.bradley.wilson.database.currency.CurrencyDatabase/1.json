@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "605a5c3761658651ac15fce921698fb1",
+    "identityHash": "8d3bd8280f7fec8d26a9a0eb70f88ca1",
     "entities": [
       {
         "tableName": "Rates",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`baseCurrency` TEXT NOT NULL, `rates` TEXT NOT NULL, `modified_at` INTEGER NOT NULL, PRIMARY KEY(`baseCurrency`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`baseCurrency` TEXT NOT NULL, `rates` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, `modifiedAt` INTEGER NOT NULL, PRIMARY KEY(`baseCurrency`))",
         "fields": [
           {
             "fieldPath": "baseCurrency",
@@ -21,8 +21,14 @@
             "notNull": true
           },
           {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
             "fieldPath": "modifiedAt",
-            "columnName": "modified_at",
+            "columnName": "modifiedAt",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -40,7 +46,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '605a5c3761658651ac15fce921698fb1')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8d3bd8280f7fec8d26a9a0eb70f88ca1')"
     ]
   }
 }

@@ -24,7 +24,7 @@ class CurrencyMapper {
     fun toRatesEntity(baseCurrency: String, rates: List<Currency>) =
         CurrencyEntity(baseCurrency, rates.map {
             CurrencyRate(it.country, it.rate)
-        }, DEFAULT_TIMESTAMP)
+        }, DEFAULT_TIMESTAMP, DEFAULT_TIMESTAMP)
 
     fun toCurrencyItem(it: Currency) =
         CurrencyItem(it.country, it.rate, lastUpdatedAt = it.lastUpdatedAt)

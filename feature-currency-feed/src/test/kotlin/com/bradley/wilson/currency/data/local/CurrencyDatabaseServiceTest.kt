@@ -28,7 +28,7 @@ class CurrencyDatabaseServiceTest : UnitTest() {
     fun setup() {
         currencyDatabaseService = CurrencyDatabaseService(ratesDao)
 
-        val currencyList = listOf(CurrencyRate(TEST_COUNTRY_CODE, TEST_RATE.toPlainString()))
+        val currencyList = listOf(CurrencyRate(TEST_COUNTRY_CODE, TEST_RATE))
         `when`(currencyEntity.rates).thenReturn(currencyList)
     }
 
@@ -42,8 +42,8 @@ class CurrencyDatabaseServiceTest : UnitTest() {
             verify(ratesDao).getLatestRatesFromBase(TEST_BASE_CURRENCY)
 
             response.onSuccess {
-                assertEquals(it.rates.first().countryCode, TEST_COUNTRY_CODE)
-                assertEquals(it.rates.first().value, TEST_RATE.toPlainString())
+                assertEquals(it?.rates?.first()?.countryCode, TEST_COUNTRY_CODE)
+                assertEquals(it?.rates?.first()?.value, TEST_RATE)
             }
         }
     }
@@ -53,13 +53,13 @@ class CurrencyDatabaseServiceTest : UnitTest() {
         runBlocking {
             currencyDatabaseService.updateRates(currencyEntity)
 
-            verify(ratesDao).insertRate(currencyEntity)
+            verify(ratesDao).insertOrUpdate(currencyEntity)
         }
     }
 
     companion object {
         private const val TEST_COUNTRY_CODE = "USD"
-        private val TEST_RATE = BigDecimal(12.45775)
         private const val TEST_BASE_CURRENCY = "EUR"
+        private val TEST_RATE = BigDecimal(12.45775)
     }
 }

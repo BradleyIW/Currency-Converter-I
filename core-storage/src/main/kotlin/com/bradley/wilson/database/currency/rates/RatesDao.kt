@@ -27,6 +27,7 @@ abstract class RatesDao {
 
     private fun insertWithTimestamp(CurrencyEntity: CurrencyEntity) {
         insertRate(CurrencyEntity.apply {
+            createdAt = System.currentTimeMillis()
             modifiedAt = System.currentTimeMillis()
         })
     }
