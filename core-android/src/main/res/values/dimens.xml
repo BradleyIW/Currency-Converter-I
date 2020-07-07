@@ -2,5 +2,4 @@
 <resources>
     <dimen name="recycler_item_height">72dp</dimen>
     <dimen name="recycler_item_padding">4dp</dimen>
-    <dimen name="recycler_item_input_max_width">125sp</dimen>
 </resources>
