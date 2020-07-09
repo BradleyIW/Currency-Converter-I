@@ -11,7 +11,7 @@ val networkModule: Module = module {
     single<NetworkClient> { RetrofitClient(get()) }
     single {
         Retrofit.Builder()
-            .baseUrl("https://hiring.revolut.codes/api/android/")
+            .baseUrl("")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
