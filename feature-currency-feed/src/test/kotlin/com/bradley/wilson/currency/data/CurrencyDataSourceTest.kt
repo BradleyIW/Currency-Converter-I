@@ -1,11 +1,11 @@
 package com.bradley.wilson.currency.data
 
-import com.bradley.wilson.core.UnitTest
+import com.bradley.wilson.core.test.UnitTest
 import com.bradley.wilson.core.functional.Either
 import com.bradley.wilson.core.functional.onFailure
 import com.bradley.wilson.core.functional.onSuccess
-import com.bradley.wilson.core.mockito.any
-import com.bradley.wilson.core.mockito.eq
+import com.bradley.wilson.core.test.mockito.any
+import com.bradley.wilson.core.test.mockito.eq
 import com.bradley.wilson.currency.CurrencyMapper
 import com.bradley.wilson.currency.data.local.CurrencyLocalDataSource
 import com.bradley.wilson.currency.data.remote.CurrencyRemoteDataSource

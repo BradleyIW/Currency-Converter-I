@@ -1,4 +1,4 @@
-package com.bradley.wilson.core.mockito
+package com.bradley.wilson.core.test.mockito
 
 import org.junit.rules.TestRule
 import org.mockito.MockitoAnnotations

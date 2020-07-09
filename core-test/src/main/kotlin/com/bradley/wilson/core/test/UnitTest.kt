@@ -1,8 +1,8 @@
 @file:Suppress("LeakingThis")
 
-package com.bradley.wilson.core
+package com.bradley.wilson.core.test
 
-import com.bradley.wilson.core.mockito.InjectMocksRule
+import com.bradley.wilson.core.test.mockito.InjectMocksRule
 import org.junit.Rule
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner

@@ -1,4 +1,4 @@
-package com.bradley.wilson.core.coroutines
+package com.bradley.wilson.core.test.coroutines
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

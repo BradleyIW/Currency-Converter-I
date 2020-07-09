@@ -1,7 +1,7 @@
 package com.bradley.wilson.core.usecase
 
-import com.bradley.wilson.core.UnitTest
-import com.bradley.wilson.core.coroutines.CoroutinesTestRule
+import com.bradley.wilson.core.test.UnitTest
+import com.bradley.wilson.core.test.coroutines.CoroutinesTestRule
 import com.bradley.wilson.core.exceptions.Failure
 import com.bradley.wilson.core.functional.Either
 import com.bradley.wilson.core.functional.onSuccess

@@ -1,6 +1,6 @@
 package com.bradley.wilson.core.extensions.primitives
 
-import com.bradley.wilson.core.UnitTest
+import com.bradley.wilson.core.test.UnitTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

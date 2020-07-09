@@ -1,7 +1,7 @@
 package com.bradley.wilson.currency.data.local
 
-import com.bradley.wilson.core.UnitTest
-import com.bradley.wilson.core.mockito.eq
+import com.bradley.wilson.core.test.UnitTest
+import com.bradley.wilson.core.test.mockito.eq
 import com.bradley.wilson.database.currency.rates.CurrencyEntity
 import kotlinx.coroutines.runBlocking
 import org.junit.Before

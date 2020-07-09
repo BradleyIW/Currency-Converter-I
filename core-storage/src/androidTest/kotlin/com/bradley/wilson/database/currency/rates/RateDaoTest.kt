@@ -3,7 +3,7 @@ package com.bradley.wilson.database.currency.rates
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import com.bradley.wilson.core.FunctionalTest
+import com.bradley.wilson.core.test.FunctionalTest
 import com.bradley.wilson.core.extensions.math.equalTo
 import com.bradley.wilson.database.currency.CurrencyDatabase
 import org.junit.After

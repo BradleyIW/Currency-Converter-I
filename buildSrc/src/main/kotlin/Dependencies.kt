@@ -88,6 +88,14 @@ object Libraries {
 }
 
 object TestLibraries {
+
+    object Espresso {
+        const val core = "androidx.test.espresso:espresso-core:${Versions.espresso}"
+        //Androidx isn't support yet. Please see:
+        //https://github.com/android/android-test/issues/492
+        const val accessibility = "com.android.support.test.espresso:espresso-accessibility:${Versions.espresso}"
+    }
+
     object Mockito {
         const val inline = "org.mockito:mockito-inline:${Versions.mockito}"
         const val android = "org.mockito:mockito-android:${Versions.mockito}"
@@ -101,7 +109,6 @@ object TestLibraries {
     const val junit4 = "junit:junit:${Versions.junit4}"
     const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
     const val testRunner = "androidx.test:runner:${Versions.testRunner}"
-    const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
     const val testExtJunit = "androidx.test.ext:junit:${Versions.testExtensions}"
     const val testRules = "androidx.test:rules:${Versions.testRules}"
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"

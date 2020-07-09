@@ -1,6 +1,6 @@
 package com.bradley.wilson.core.functional
 
-import com.bradley.wilson.core.UnitTest
+import com.bradley.wilson.core.test.UnitTest
 import com.bradley.wilson.core.exceptions.Failure
 import com.bradley.wilson.core.exceptions.FeatureFailure
 import kotlinx.coroutines.runBlocking

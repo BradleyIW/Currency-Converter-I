@@ -1,6 +1,6 @@
 package com.bradley.wilson.currency.usecase
 
-import com.bradley.wilson.core.UnitTest
+import com.bradley.wilson.core.test.UnitTest
 import com.bradley.wilson.core.functional.onSuccess
 import com.bradley.wilson.currency.feed.Currency
 import kotlinx.coroutines.runBlocking

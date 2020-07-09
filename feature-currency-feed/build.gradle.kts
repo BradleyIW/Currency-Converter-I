@@ -47,9 +47,8 @@ dependencies {
 
     androidTestImplementation(TestLibraries.junit4)
     androidTestImplementation(TestLibraries.Mockito.android)
-    androidTestImplementation(TestLibraries.espresso)
+    androidTestImplementation(TestLibraries.Espresso.core)
     androidTestImplementation(TestLibraries.testRules)
-    androidTestImplementation(TestLibraries.uiAutomator)
 
     debugImplementation(project(Modules.Core.test))
 }

@@ -1,6 +1,6 @@
 package com.bradley.wilson.currency
 
-import com.bradley.wilson.core.UnitTest
+import com.bradley.wilson.core.test.UnitTest
 import com.bradley.wilson.currency.data.remote.responses.CurrencyResponse
 import com.bradley.wilson.currency.feed.Currency
 import com.bradley.wilson.database.currency.rates.CurrencyEntity

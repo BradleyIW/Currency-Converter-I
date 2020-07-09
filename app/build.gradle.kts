@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-    api(project(Modules.Core.android))
+    implementation(project(Modules.Core.android))
     implementation(project(Modules.Core.network))
     implementation(project(Modules.Core.storage))
     implementation(project(Modules.Feature.currency))
@@ -35,4 +35,6 @@ dependencies {
     implementation(Libraries.material)
 
     testImplementation(TestLibraries.junit4)
+
+    androidTestImplementation(TestLibraries.testRunner)
 }

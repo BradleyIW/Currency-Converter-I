@@ -1,6 +1,6 @@
 package com.bradley.wilson.database.currency.rates.converter
 
-import com.bradley.wilson.core.UnitTest
+import com.bradley.wilson.core.test.UnitTest
 import com.bradley.wilson.core.extensions.math.equalTo
 import com.bradley.wilson.core.extensions.math.equalsZero
 import com.bradley.wilson.core.extensions.primitives.empty

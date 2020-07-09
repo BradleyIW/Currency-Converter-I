@@ -2,7 +2,7 @@
 
 package com.bradley.wilson.network.api
 
-import com.bradley.wilson.core.UnitTest
+import com.bradley.wilson.core.test.UnitTest
 import com.bradley.wilson.core.functional.onFailure
 import com.bradley.wilson.core.functional.onSuccess
 import com.bradley.wilson.network.error.*

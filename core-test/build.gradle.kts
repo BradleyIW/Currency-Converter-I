@@ -23,7 +23,10 @@ dependencies {
     implementation(TestLibraries.junit4)
     implementation(TestLibraries.Mockito.android)
     implementation(TestLibraries.coroutines)
-    implementation(TestLibraries.espresso)
+    implementation(TestLibraries.Espresso.core)
+    implementation(TestLibraries.Espresso.accessibility)
     implementation(TestLibraries.testRules)
     implementation(TestLibraries.uiAutomator)
+    implementation(TestLibraries.testExtJunit)
+
 }
