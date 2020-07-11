@@ -2,6 +2,7 @@ plugins {
     id(BuildPlugins.Android.application)
     id(BuildPlugins.Kotlin.android)
     id(BuildPlugins.Kotlin.androidExtensions)
+    id(BuildPlugins.Kotlin.kapt)
     id(ScriptPlugins.buildConfigApplication)
 }
 
@@ -19,22 +20,35 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.Core.android))
-    implementation(project(Modules.Core.network))
-    implementation(project(Modules.Core.storage))
-    implementation(project(Modules.Feature.currency))
-
-    implementation(Libraries.emoji)
-    implementation(Libraries.emojiBundled)
+    implementation(Libraries.Ktx.core)
+    implementation(Libraries.constraint)
+    implementation(Libraries.Retrofit.core)
+    implementation(Libraries.Retrofit.gsonConverter)
+    implementation(Libraries.coroutines)
     implementation(Libraries.Koin.core)
     implementation(Libraries.Koin.viewModel)
+    implementation(Libraries.Room.runtime)
+    implementation(Libraries.Room.ktx)
+    implementation(Libraries.emoji)
+    implementation(Libraries.emojiBundled)
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.appCompat)
     implementation(Libraries.Ktx.core)
-    implementation(Libraries.constraint)
     implementation(Libraries.material)
 
-    testImplementation(TestLibraries.junit4)
+    kapt(Libraries.Room.compiler)
 
+    testImplementation(TestLibraries.junit4)
+    testImplementation(TestLibraries.coroutines)
+    testImplementation(TestLibraries.Mockito.inline)
+
+    androidTestImplementation(TestLibraries.Espresso.core)
+    androidTestImplementation(TestLibraries.Espresso.accessibility)
+    androidTestImplementation(TestLibraries.testRules)
+    androidTestImplementation(TestLibraries.uiAutomator)
+    androidTestImplementation(TestLibraries.testExtJunit)
     androidTestImplementation(TestLibraries.testRunner)
+
+    debugImplementation(DevLibraries.leakCanary)
+    debugImplementation(DevLibraries.fragmentTesting)
 }

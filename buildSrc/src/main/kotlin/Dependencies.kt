@@ -40,7 +40,6 @@ object BuildPlugins {
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         const val android = "kotlin-android"
         const val androidExtensions = "kotlin-android-extensions"
-        const val plugin = "kotlin"
         const val kapt = "kotlin-kapt"
     }
 }
@@ -70,12 +69,6 @@ object Libraries {
         const val ktx = "androidx.room:room-ktx:${Versions.room}"
     }
 
-    object Lifecycle {
-        const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
-        const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
-        const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
-        const val extensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
-    }
 
     const val emoji = "androidx.emoji:emoji:${Versions.emoji}"
     const val emojiBundled = "com.android.support:support-emoji-bundled:${Versions.emoji}"
@@ -83,7 +76,6 @@ object Libraries {
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     const val appCompat = "androidx.appcompat:appcompat:${Versions.jetpack}"
     const val constraint = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
-    const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.jetpack}"
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
 }
 
@@ -91,6 +83,7 @@ object TestLibraries {
 
     object Espresso {
         const val core = "androidx.test.espresso:espresso-core:${Versions.espresso}"
+
         //Androidx isn't support yet. Please see:
         //https://github.com/android/android-test/issues/492
         const val accessibility = "com.android.support.test.espresso:espresso-accessibility:${Versions.espresso}"
@@ -118,9 +111,19 @@ object TestLibraries {
 
 object ScriptPlugins {
     const val buildConfigApplication = "scripts.application.config"
-    const val buildConfigLibrary = "scripts.library.config"
     const val detekt = "scripts.detekt"
 }
+
+object DevLibraries {
+    private object Versions {
+        const val leakCanary = "2.3"
+        const val fragment = "1.2.5"
+    }
+
+    const val fragmentTesting = "androidx.fragment:fragment-testing:${Versions.fragment}"
+    const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
+}
+
 
 object Modules {
     object Core {

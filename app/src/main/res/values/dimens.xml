@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="recycler_item_height">72dp</dimen>
+    <dimen name="recycler_item_padding">4dp</dimen>
+    <dimen name="currency_flag_size">48sp</dimen>
+    <dimen name="screen_title_margin">16dp</dimen>
+    <dimen name="currency_input_text_size">20sp</dimen>
+    <dimen name="title_guideline_percentage" type="float">0.2</dimen>
+    <dimen name="item_image_guideline_percentage" type="float">0.2</dimen>
+    <dimen name="currency_input_margin_end">16dp</dimen>
+</resources>

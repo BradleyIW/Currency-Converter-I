@@ -6,7 +6,6 @@ import androidx.emoji.text.EmojiCompat
 import com.bradley.wilson.connectivity.ActivityLifecycleConnectivityCallback
 import com.bradley.wilson.di.Injector
 
-
 class CurrencyApplication : Application() {
     override fun onCreate() {
         super.onCreate()

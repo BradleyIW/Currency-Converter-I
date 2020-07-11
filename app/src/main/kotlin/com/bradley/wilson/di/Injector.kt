@@ -2,7 +2,7 @@ package com.bradley.wilson.di
 
 import android.content.Context
 import com.bradley.wilson.currency.currencyFeedModule
-import com.bradley.wilson.database.di.storageModule
+import com.bradley.wilson.core.database.di.storageModule
 import com.bradley.wilson.network.di.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin

@@ -40,14 +40,20 @@ class ActivityLifecycleConnectivityCallback : Application.ActivityLifecycleCallb
         connectionSnackbar.show()
     }
 
-    override fun onActivityPaused(activity: Activity) {}
+    override fun onActivityPaused(activity: Activity) {
+        //Do nothing
+    }
 
     override fun onActivityStarted(activity: Activity) =
         connectivityListener.registerListener(activity)
 
-    override fun onActivityDestroyed(activity: Activity) {}
+    override fun onActivityDestroyed(activity: Activity) {
+        //Do nothing
+    }
 
-    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
+    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
+        //Do nothing
+    }
 
     override fun onActivityStopped(activity: Activity) =
         connectivityListener.unregisterListener(activity)
@@ -69,5 +75,7 @@ class ActivityLifecycleConnectivityCallback : Application.ActivityLifecycleCallb
         }
     }
 
-    override fun onActivityResumed(activity: Activity) {}
+    override fun onActivityResumed(activity: Activity) {
+        //Do nothing
+    }
 }
