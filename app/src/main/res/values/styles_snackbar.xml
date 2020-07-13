@@ -2,7 +2,7 @@
 <resources>
 
     <style name="Snackbar.Style" parent="@style/Widget.MaterialComponents.Snackbar.FullWidth">
-        <item name="android:background">?statusBarBackground</item>
+        <item name="android:background">?colorError</item>
     </style>
 
 </resources>

@@ -44,6 +44,7 @@ dependencies {
 
     androidTestImplementation(TestLibraries.Espresso.core)
     androidTestImplementation(TestLibraries.Espresso.accessibility)
+    androidTestImplementation(TestLibraries.Espresso.contrib)
     androidTestImplementation(TestLibraries.testRules)
     androidTestImplementation(TestLibraries.uiAutomator)
     androidTestImplementation(TestLibraries.testExtJunit)

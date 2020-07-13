@@ -3,7 +3,8 @@
     <string name="no_connection_error_message">You are now in offline mode.</string>
     <string name="fragment_currency_feed_title">Rates</string>
     <string name="currency_amount_hint">0.00</string>
-    <string name="no_results_for_currency">Not enough data for %1$s. Please re-connect your internet.</string>
-    <string name="last_updated_at">Last update: %s</string>
+    <string name="last_updated_at">Last updated: %s</string>
     <string name="app_name">Currency Converter</string>
+    <string name="no_overall_results_error_message">There are no results to display right now.</string>
+    <string name="no_offline_results_error_message">There is no offline data for %1$s.</string>
 </resources>

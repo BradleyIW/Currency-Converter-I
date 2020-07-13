@@ -7,7 +7,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.os.Build
-import com.bradley.wilson.core.util.Compatibility
+import com.bradley.wilson.core.compatibility.Compatibility
 
 class ConnectivityListener(
     private val compatibility: Compatibility = Compatibility(),

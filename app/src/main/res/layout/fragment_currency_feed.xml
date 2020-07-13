@@ -1,38 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/fragment_currency_title_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/title_guideline_percentage" />
+    <include
+        android:id="@+id/currency_feed_error_content"
+        layout="@layout/currency_feed_error_content" />
 
-    <TextView
-        android:id="@+id/fragment_currency_feed_title_text_view"
-        style="@style/TextView.Screen.Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/screen_title_margin"
-        android:layout_marginBottom="@dimen/screen_title_margin"
-        android:text="@string/fragment_currency_feed_title"
-        app:layout_constraintStart_toEndOf="@id/fragment_currency_title_guideline"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include
+        android:id="@+id/currency_feed_main_content"
+        layout="@layout/currency_feed_main_content" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/currency_feed_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?actionBarSize"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_currency_feed_title_text_view"
-        tools:listitem="@layout/item_view_currency_feed" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

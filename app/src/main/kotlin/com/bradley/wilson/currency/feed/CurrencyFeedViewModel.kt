@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bradley.wilson.R
+import com.bradley.wilson.core.database.error.NoResultsError
+import com.bradley.wilson.core.error.ErrorMessage
 import com.bradley.wilson.core.exceptions.Failure
 import com.bradley.wilson.currency.CurrencyMapper
 import com.bradley.wilson.currency.usecase.ConvertRatesParams
@@ -28,6 +31,9 @@ class CurrencyFeedViewModel(
 
     private val _recyclerScrollerLiveData = MutableLiveData<Unit>()
     val recyclerScrollerLiveData: LiveData<Unit> = _recyclerScrollerLiveData
+
+    private val _noResultsErrorMessageLiveData = MutableLiveData<ErrorMessage>()
+    val noResultsErrorMessageLiveData: LiveData<ErrorMessage> = _noResultsErrorMessageLiveData
 
     private var onItemClicked: Boolean = false
 
@@ -73,7 +79,11 @@ class CurrencyFeedViewModel(
     }
 
     private fun handleFailure(failure: Failure) {
-        //Do nothing for now
+        when (failure) {
+            is NoResultsError -> if (currencyItems.isEmpty()) {
+                _noResultsErrorMessageLiveData.postValue(ErrorMessage(R.string.no_overall_results_error_message))
+            }
+        }
     }
 
     private fun cleanupAndMapCurrencyItems(convertedCurrencies: List<Currency>) {

@@ -7,7 +7,8 @@ import androidx.lifecycle.observe
 import com.bradley.wilson.R
 import com.bradley.wilson.core.extensions.android.scrollToTop
 import com.bradley.wilson.currency.feed.list.CurrencyFeedRecyclerAdapter
-import kotlinx.android.synthetic.main.fragment_currency_feed.*
+import kotlinx.android.synthetic.main.currency_feed_error_content.*
+import kotlinx.android.synthetic.main.currency_feed_main_content.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class CurrencyFeedFragment : Fragment(R.layout.fragment_currency_feed) {
@@ -22,6 +23,13 @@ class CurrencyFeedFragment : Fragment(R.layout.fragment_currency_feed) {
         super.onViewCreated(view, savedInstanceState)
         initCurrencyFeed()
         observeFeed()
+        observeErrors()
+    }
+
+    private fun observeErrors() {
+        currencyFeedViewModel.noResultsErrorMessageLiveData.observe(viewLifecycleOwner) {
+            currency_no_results_error.text = getString(it.msg)
+        }
     }
 
     private fun initCurrencyFeed() {

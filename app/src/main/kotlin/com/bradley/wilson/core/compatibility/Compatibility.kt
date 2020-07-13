@@ -1,4 +1,4 @@
-package com.bradley.wilson.core.util
+package com.bradley.wilson.core.compatibility
 
 import android.os.Build
 

@@ -13,6 +13,7 @@ import com.bradley.wilson.currency.feed.ConnectivityListener
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
+
 class ActivityLifecycleConnectivityCallback : Application.ActivityLifecycleCallbacks {
     private lateinit var connectionSnackbar: Snackbar
 
@@ -65,7 +66,7 @@ class ActivityLifecycleConnectivityCallback : Application.ActivityLifecycleCallb
                 getString(R.string.no_connection_error_message),
                 Snackbar.LENGTH_INDEFINITE
             )
-            connectionSnackbar.setTextColor(resources.getColor(R.color.white))
+            connectionSnackbar.setTextColor(resources.getColor(R.color.black))
             val view = connectionSnackbar.view
             val params = view.layoutParams as FrameLayout.LayoutParams
             params.gravity = Gravity.TOP
