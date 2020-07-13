@@ -4,6 +4,9 @@
 *.ap_
 *.aab
 
+# Room database schemas
+/schemas
+
 # Files for the ART/Dalvik VM
 *.dex
 

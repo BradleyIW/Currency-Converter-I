@@ -1,7 +1,7 @@
 plugins {
     id(ScriptPlugins.detekt)
+    id(ScriptPlugins.jacoco)
 }
-
 
 buildscript {
     repositories {
@@ -13,6 +13,8 @@ buildscript {
     dependencies {
         classpath(BuildPlugins.Android.gradlePlugin)
         classpath(BuildPlugins.Kotlin.gradlePlugin)
+        classpath(BuildPlugins.Jacoco.gradlePlugin)
+        classpath(BuildPlugins.Detekt.gradlePlugin)
     }
 }
 
@@ -22,8 +24,4 @@ allprojects {
         jcenter()
         mavenCentral()
     }
-}
-
-tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
 }

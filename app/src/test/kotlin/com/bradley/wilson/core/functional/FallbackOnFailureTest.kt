@@ -1,6 +1,6 @@
 package com.bradley.wilson.core.functional
 
-import com.bradley.wilson.core.test.UnitTest
+import com.bradley.wilson.core.UnitTest
 import com.bradley.wilson.core.exceptions.Failure
 import com.bradley.wilson.core.exceptions.FeatureFailure
 import kotlinx.coroutines.runBlocking
@@ -8,7 +8,9 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.verify
+import org.mockito.Mockito.verifyNoMoreInteractions
 
 class FallbackOnFailureTest : UnitTest() {
 

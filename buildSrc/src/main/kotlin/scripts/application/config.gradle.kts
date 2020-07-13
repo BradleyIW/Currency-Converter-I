@@ -13,6 +13,7 @@ plugins {
 android {
     buildTypes {
         getByName(BuildTypes.DEBUG) {
+            isTestCoverageEnabled = true
             isMinifyEnabled = false
             applicationIdSuffix = ".${BuildTypes.DEBUG}"
             isDebuggable = true

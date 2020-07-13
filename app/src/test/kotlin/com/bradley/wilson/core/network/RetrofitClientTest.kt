@@ -1,5 +1,7 @@
 package com.bradley.wilson.core.network
 
+import com.bradley.wilson.core.UnitTest
+import com.bradley.wilson.network.RetrofitClient
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock

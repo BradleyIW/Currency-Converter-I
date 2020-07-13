@@ -16,6 +16,13 @@ android {
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = Instrumentation.testRunner
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = mapOf(Pair("room.schemaLocation", "$projectDir/schemas"))
+            }
+        }
+
     }
 }
 
@@ -35,6 +42,8 @@ dependencies {
     implementation(Libraries.appCompat)
     implementation(Libraries.Ktx.core)
     implementation(Libraries.material)
+    implementation(Libraries.livedataKtx)
+    implementation(Libraries.viewModelKtx)
 
     kapt(Libraries.Room.compiler)
 
@@ -45,6 +54,7 @@ dependencies {
     androidTestImplementation(TestLibraries.Espresso.core)
     androidTestImplementation(TestLibraries.Espresso.accessibility)
     androidTestImplementation(TestLibraries.Espresso.contrib)
+    androidTestImplementation(TestLibraries.room)
     androidTestImplementation(TestLibraries.testRules)
     androidTestImplementation(TestLibraries.uiAutomator)
     androidTestImplementation(TestLibraries.testExtJunit)

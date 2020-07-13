@@ -5,16 +5,11 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
-import androidx.test.rule.ActivityTestRule
-import com.bradley.wilson.FunctionalTest
+import com.bradley.wilson.ActivityTest
 import com.bradley.wilson.R
-import org.junit.Rule
 import org.junit.Test
 
-class CurrencyFeedUITest : FunctionalTest() {
-
-    @get:Rule
-    val activityRule = ActivityTestRule(CurrencyFeedActivity::class.java)
+class CurrencyFeedUITest : ActivityTest(CurrencyFeedActivity::class.java) {
 
     @Test
     fun givenScreenIsLaunched_thenVerifyCorrectUIElementsAreDisplayed() {
