@@ -1,9 +1,14 @@
 plugins {
+    //Plugins
     id(BuildPlugins.Android.application)
     id(BuildPlugins.Kotlin.android)
     id(BuildPlugins.Kotlin.androidExtensions)
     id(BuildPlugins.Kotlin.kapt)
-    id(ScriptPlugins.buildConfigApplication)
+
+    //Scripts
+    id(ScriptPlugins.compilation)
+    id(ScriptPlugins.variants)
+    id(ScriptPlugins.sourceSets)
 }
 
 android {
@@ -16,13 +21,6 @@ android {
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = Instrumentation.testRunner
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = mapOf(Pair("room.schemaLocation", "$projectDir/schemas"))
-            }
-        }
-
     }
 }
 

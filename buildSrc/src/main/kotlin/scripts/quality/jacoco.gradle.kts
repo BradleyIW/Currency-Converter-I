@@ -1,14 +1,12 @@
-package scripts
-
-import com.android.build.gradle.internal.tasks.factory.dependsOn
+package scripts.quality
 
 subprojects {
     apply(plugin = "jacoco")
 
-    task<JacocoReport>("mergedJacocoReport") {
+    tasks.register("jacocoReport", JacocoReport::class) {
         group = "Reporting"
         description = "Generate Jacoco coverage reports on the debug build."
-        dependsOn("testDebugUnitTest", "connectedDebugAndroidTest")
+        dependsOn(":${project.path}:testDebugUnitTest")
         reports {
             xml.isEnabled = true
             html.isEnabled = true

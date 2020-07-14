@@ -1,6 +1,7 @@
 plugins {
     id(ScriptPlugins.detekt)
     id(ScriptPlugins.jacoco)
+    id(ScriptPlugins.infrastructure)
 }
 
 buildscript {

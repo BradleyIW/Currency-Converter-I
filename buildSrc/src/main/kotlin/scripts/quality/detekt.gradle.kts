@@ -1,4 +1,4 @@
-package scripts
+package scripts.quality
 
 plugins {
     id("io.gitlab.arturbosch.detekt") apply false

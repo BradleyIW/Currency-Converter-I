@@ -46,6 +46,7 @@ object BuildPlugins {
         private object Versions {
             const val jacoco = "0.8.5"
         }
+
         const val android = "jacoco-android"
         const val gradlePlugin = "org.jacoco:org.jacoco.core:${Versions.jacoco}"
     }
@@ -127,9 +128,12 @@ object TestLibraries {
 }
 
 object ScriptPlugins {
-    const val buildConfigApplication = "scripts.application.config"
-    const val detekt = "scripts.detekt"
-    const val jacoco = "scripts.jacoco"
+    const val sourceSets = "scripts.application.sources"
+    const val variants = "scripts.application.variants"
+    const val compilation = "scripts.application.compiling"
+    const val detekt = "scripts.quality.detekt"
+    const val jacoco = "scripts.quality.jacoco"
+    const val infrastructure = "scripts.infrastructure"
 }
 
 object DevLibraries {
