@@ -16,10 +16,6 @@
 # debugging stack traces.
 #-keepattributes SourceFile,LineNumberTable
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
-
 # Retrofit does reflection on generic parameters. InnerClasses is required to use Signature and
 # EnclosingMethod is required to use InnerClasses.
 -keepattributes Signature, InnerClasses, EnclosingMethod
@@ -48,6 +44,6 @@
 # With R8 full mode, it sees no subtypes of Retrofit interfaces since they are created with a Proxy
 # and replaces all potential values with null. Explicitly keeping the interfaces prevents this.
 -if interface * { @retrofit2.http.* <methods>; }
--keep,allowobfuscation interface <1>
 
+-keep,allowobfuscation interface <1>
 -keep class **.responses.** { *; }

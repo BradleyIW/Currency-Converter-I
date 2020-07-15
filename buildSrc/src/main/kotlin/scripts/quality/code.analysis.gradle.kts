@@ -4,7 +4,7 @@ plugins {
     id("io.gitlab.arturbosch.detekt") apply false
 }
 
-val detektAll by tasks.registering(io.gitlab.arturbosch.detekt.Detekt::class) {
+tasks.register("detektAll", io.gitlab.arturbosch.detekt.Detekt::class) {
     description = "Runs over whole code base without the starting overhead for each module."
     parallel = true
     buildUponDefaultConfig = true

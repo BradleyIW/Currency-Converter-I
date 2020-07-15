@@ -9,7 +9,7 @@ tasks.register("checkQuality") {
 tasks.register("staticCodeAnalysis") {
     group = "Quality"
     description = "This performs a static code analysis on the codebase and reports any particular issues found"
-    dependsOn("detektAll")
+    dependsOn(":app:detektAll")
 }
 
 tasks.register("codeCoverage") {

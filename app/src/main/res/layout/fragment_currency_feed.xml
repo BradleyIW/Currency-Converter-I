@@ -4,6 +4,13 @@
     android:layout_height="match_parent">
 
     <include
+        android:id="@+id/currency_feed_loading_indicator"
+        layout="@layout/loading_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <include
         android:id="@+id/currency_feed_error_content"
         layout="@layout/currency_feed_error_content" />
 
