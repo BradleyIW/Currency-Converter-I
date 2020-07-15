@@ -6,9 +6,7 @@ plugins {
     id(BuildPlugins.Kotlin.kapt)
 
     //Scripts
-    id(ScriptPlugins.compilation)
-    id(ScriptPlugins.variants)
-    id(ScriptPlugins.sourceSets)
+    id(ScriptPlugins.applicationConfig)
 }
 
 android {

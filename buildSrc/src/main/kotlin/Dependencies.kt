@@ -128,11 +128,7 @@ object TestLibraries {
 }
 
 object ScriptPlugins {
-    const val sourceSets = "scripts.application.sources"
-    const val variants = "scripts.application.variants"
-    const val compilation = "scripts.application.compiling"
-    const val detekt = "scripts.quality.detekt"
-    const val jacoco = "scripts.quality.jacoco"
+    const val applicationConfig = "scripts.application.config"
     const val infrastructure = "scripts.infrastructure"
 }
 

@@ -15,11 +15,11 @@ android {
             isTestCoverageEnabled = true
             isMinifyEnabled = false
             applicationIdSuffix = ".${BuildTypes.DEBUG}"
-            isDebuggable = true
         }
 
         getByName(BuildTypes.RELEASE) {
             isMinifyEnabled = true
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
