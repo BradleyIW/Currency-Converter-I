@@ -28,7 +28,7 @@ class CurrencyFeedViewModel(
     private val currencyMapper: CurrencyMapper
 ) : ViewModel() {
 
-    private var currencyItems = mutableListOf<CurrencyItem>()
+    private lateinit var currencyItems: MutableList<CurrencyItem>
 
     private lateinit var baseCurrencyItem: CurrencyItem
 
@@ -46,13 +46,14 @@ class CurrencyFeedViewModel(
 
     private var itemState: ItemState = ItemDormant
 
-    init {
+    fun startFeed() {
+        currencyItems = mutableListOf()
         updateLoadingState(Loading)
         updateFeed(CurrencyItem.EMPTY)
     }
 
     fun onCurrencyItemClicked(updatedItem: CurrencyItem) {
-        updateItemState(ItemClicked)
+        updateListItemState(ItemClicked)
         updateFeed(updatedItem)
     }
 
@@ -94,13 +95,13 @@ class CurrencyFeedViewModel(
         _loadingIndicatorLiveData.value = state
     }
 
-    private fun updateItemState(state: ItemState) {
+    private fun updateListItemState(state: ItemState) {
         itemState = state
     }
 
     private fun scrollRecyclerView() {
         _recyclerScrollerLiveData.value = itemState
-        updateItemState(itemState)
+        updateListItemState(ItemDormant)
     }
 
     private fun cleanupAndMapCurrencyItems(convertedCurrencies: List<Currency>) {

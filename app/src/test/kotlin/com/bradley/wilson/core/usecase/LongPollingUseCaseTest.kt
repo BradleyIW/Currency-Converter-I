@@ -2,9 +2,12 @@ package com.bradley.wilson.core.usecase
 
 import com.bradley.wilson.core.UnitTest
 import com.bradley.wilson.core.exceptions.Failure
+import com.bradley.wilson.core.extensions.math.equalTo
 import com.bradley.wilson.core.functional.Either
 import com.bradley.wilson.core.functional.onSuccess
 import com.bradley.wilson.coroutines.CoroutinesTestRule
+import com.bradley.wilson.currency.feed.Currency
+import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher
@@ -17,6 +20,7 @@ import org.junit.Test
 import org.mockito.Mockito
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
+import java.math.BigDecimal
 
 @ExperimentalCoroutinesApi
 class LongPollingUseCaseTest : UnitTest() {
@@ -26,23 +30,18 @@ class LongPollingUseCaseTest : UnitTest() {
     @get:Rule
     val coroutinesTestRule = CoroutinesTestRule(testDispatcher)
 
-    private data class TestRate(
-        val code: String,
-        val value: Double
-    )
+    private lateinit var longPollingUseCase: LongPollingUseCase<Unit, Currency>
 
-    private lateinit var longPollingUseCase: LongPollingUseCase<Unit, TestRate>
-
-    private lateinit var spiedUseCase: LongPollingUseCase<Unit, TestRate>
+    private lateinit var spiedUseCase: LongPollingUseCase<Unit, Currency>
 
     private val testScope = TestCoroutineScope(testDispatcher)
 
     @Before
     fun setup() {
-        longPollingUseCase = object : LongPollingUseCase<Unit, TestRate>() {
-            override suspend fun run(params: Unit): Either<Failure, TestRate> =
+        longPollingUseCase = object : LongPollingUseCase<Unit, Currency>() {
+            override suspend fun run(params: Unit): Either<Failure, Currency> =
                 //Dummy response from a repository
-                Either.Right(TestRate(TEST_COUNTRY_CODE, TEST_RATE))
+                Either.Right(Currency(TEST_COUNTRY_CODE, TEST_RATE, 0L))
         }
         spiedUseCase = Mockito.spy(longPollingUseCase)
     }
@@ -57,10 +56,10 @@ class LongPollingUseCaseTest : UnitTest() {
         runBlocking {
             val intervalMillis = 100L
 
-            spiedUseCase.execute(Unit, testScope, intervalMillis) { result ->
+            spiedUseCase(Unit, testScope, intervalMillis) { result ->
                 result.onSuccess {
-                    assertEquals(it.code, TEST_COUNTRY_CODE)
-                    assertEquals(it.value, TEST_RATE, 0.0)
+                    assertEquals(it.country, TEST_COUNTRY_CODE)
+                    assertTrue(it.rate.equalTo(TEST_RATE))
                 }
             }
 
@@ -72,7 +71,7 @@ class LongPollingUseCaseTest : UnitTest() {
 
     companion object {
         private const val TEST_COUNTRY_CODE = "USD"
-        private const val TEST_RATE = 1.234664
+        private val TEST_RATE = BigDecimal(1.23466)
     }
 }
 

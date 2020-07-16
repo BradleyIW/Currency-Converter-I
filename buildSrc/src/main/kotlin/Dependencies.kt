@@ -7,7 +7,6 @@ private object Versions {
     const val ktx = "1.3.0"
     const val retrofit = "2.6.2"
     const val coroutines = "1.3.7"
-    const val buildToolsVersion = "4.0.0"
     const val junit4 = "4.13"
     const val mockito = "3.3.0"
     const val robolectric = "4.3.1"
@@ -21,6 +20,7 @@ private object Versions {
     const val koin = "2.1.6"
     const val room = "2.2.5"
     const val uiAutomator = "2.2.0"
+    const val testCore = "2.1.0"
 }
 
 object AndroidSdk {
@@ -32,31 +32,12 @@ object AndroidSdk {
 object BuildPlugins {
     object Android {
         const val application = "com.android.application"
-        const val gradlePlugin = "com.android.tools.build:gradle:${Versions.buildToolsVersion}"
     }
 
     object Kotlin {
-        const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         const val android = "kotlin-android"
         const val androidExtensions = "kotlin-android-extensions"
         const val kapt = "kotlin-kapt"
-    }
-
-    object Jacoco {
-        private object Versions {
-            const val jacoco = "0.8.5"
-        }
-
-        const val android = "jacoco-android"
-        const val gradlePlugin = "org.jacoco:org.jacoco.core:${Versions.jacoco}"
-    }
-
-    object Detekt {
-        private object Versions {
-            const val detekt = "1.9.1"
-        }
-
-        const val gradlePlugin = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${Versions.detekt}"
     }
 }
 
@@ -125,6 +106,7 @@ object TestLibraries {
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
     const val uiAutomator = "androidx.test.uiautomator:uiautomator:${Versions.uiAutomator}"
     const val room = "androidx.room:room-testing:${Versions.room}"
+    const val testCore = "androidx.arch.core:core-testing:${Versions.testCore}"
 }
 
 object ScriptPlugins {

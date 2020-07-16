@@ -14,7 +14,6 @@ android {
         getByName(BuildTypes.DEBUG) {
             isTestCoverageEnabled = true
             isMinifyEnabled = false
-            applicationIdSuffix = ".${BuildTypes.DEBUG}"
         }
 
         getByName(BuildTypes.RELEASE) {

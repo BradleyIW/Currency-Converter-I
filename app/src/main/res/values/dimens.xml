@@ -8,4 +8,6 @@
     <dimen name="title_guideline_percentage" type="float">0.2</dimen>
     <dimen name="item_image_guideline_percentage" type="float">0.2</dimen>
     <dimen name="currency_input_margin_end">16dp</dimen>
+    <dimen name="no_results_error_message_padding">50dp</dimen>
+    <dimen name="loading_indicator_width_height">50dp</dimen>
 </resources>

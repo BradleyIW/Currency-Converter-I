@@ -46,6 +46,7 @@ dependencies {
     testImplementation(TestLibraries.junit4)
     testImplementation(TestLibraries.coroutines)
     testImplementation(TestLibraries.Mockito.inline)
+    testImplementation(TestLibraries.testCore)
 
     androidTestImplementation(TestLibraries.Espresso.core)
     androidTestImplementation(TestLibraries.Espresso.accessibility)

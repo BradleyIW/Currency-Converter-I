@@ -8,6 +8,7 @@ import com.bradley.wilson.R
 import com.bradley.wilson.core.extensions.android.gone
 import com.bradley.wilson.core.extensions.android.scrollToTop
 import com.bradley.wilson.core.extensions.android.visible
+import com.bradley.wilson.core.ui.ItemClicked
 import com.bradley.wilson.core.ui.Loaded
 import com.bradley.wilson.core.ui.Loading
 import com.bradley.wilson.currency.feed.list.CurrencyFeedRecyclerAdapter
@@ -26,10 +27,15 @@ class CurrencyFeedFragment : Fragment(R.layout.fragment_currency_feed) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        startFeed()
         initCurrencyFeed()
         observeFeed()
         observeErrors()
         observeLoadingState()
+    }
+
+    private fun startFeed() {
+        currencyFeedViewModel.startFeed()
     }
 
     private fun observeLoadingState() {
@@ -62,7 +68,9 @@ class CurrencyFeedFragment : Fragment(R.layout.fragment_currency_feed) {
     private fun observeFeed() {
         with(currencyFeedViewModel) {
             recyclerScrollerLiveData.observe(viewLifecycleOwner) {
-                currency_feed_recycler_view.scrollToTop()
+                when (it) {
+                    is ItemClicked -> currency_feed_recycler_view.scrollToTop()
+                }
             }
             currencyFeedLiveData.observe(viewLifecycleOwner) {
                 currencyFeedAdapter.updateList(it)

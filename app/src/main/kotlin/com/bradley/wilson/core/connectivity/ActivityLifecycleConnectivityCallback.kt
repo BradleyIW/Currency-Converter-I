@@ -1,4 +1,4 @@
-package com.bradley.wilson.connectivity
+package com.bradley.wilson.core.connectivity
 
 import android.annotation.SuppressLint
 import android.app.Activity

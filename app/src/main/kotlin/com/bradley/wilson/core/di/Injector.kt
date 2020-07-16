@@ -1,4 +1,4 @@
-package com.bradley.wilson.di
+package com.bradley.wilson.core.di
 
 import android.content.Context
 import com.bradley.wilson.currency.currencyFeedModule
