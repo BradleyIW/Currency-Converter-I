@@ -2,9 +2,7 @@ package com.bradley.wilson.currency.data.local
 
 import com.bradley.wilson.core.UnitTest
 import com.bradley.wilson.core.functional.onSuccess
-import com.bradley.wilson.core.database.currency.rates.CurrencyEntity
-import com.bradley.wilson.core.database.currency.rates.CurrencyRate
-import com.bradley.wilson.core.database.currency.rates.RatesDao
+import com.bradley.wilson.currency.data.local.source.CurrencyDatabaseService
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -26,9 +24,15 @@ class CurrencyDatabaseServiceTest : UnitTest() {
 
     @Before
     fun setup() {
-        currencyDatabaseService = CurrencyDatabaseService(ratesDao)
+        currencyDatabaseService =
+            CurrencyDatabaseService(ratesDao)
 
-        val currencyList = listOf(CurrencyRate(TEST_COUNTRY_CODE, TEST_RATE))
+        val currencyList = listOf(
+            CurrencyRate(
+                TEST_COUNTRY_CODE,
+                TEST_RATE
+            )
+        )
         `when`(currencyEntity.rates).thenReturn(currencyList)
     }
 

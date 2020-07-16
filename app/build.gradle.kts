@@ -20,6 +20,8 @@ android {
         versionName = "1.0"
         testInstrumentationRunner = Instrumentation.testRunner
     }
+
+    sourceSets { map { it.java.srcDir("src/${it.name}/kotlin") } }
 }
 
 dependencies {
@@ -51,6 +53,8 @@ dependencies {
     androidTestImplementation(TestLibraries.Espresso.core)
     androidTestImplementation(TestLibraries.Espresso.accessibility)
     androidTestImplementation(TestLibraries.Espresso.contrib)
+    androidTestImplementation(TestLibraries.Android.core)
+    androidTestImplementation(TestLibraries.Android.junit)
     androidTestImplementation(TestLibraries.room)
     androidTestImplementation(TestLibraries.testRules)
     androidTestImplementation(TestLibraries.uiAutomator)

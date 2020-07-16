@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.view.Gravity
 import android.widget.FrameLayout
 import com.bradley.wilson.R
-import com.bradley.wilson.currency.feed.ConnectivityListener
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
@@ -18,7 +17,8 @@ class ActivityLifecycleConnectivityCallback : Application.ActivityLifecycleCallb
     private lateinit var connectionSnackbar: Snackbar
 
     private val connectivityListener: ConnectivityListener =
-        ConnectivityListener(networkCallback = object : ConnectivityManager.NetworkCallback() {
+        ConnectivityListener(networkCallback = object :
+            ConnectivityManager.NetworkCallback() {
             override fun onLost(network: Network) {
                 showConnectivitySnackbar()
             }

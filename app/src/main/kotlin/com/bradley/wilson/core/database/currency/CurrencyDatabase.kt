@@ -2,8 +2,8 @@ package com.bradley.wilson.core.database.currency
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.bradley.wilson.core.database.currency.rates.CurrencyEntity
-import com.bradley.wilson.core.database.currency.rates.RatesDao
+import com.bradley.wilson.currency.data.local.CurrencyEntity
+import com.bradley.wilson.currency.data.local.RatesDao
 
 @Database(
     entities = [CurrencyEntity::class],

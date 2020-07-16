@@ -5,11 +5,11 @@ import com.bradley.wilson.core.functional.Either
 import com.bradley.wilson.core.functional.onFailure
 import com.bradley.wilson.core.functional.onSuccess
 import com.bradley.wilson.currency.CurrencyMapper
-import com.bradley.wilson.currency.data.local.CurrencyLocalDataSource
+import com.bradley.wilson.currency.data.local.source.CurrencyLocalDataSource
 import com.bradley.wilson.currency.data.remote.CurrencyRemoteDataSource
 import com.bradley.wilson.currency.data.remote.responses.CurrencyResponse
-import com.bradley.wilson.core.database.currency.rates.CurrencyEntity
-import com.bradley.wilson.core.database.currency.rates.CurrencyRate
+import com.bradley.wilson.currency.data.local.CurrencyEntity
+import com.bradley.wilson.currency.data.local.CurrencyRate
 import com.bradley.wilson.mockito.any
 import com.bradley.wilson.mockito.eq
 import com.bradley.wilson.network.error.ServerError
@@ -68,7 +68,14 @@ class CurrencyDataSourceTest : UnitTest() {
     fun `given getCurrenciesByBase is called, remote data source request fails and local data source succeeds, then propagate list`() {
         runBlocking {
             val entity =
-                CurrencyEntity(TEST_BASE_EUR_CURRENCY, listOf(CurrencyRate(TEST_COUNTRY, TEST_RATE)), 0L, 0L)
+                CurrencyEntity(
+                    TEST_BASE_EUR_CURRENCY, listOf(
+                        CurrencyRate(
+                            TEST_COUNTRY,
+                            TEST_RATE
+                        )
+                    ), 0L, 0L
+                )
 
             `when`(remoteDataSource.latestCurrencyRates(TEST_BASE_EUR_CURRENCY)).thenReturn(Either.Left(ServerError))
             `when`(localDataSource.latestCurrencyRates(TEST_BASE_EUR_CURRENCY)).thenReturn(Either.Right(entity))

@@ -8,9 +8,9 @@ import com.bradley.wilson.R
 import com.bradley.wilson.core.extensions.android.gone
 import com.bradley.wilson.core.extensions.android.scrollToTop
 import com.bradley.wilson.core.extensions.android.visible
-import com.bradley.wilson.core.ui.ItemClicked
-import com.bradley.wilson.core.ui.Loaded
-import com.bradley.wilson.core.ui.Loading
+import com.bradley.wilson.core.ui.state.ItemClicked
+import com.bradley.wilson.core.ui.state.Loaded
+import com.bradley.wilson.core.ui.state.Loading
 import com.bradley.wilson.currency.feed.list.CurrencyFeedRecyclerAdapter
 import kotlinx.android.synthetic.main.currency_feed_error_content.*
 import kotlinx.android.synthetic.main.currency_feed_main_content.*

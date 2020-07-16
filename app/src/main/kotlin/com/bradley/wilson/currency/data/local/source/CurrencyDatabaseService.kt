@@ -1,8 +1,8 @@
-package com.bradley.wilson.currency.data.local
+package com.bradley.wilson.currency.data.local.source
 
-import com.bradley.wilson.core.database.currency.rates.CurrencyEntity
-import com.bradley.wilson.core.database.currency.rates.RatesDao
 import com.bradley.wilson.core.database.service.DatabaseService
+import com.bradley.wilson.currency.data.local.CurrencyEntity
+import com.bradley.wilson.currency.data.local.RatesDao
 
 class CurrencyDatabaseService(private val ratesDao: RatesDao) : DatabaseService() {
 

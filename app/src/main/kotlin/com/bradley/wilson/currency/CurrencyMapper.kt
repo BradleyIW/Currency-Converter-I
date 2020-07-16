@@ -3,8 +3,8 @@ package com.bradley.wilson.currency
 import com.bradley.wilson.currency.data.remote.responses.CurrencyResponse
 import com.bradley.wilson.currency.feed.Currency
 import com.bradley.wilson.currency.feed.CurrencyItem
-import com.bradley.wilson.core.database.currency.rates.CurrencyEntity
-import com.bradley.wilson.core.database.currency.rates.CurrencyRate
+import com.bradley.wilson.currency.data.local.CurrencyEntity
+import com.bradley.wilson.currency.data.local.CurrencyRate
 import java.math.BigDecimal
 
 class CurrencyMapper {

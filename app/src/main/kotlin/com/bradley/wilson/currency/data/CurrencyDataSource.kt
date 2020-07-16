@@ -5,7 +5,7 @@ import com.bradley.wilson.core.functional.Either
 import com.bradley.wilson.core.functional.fallback
 import com.bradley.wilson.core.functional.map
 import com.bradley.wilson.currency.CurrencyMapper
-import com.bradley.wilson.currency.data.local.CurrencyLocalDataSource
+import com.bradley.wilson.currency.data.local.source.CurrencyLocalDataSource
 import com.bradley.wilson.currency.data.remote.CurrencyRemoteDataSource
 import com.bradley.wilson.currency.feed.Currency
 

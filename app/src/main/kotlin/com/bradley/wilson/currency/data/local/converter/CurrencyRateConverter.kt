@@ -1,7 +1,7 @@
-package com.bradley.wilson.database.currency.rates.converter
+package com.bradley.wilson.currency.data.local.converter
 
 import androidx.room.TypeConverter
-import com.bradley.wilson.core.database.currency.rates.CurrencyRate
+import com.bradley.wilson.currency.data.local.CurrencyRate
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

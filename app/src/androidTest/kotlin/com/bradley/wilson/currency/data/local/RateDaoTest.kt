@@ -1,14 +1,11 @@
-package com.bradley.wilson.database.currency.rates
+package com.bradley.wilson.currency.data.local
 
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.bradley.wilson.FunctionalTest
-import com.bradley.wilson.core.database.currency.rates.CurrencyEntity
-import com.bradley.wilson.core.database.currency.rates.CurrencyRate
-import com.bradley.wilson.core.database.currency.rates.RatesDao
-import com.bradley.wilson.core.extensions.math.equalTo
 import com.bradley.wilson.core.database.currency.CurrencyDatabase
+import com.bradley.wilson.core.extensions.math.equalTo
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -36,26 +33,56 @@ class RateDaoTest : FunctionalTest() {
     @Test
     fun givenOneRateValueInserted_whenBaseCurrencyIsEUR_thenAssertValuesAreStoredAndRetrievedProperly() {
         val baseCurrency = "EUR"
-        val currencyRate = CurrencyRate(TEST_COUNTRY_CODE, TEST_RATE)
-        val rateEntity = CurrencyEntity(baseCurrency, listOf(currencyRate), 0L, 0L)
+        val currencyRate =
+            CurrencyRate(
+                TEST_COUNTRY_CODE,
+                TEST_RATE
+            )
+        val rateEntity = CurrencyEntity(
+            baseCurrency,
+            listOf(currencyRate),
+            0L,
+            0L
+        )
 
         dao.insertRate(rateEntity)
 
         val rates = dao.getLatestRatesFromBase(baseCurrency)
 
         assertEquals(rates?.baseCurrency, baseCurrency)
-        assertEquals(rates?.rates?.first()?.countryCode, TEST_COUNTRY_CODE)
+        assertEquals(
+            rates?.rates?.first()?.countryCode,
+            TEST_COUNTRY_CODE
+        )
         assertTrue(rates?.rates?.first()?.value?.equalTo(TEST_RATE) ?: true)
     }
 
     @Test
     fun givenOneRateValueUpdated_whenBaseCurrencyIsEUR_thenAssertValuesAreStoredAndRetrievedProperly() {
         val baseCurrency = "EUR"
-        val insertedCurrencyRate = CurrencyRate(TEST_COUNTRY_CODE, TEST_RATE)
-        val insertedRate = CurrencyEntity(baseCurrency, listOf(insertedCurrencyRate), 0L, 0L)
+        val insertedCurrencyRate =
+            CurrencyRate(
+                TEST_COUNTRY_CODE,
+                TEST_RATE
+            )
+        val insertedRate = CurrencyEntity(
+            baseCurrency,
+            listOf(insertedCurrencyRate),
+            0L,
+            0L
+        )
 
-        val updatedCurrencyRate = CurrencyRate(TEST_COUNTRY_CODE, UPDATED_TEST_RATE)
-        val updatedRate = CurrencyEntity(baseCurrency, listOf(updatedCurrencyRate), 0L, 0L)
+        val updatedCurrencyRate =
+            CurrencyRate(
+                TEST_COUNTRY_CODE,
+                UPDATED_TEST_RATE
+            )
+        val updatedRate = CurrencyEntity(
+            baseCurrency,
+            listOf(updatedCurrencyRate),
+            0L,
+            0L
+        )
 
         dao.insertRate(insertedRate)
         dao.updateRate(updatedRate)
@@ -63,7 +90,10 @@ class RateDaoTest : FunctionalTest() {
         val rates = dao.getLatestRatesFromBase(baseCurrency)
 
         assertEquals(rates?.baseCurrency, baseCurrency)
-        assertEquals(rates?.rates?.first()?.countryCode, TEST_COUNTRY_CODE)
+        assertEquals(
+            rates?.rates?.first()?.countryCode,
+            TEST_COUNTRY_CODE
+        )
         assertTrue(rates?.rates?.first()?.value?.equalTo(UPDATED_TEST_RATE) ?: true)
     }
 
@@ -71,8 +101,17 @@ class RateDaoTest : FunctionalTest() {
     fun givenTableIsNotEmpty_whenInsertOrUpdateIsCalled_thenTimestampsShouldBeDifferent() {
         val baseCurrency = "EUR"
 
-        val testRate = CurrencyRate(TEST_COUNTRY_CODE, TEST_RATE)
-        val testEntity = CurrencyEntity(baseCurrency, listOf(testRate), 0L, 0L)
+        val testRate =
+            CurrencyRate(
+                TEST_COUNTRY_CODE,
+                TEST_RATE
+            )
+        val testEntity = CurrencyEntity(
+            baseCurrency,
+            listOf(testRate),
+            0L,
+            0L
+        )
 
         dao.insertRate(testEntity)
 
@@ -88,8 +127,17 @@ class RateDaoTest : FunctionalTest() {
     fun givenTableIsEmpty_whenInsertOrUpdateIsCalled_thenTimestampsShouldBeTheSame() {
         val baseCurrency = "EUR"
 
-        val testRate = CurrencyRate(TEST_COUNTRY_CODE, TEST_RATE)
-        val testEntity = CurrencyEntity(baseCurrency, listOf(testRate), 0L, 0L)
+        val testRate =
+            CurrencyRate(
+                TEST_COUNTRY_CODE,
+                TEST_RATE
+            )
+        val testEntity = CurrencyEntity(
+            baseCurrency,
+            listOf(testRate),
+            0L,
+            0L
+        )
 
         dao.insertOrUpdate(testEntity)
 

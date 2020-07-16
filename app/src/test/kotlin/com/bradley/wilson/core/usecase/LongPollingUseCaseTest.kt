@@ -56,7 +56,7 @@ class LongPollingUseCaseTest : UnitTest() {
         runBlocking {
             val intervalMillis = 100L
 
-            spiedUseCase(Unit, testScope, intervalMillis) { result ->
+            spiedUseCase.execute(Unit, testScope, intervalMillis) { result ->
                 result.onSuccess {
                     assertEquals(it.country, TEST_COUNTRY_CODE)
                     assertTrue(it.rate.equalTo(TEST_RATE))

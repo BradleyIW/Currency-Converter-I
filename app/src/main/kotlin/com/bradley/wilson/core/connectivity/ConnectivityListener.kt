@@ -1,6 +1,6 @@
 @file:Suppress("MissingPermission")
 
-package com.bradley.wilson.currency.feed
+package com.bradley.wilson.core.connectivity
 
 import android.content.Context
 import android.net.ConnectivityManager

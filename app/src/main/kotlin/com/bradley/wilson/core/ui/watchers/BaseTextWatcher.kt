@@ -1,4 +1,4 @@
-package com.bradley.wilson.currency.feed.list
+package com.bradley.wilson.core.ui.watchers
 
 import android.text.Editable
 import android.text.TextWatcher

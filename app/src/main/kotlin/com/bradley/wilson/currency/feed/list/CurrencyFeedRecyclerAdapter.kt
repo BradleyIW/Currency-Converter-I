@@ -11,6 +11,7 @@ import com.bradley.wilson.R
 import com.bradley.wilson.core.extensions.math.equalsZero
 import com.bradley.wilson.core.extensions.math.notEqualTo
 import com.bradley.wilson.core.extensions.primitives.empty
+import com.bradley.wilson.core.ui.watchers.BaseTextWatcher
 import com.bradley.wilson.currency.feed.CurrencyItem
 import com.bradley.wilson.currency.utils.CurrencyFlags
 import com.bradley.wilson.currency.utils.CurrencyFormatter

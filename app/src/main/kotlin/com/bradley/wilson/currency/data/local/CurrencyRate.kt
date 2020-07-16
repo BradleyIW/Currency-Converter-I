@@ -1,4 +1,4 @@
-package com.bradley.wilson.core.database.currency.rates
+package com.bradley.wilson.currency.data.local
 
 import java.math.BigDecimal
 

@@ -1,8 +1,8 @@
-package com.bradley.wilson.currency.data.local
+package com.bradley.wilson.currency.data.local.source
 
 import com.bradley.wilson.core.exceptions.Failure
 import com.bradley.wilson.core.functional.Either
-import com.bradley.wilson.core.database.currency.rates.CurrencyEntity
+import com.bradley.wilson.currency.data.local.CurrencyEntity
 
 class CurrencyLocalDataSource(private val currencyDatabaseService: CurrencyDatabaseService) {
 
