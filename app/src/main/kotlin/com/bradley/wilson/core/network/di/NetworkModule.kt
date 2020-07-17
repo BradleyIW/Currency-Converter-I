@@ -1,4 +1,4 @@
-package com.bradley.wilson.network.di
+package com.bradley.wilson.core.network.di
 
 import com.bradley.wilson.network.NetworkClient
 import com.bradley.wilson.network.RetrofitClient

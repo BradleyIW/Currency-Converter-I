@@ -4,14 +4,16 @@ import com.bradley.wilson.core.exceptions.Failure
 import com.bradley.wilson.core.functional.Either
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
-class LongPollingUseCaseExecutors : UseCaseExecutors {
+class CurrencyUseCaseExecutors : UseCaseExecutors {
 
     private var pollingJob: Job? = null
 
@@ -38,12 +40,16 @@ class LongPollingUseCaseExecutors : UseCaseExecutors {
         pollingJob = scope.launch {
             while (true) {
                 val backgroundJob = async(dispatcher) { run(params) }
-                val either = backgroundJob.await()
-                either?.let {
+
+                //Weird behaviour where it'll throw IllegalStateException in tests
+                //for a null value from await()
+                backgroundJob.await()?.let {
                     result(it)
                 }
-                delay(intervalMillis)
 
+                withContext(Dispatchers.Default) {
+                    delay(intervalMillis)
+                }
             }
         }
     }

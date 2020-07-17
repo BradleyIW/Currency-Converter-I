@@ -1,4 +1,4 @@
-package com.bradley.wilson.network.error
+package com.bradley.wilson.core.network.error
 
 import com.bradley.wilson.core.exceptions.FeatureFailure
 

@@ -15,7 +15,7 @@ import com.bradley.wilson.core.ui.state.ListItemState
 import com.bradley.wilson.core.ui.state.Loaded
 import com.bradley.wilson.core.ui.state.Loading
 import com.bradley.wilson.core.ui.state.LoadingState
-import com.bradley.wilson.core.usecase.LongPollingUseCaseExecutors
+import com.bradley.wilson.core.usecase.CurrencyUseCaseExecutors
 import com.bradley.wilson.core.usecase.UseCaseExecutors
 import com.bradley.wilson.currency.CurrencyMapper
 import com.bradley.wilson.currency.usecase.ConvertRatesParams
@@ -29,7 +29,7 @@ class CurrencyFeedViewModel(
     private val convertRatesUseCase: ConvertRatesUseCase,
     private val currencyMapper: CurrencyMapper,
     private val dispatcherProvider: CoroutineDispatcherProvider
-) : ViewModel(), UseCaseExecutors by LongPollingUseCaseExecutors() {
+) : ViewModel(), UseCaseExecutors by CurrencyUseCaseExecutors() {
 
     private var currencyItems: MutableList<CurrencyItem> = mutableListOf()
     private lateinit var baseCurrencyItem: CurrencyItem
@@ -65,10 +65,9 @@ class CurrencyFeedViewModel(
 
     private fun latestCurrencyRates(baseCurrency: String, amount: BigDecimal) {
         latestRatesUseCase(
-            GetLatestRatesParams(baseCurrency),
-            viewModelScope,
-            intervalMillis = 1000L,
-            dispatcher = dispatcherProvider.io
+            params = GetLatestRatesParams(baseCurrency),
+            scope = viewModelScope, dispatcher = dispatcherProvider.io,
+            intervalMillis = 1000L
         ) {
             it.fold(::handleFailure) { currencies -> handleFetchSuccess(currencies, amount) }
         }
@@ -76,7 +75,10 @@ class CurrencyFeedViewModel(
 
     private fun handleFetchSuccess(currencyRates: List<Currency>, amount: BigDecimal) {
         val convertCurrencyParams = ConvertRatesParams(currencyRates, amount)
-        convertRatesUseCase(convertCurrencyParams, viewModelScope, dispatcherProvider.default) {
+        convertRatesUseCase(
+            params = convertCurrencyParams,
+            scope = viewModelScope, dispatcher = dispatcherProvider.default
+        ) {
             it.fold(::handleFailure, ::handleConvertSuccess)
         }
     }

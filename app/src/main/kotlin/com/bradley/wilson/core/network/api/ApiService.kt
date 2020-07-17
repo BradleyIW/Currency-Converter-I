@@ -4,23 +4,21 @@ package com.bradley.wilson.core.network.api
 
 import com.bradley.wilson.core.exceptions.Failure
 import com.bradley.wilson.core.functional.Either
-import com.bradley.wilson.network.error.BadRequest
-import com.bradley.wilson.network.error.Cancelled
-import com.bradley.wilson.network.error.Conflict
-import com.bradley.wilson.network.error.EmptyResponseBody
-import com.bradley.wilson.network.error.Forbidden
-import com.bradley.wilson.network.error.InternalServerError
-import com.bradley.wilson.network.error.NoConnection
-import com.bradley.wilson.network.error.NotFound
-import com.bradley.wilson.network.error.ServerError
-import com.bradley.wilson.network.error.Unauthorized
+import com.bradley.wilson.core.network.error.BadRequest
+import com.bradley.wilson.core.network.error.Cancelled
+import com.bradley.wilson.core.network.error.Conflict
+import com.bradley.wilson.core.network.error.EmptyResponseBody
+import com.bradley.wilson.core.network.error.Forbidden
+import com.bradley.wilson.core.network.error.InternalServerError
+import com.bradley.wilson.core.network.error.NoConnection
+import com.bradley.wilson.core.network.error.NotFound
+import com.bradley.wilson.core.network.error.ServerError
+import com.bradley.wilson.core.network.error.Unauthorized
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 import java.net.SocketTimeoutException
-
-class ConnectionException : Exception()
 
 abstract class ApiService {
 
@@ -42,7 +40,6 @@ abstract class ApiService {
             }
         } catch (exception: Exception) {
             when (exception) {
-                is ConnectionException -> Either.Left(NoConnection)
                 is SocketTimeoutException -> Either.Left(NoConnection)
                 is CancellationException -> Either.Left(Cancelled)
                 else -> Either.Left(ServerError)

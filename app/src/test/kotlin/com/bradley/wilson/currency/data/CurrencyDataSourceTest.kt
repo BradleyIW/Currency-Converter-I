@@ -12,7 +12,7 @@ import com.bradley.wilson.currency.data.local.CurrencyEntity
 import com.bradley.wilson.currency.data.local.CurrencyRate
 import com.bradley.wilson.mockito.any
 import com.bradley.wilson.mockito.eq
-import com.bradley.wilson.network.error.ServerError
+import com.bradley.wilson.core.network.error.ServerError
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue

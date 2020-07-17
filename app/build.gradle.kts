@@ -60,6 +60,9 @@ dependencies {
     androidTestImplementation(TestLibraries.uiAutomator)
     androidTestImplementation(TestLibraries.testExtJunit)
     androidTestImplementation(TestLibraries.testRunner)
+    androidTestImplementation(TestLibraries.koinTest)
+    androidTestImplementation(TestLibraries.Mockito.android)
+
 
     debugImplementation(DevLibraries.leakCanary)
     debugImplementation(DevLibraries.fragmentTesting)
