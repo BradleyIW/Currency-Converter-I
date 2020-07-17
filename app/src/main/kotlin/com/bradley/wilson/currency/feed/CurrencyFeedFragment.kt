@@ -67,7 +67,7 @@ class CurrencyFeedFragment : Fragment(R.layout.fragment_currency_feed) {
 
     private fun observeFeed() {
         with(currencyFeedViewModel) {
-            recyclerScrollerLiveData.observe(viewLifecycleOwner) {
+            listItemStateLiveData.observe(viewLifecycleOwner) {
                 when (it) {
                     is ItemClicked -> currency_feed_recycler_view.scrollToTop()
                 }

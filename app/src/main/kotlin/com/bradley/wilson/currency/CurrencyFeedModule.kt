@@ -1,9 +1,10 @@
 package com.bradley.wilson.currency
 
+import com.bradley.wilson.core.ui.CoroutineDispatcherProvider
 import com.bradley.wilson.currency.data.CurrencyDataSource
 import com.bradley.wilson.currency.data.CurrencyRepository
-import com.bradley.wilson.currency.data.local.CurrencyDatabaseService
-import com.bradley.wilson.currency.data.local.CurrencyLocalDataSource
+import com.bradley.wilson.currency.data.local.source.CurrencyDatabaseService
+import com.bradley.wilson.currency.data.local.source.CurrencyLocalDataSource
 import com.bradley.wilson.currency.data.remote.CurrencyApi
 import com.bradley.wilson.currency.data.remote.CurrencyApiService
 import com.bradley.wilson.currency.data.remote.CurrencyRemoteDataSource
@@ -16,8 +17,9 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 
 val currencyFeedModule: Module = module {
-    viewModel { CurrencyFeedViewModel(get(), get(), get()) }
+    viewModel { CurrencyFeedViewModel(get(), get(), get(), get()) }
 
+    factory { CoroutineDispatcherProvider() }
     factory { ConvertRatesUseCase() }
     factory { GetLatestRatesUseCase(get()) }
     single<CurrencyRepository> { CurrencyDataSource(get(), get(), get()) }

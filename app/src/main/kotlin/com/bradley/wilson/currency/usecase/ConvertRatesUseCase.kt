@@ -3,11 +3,11 @@ package com.bradley.wilson.currency.usecase
 import com.bradley.wilson.core.exceptions.Failure
 import com.bradley.wilson.core.extensions.math.equalsZero
 import com.bradley.wilson.core.functional.Either
-import com.bradley.wilson.core.usecase.OneShotUseCase
+import com.bradley.wilson.core.usecase.UseCase
 import com.bradley.wilson.currency.feed.Currency
 import java.math.BigDecimal
 
-class ConvertRatesUseCase : OneShotUseCase<ConvertRatesParams, List<Currency>>() {
+class ConvertRatesUseCase : UseCase<ConvertRatesParams, List<Currency>> {
 
     override suspend fun run(params: ConvertRatesParams): Either<Failure, List<Currency>> =
         Either.Right(convertCurrencies(params))
