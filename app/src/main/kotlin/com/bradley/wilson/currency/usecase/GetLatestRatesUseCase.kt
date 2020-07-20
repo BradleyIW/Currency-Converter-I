@@ -4,7 +4,6 @@ import com.bradley.wilson.core.exceptions.Failure
 import com.bradley.wilson.core.functional.Either
 import com.bradley.wilson.core.usecase.UseCase
 import com.bradley.wilson.currency.data.CurrencyRepository
-import com.bradley.wilson.currency.feed.Currency
 
 class GetLatestRatesUseCase(private val repository: CurrencyRepository) :
     UseCase<GetLatestRatesParams, List<Currency>> {

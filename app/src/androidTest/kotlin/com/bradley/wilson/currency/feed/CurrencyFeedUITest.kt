@@ -18,14 +18,19 @@ import com.bradley.wilson.core.idling.GlobalIncrementalIdlingResource
 import com.bradley.wilson.currency.RecyclerActions.childMatchesAtPosition
 import com.bradley.wilson.currency.RecyclerActions.childPerformAction
 import com.bradley.wilson.currency.feed.list.CurrencyFeedRecyclerAdapter
+import com.bradley.wilson.currency.formatting.CurrencyFormatter
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import java.math.BigDecimal
 
 class CurrencyFeedUITest : ActivityTest(CurrencyFeedActivity::class.java) {
 
+    private lateinit var currencyFormatter: CurrencyFormatter
+
     @Before
     fun setup() {
+        currencyFormatter = CurrencyFormatter()
         IdlingRegistry.getInstance().register(GlobalIncrementalIdlingResource.countingIdlingResource)
     }
 
@@ -87,13 +92,15 @@ class CurrencyFeedUITest : ActivityTest(CurrencyFeedActivity::class.java) {
     }
 
     @Test
-    fun inputValueShouldNotChangeWhenScreenIsRotated() {
-        replaceCurrencyInput(input = VALID_INPUT)
+    fun shortInputValueShouldNotChangeWhenScreenIsRotated() {
+        val input = BigDecimal(6.000)
+
+        replaceCurrencyInput(input = input.toPlainString())
 
         uiDevice.setOrientationLeft()
         uiDevice.setOrientationNatural()
 
-        checkDescendantTextAtPosition(text = VALID_INPUT)
+        checkDescendantTextAtPosition(text = currencyFormatter.formatRateToCurrency(input))
     }
 
     private fun replaceCurrencyInput(position: Int = 0, input: String) {
@@ -125,7 +132,6 @@ class CurrencyFeedUITest : ActivityTest(CurrencyFeedActivity::class.java) {
     }
 
     companion object {
-        private const val VALID_INPUT = "6,00"
         private const val ZERO_INPUT = "0.00"
         private const val USD_CURRENCY_CODE = "USD"
         private const val EURO_CURRENCY_CODE = "EUR"

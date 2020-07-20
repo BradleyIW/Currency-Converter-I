@@ -7,7 +7,7 @@ import com.bradley.wilson.core.functional.map
 import com.bradley.wilson.currency.CurrencyMapper
 import com.bradley.wilson.currency.data.local.source.CurrencyLocalDataSource
 import com.bradley.wilson.currency.data.remote.CurrencyRemoteDataSource
-import com.bradley.wilson.currency.feed.Currency
+import com.bradley.wilson.currency.usecase.Currency
 
 class CurrencyDataSource(
     private val remoteDataSource: CurrencyRemoteDataSource,
@@ -27,10 +27,9 @@ class CurrencyDataSource(
 
     private suspend fun getLatestCurrenciesRemotely(baseCurrency: String): suspend () -> (Either<Failure, List<Currency>>) =
         {
-            remoteDataSource.latestCurrencyRates(baseCurrency)
-                .map {
-                    currencyMapper.toCurrencyList(it)
-                }
+            remoteDataSource.latestCurrencyRates(baseCurrency).map {
+                currencyMapper.toCurrencyList(it)
+            }
         }
 
 }

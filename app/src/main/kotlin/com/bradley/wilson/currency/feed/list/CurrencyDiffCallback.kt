@@ -1,4 +1,5 @@
 @file:Suppress("ReturnCount")
+
 package com.bradley.wilson.currency.feed.list
 
 import androidx.recyclerview.widget.DiffUtil

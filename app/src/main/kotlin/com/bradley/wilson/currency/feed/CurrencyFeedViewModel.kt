@@ -1,15 +1,14 @@
 package com.bradley.wilson.currency.feed
 
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bradley.wilson.R
 import com.bradley.wilson.core.database.error.NoResultsError
-import com.bradley.wilson.core.error.ErrorMessage
 import com.bradley.wilson.core.exceptions.Failure
 import com.bradley.wilson.core.ui.CoroutineDispatcherProvider
+import com.bradley.wilson.core.ui.error.ErrorMessage
 import com.bradley.wilson.core.ui.state.ItemClicked
 import com.bradley.wilson.core.ui.state.ItemDormant
 import com.bradley.wilson.core.ui.state.ListItemState
@@ -21,6 +20,7 @@ import com.bradley.wilson.core.usecase.UseCaseExecutors
 import com.bradley.wilson.currency.CurrencyMapper
 import com.bradley.wilson.currency.usecase.ConvertRatesParams
 import com.bradley.wilson.currency.usecase.ConvertRatesUseCase
+import com.bradley.wilson.currency.usecase.Currency
 import com.bradley.wilson.currency.usecase.GetLatestRatesParams
 import com.bradley.wilson.currency.usecase.GetLatestRatesUseCase
 import java.math.BigDecimal
@@ -104,9 +104,8 @@ class CurrencyFeedViewModel(
         }
     }
 
-    private fun updateLoadingState(state: LoadingState) {
+    private fun updateLoadingState(state: LoadingState) =
         _loadingIndicatorLiveData.postValue(state)
-    }
 
     private fun updateListItemState(state: ListItemState) {
         itemState = state

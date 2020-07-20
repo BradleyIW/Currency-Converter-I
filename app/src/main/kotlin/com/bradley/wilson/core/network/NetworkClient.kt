@@ -1,4 +1,4 @@
-package com.bradley.wilson.network
+package com.bradley.wilson.core.network
 
 import retrofit2.Retrofit
 

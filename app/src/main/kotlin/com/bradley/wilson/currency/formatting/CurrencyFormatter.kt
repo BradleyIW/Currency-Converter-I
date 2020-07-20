@@ -1,7 +1,6 @@
-package com.bradley.wilson.currency.utils
+package com.bradley.wilson.currency.formatting
 
 import com.bradley.wilson.core.extensions.primitives.empty
-import com.bradley.wilson.currency.feed.CurrencyItem
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -23,9 +22,7 @@ class CurrencyFormatter {
 
     fun currency(currencyCode: String): Currency? = currencyInstance(currencyCode)
 
-    fun formatRateToCurrency(currencyItem: CurrencyItem): String {
-        return formatter.format(currencyItem.rate)
-    }
+    fun formatRateToCurrency(rate: BigDecimal): String = formatter.format(rate)
 
     fun formatCurrencyToRate(currencyText: String): BigDecimal {
         val format: DecimalFormat = numberInstance as DecimalFormat

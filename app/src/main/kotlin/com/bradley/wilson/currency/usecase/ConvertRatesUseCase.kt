@@ -4,7 +4,6 @@ import com.bradley.wilson.core.exceptions.Failure
 import com.bradley.wilson.core.extensions.math.equalsZero
 import com.bradley.wilson.core.functional.Either
 import com.bradley.wilson.core.usecase.UseCase
-import com.bradley.wilson.currency.feed.Currency
 import java.math.BigDecimal
 
 class ConvertRatesUseCase : UseCase<ConvertRatesParams, List<Currency>> {
@@ -14,11 +13,14 @@ class ConvertRatesUseCase : UseCase<ConvertRatesParams, List<Currency>> {
 
     private fun convertCurrencies(params: ConvertRatesParams): List<Currency> =
         params.currencies.map {
-            if (params.amount.equalsZero()) {
-                it.copy(rate = params.amount)
-            } else {
-                it.copy(rate = it.rate.multiply(params.amount))
-            }
+            multiplyValues(it, params.amount)
+        }
+
+    private fun multiplyValues(currency: Currency, amount: BigDecimal) =
+        if (amount.equalsZero()) {
+            currency.copy(rate = amount)
+        } else {
+            currency.copy(rate = currency.rate.multiply(amount))
         }
 }
 

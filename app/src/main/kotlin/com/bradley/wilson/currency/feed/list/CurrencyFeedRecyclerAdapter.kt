@@ -12,10 +12,10 @@ import com.bradley.wilson.R
 import com.bradley.wilson.core.extensions.math.equalsZero
 import com.bradley.wilson.core.extensions.math.notEqualTo
 import com.bradley.wilson.core.extensions.primitives.empty
-import com.bradley.wilson.core.ui.watchers.BaseTextWatcher
+import com.bradley.wilson.core.ui.watchers.CustomTextWatcher
 import com.bradley.wilson.currency.feed.CurrencyItem
-import com.bradley.wilson.currency.utils.CurrencyFlags
-import com.bradley.wilson.currency.utils.CurrencyFormatter
+import com.bradley.wilson.currency.flags.CurrencyFlags
+import com.bradley.wilson.currency.formatting.CurrencyFormatter
 import kotlinx.android.synthetic.main.item_view_currency_feed.view.*
 import java.math.BigDecimal
 
@@ -44,7 +44,7 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
     ) {
         when {
             payloads.isNotEmpty() -> (payloads.first() as CurrencyItem)
-                .also { holder.bindRateForAll(it) }
+                .also { holder.bindInputSpecs(it) }
             else -> onBindViewHolder(holder, position)
         }
     }
@@ -69,11 +69,9 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
 
         private val currencyAmount = itemView.findViewById<EditText>(R.id.currency_feed_item_view_currency_input)
 
-        private val currencyFormatter by lazy {
-            CurrencyFormatter()
-        }
+        private val currencyFormatter by lazy { CurrencyFormatter() }
 
-        private val baseCurrencyTextWatcher = BaseTextWatcher {
+        private val baseCurrencyTextWatcher = CustomTextWatcher {
             currencyAmount.setSelection(it.length)
             val currencyItem = currencyFeedItems[adapterPosition]
             if (it.isEmpty()) {
@@ -95,20 +93,17 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
                 currency_feed_item_view_currency_display_name.text = currency?.displayName ?: String.empty()
                 currency_feed_item_view_flag.text = CurrencyFlags.getFlagEmojiForCurrency(currency)
 
-                bindRateForAll(currencyItem)
+                bindInputSpecs(currencyItem)
 
-                if (!currencyItem.isBateRate) {
-                    setOnClickListener { onItemClicked() }
-                }
+                if (!currencyItem.isBateRate) setOnClickListener { onItemClicked() }
             }
         }
 
         private fun defineContentDescription(view: View, baseCurrencyItem: CurrencyItem, currencyItem: CurrencyItem) {
-            val regularRate = currencyFormatter.formatRateToCurrency(currencyItem)
-            val baseRate = currencyFormatter.formatRateToCurrency(baseCurrencyItem)
+            val regularRate = currencyFormatter.formatRateToCurrency(currencyItem.rate)
+            val baseRate = currencyFormatter.formatRateToCurrency(baseCurrencyItem.rate)
             view.contentDescription = when (layoutPosition) {
                 0 -> {
-                    currencyAmount.hint = String.empty()
                     view.context.getString(R.string.base_currency_content_description, displayName(baseCurrencyItem), baseRate)
                 }
                 else -> view.context.getString(
@@ -119,7 +114,7 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
             }
         }
 
-        fun bindRateForAll(currencyItem: CurrencyItem) {
+        fun bindInputSpecs(currencyItem: CurrencyItem) {
             with(currencyAmount) {
                 val isBaseItem = currencyItem.isBateRate
                 inputType = if (isBaseItem) {
@@ -137,20 +132,20 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
         }
 
         private fun bindRate(currencyItem: CurrencyItem) {
-            defineContentDescription(itemView, currencyFeedItems[0], currencyItem)
+            defineContentDescription(itemView, currencyFeedItems.first(), currencyItem)
             with(currencyAmount) {
                 removeTextChangedListener(baseCurrencyTextWatcher)
-                bindCurrencyData(currencyItem)
+                setCurrencyText(currencyItem)
                 addTextChangedListener(baseCurrencyTextWatcher)
             }
         }
 
-        private fun bindCurrencyData(currencyItem: CurrencyItem) {
+        private fun setCurrencyText(currencyItem: CurrencyItem) {
             currencyAmount.setText(
                 if (currencyItem.rate.equalsZero()) {
                     String.empty()
                 } else {
-                    currencyFormatter.formatRateToCurrency(currencyItem)
+                    currencyFormatter.formatRateToCurrency(currencyItem.rate)
                 }
             )
         }

@@ -18,6 +18,7 @@ import com.bradley.wilson.currency.usecase.GetLatestRatesUseCase
 import com.bradley.wilson.livedata.awaitValue
 import com.bradley.wilson.mockito.any
 import com.bradley.wilson.core.network.error.ServerError
+import com.bradley.wilson.currency.usecase.Currency
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.ExperimentalCoroutinesApi

@@ -1,4 +1,4 @@
-package com.bradley.wilson.currency.utils
+package com.bradley.wilson.currency.flags
 
 import java.util.Currency
 

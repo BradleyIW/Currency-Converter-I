@@ -1,4 +1,4 @@
-package com.bradley.wilson.currency
+package com.bradley.wilson.currency.di
 
 import com.bradley.wilson.core.ui.CoroutineDispatcherProvider
 import com.bradley.wilson.currency.data.CurrencyDataSource
@@ -11,7 +11,8 @@ import com.bradley.wilson.currency.data.remote.CurrencyRemoteDataSource
 import com.bradley.wilson.currency.feed.CurrencyFeedViewModel
 import com.bradley.wilson.currency.usecase.ConvertRatesUseCase
 import com.bradley.wilson.currency.usecase.GetLatestRatesUseCase
-import com.bradley.wilson.network.NetworkClient
+import com.bradley.wilson.core.network.NetworkClient
+import com.bradley.wilson.currency.CurrencyMapper
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module

@@ -1,7 +1,6 @@
 package com.bradley.wilson.core.network
 
 import com.bradley.wilson.core.UnitTest
-import com.bradley.wilson.network.RetrofitClient
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -25,7 +24,6 @@ class RetrofitClientTest : UnitTest() {
     @Test
     fun `given a retrofit instance, when create is called, then calls retrofit to create the service`() {
         retrofitClient.create(ServiceClass::class.java)
-
         verify(retrofit).create(ServiceClass::class.java)
     }
 }

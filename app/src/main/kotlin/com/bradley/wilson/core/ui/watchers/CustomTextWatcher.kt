@@ -3,7 +3,7 @@ package com.bradley.wilson.core.ui.watchers
 import android.text.Editable
 import android.text.TextWatcher
 
-class BaseTextWatcher(
+class CustomTextWatcher(
     private val beforeTextChanged: (CharSequence?, Int, Int, Int) -> Unit = { _: CharSequence?, _: Int, _: Int, _: Int -> },
     private val onTextChanged: (CharSequence?, Int, Int, Int) -> Unit = { _: CharSequence?, _: Int, _: Int, _: Int -> },
     private val afterTextChanged: (String) -> Unit

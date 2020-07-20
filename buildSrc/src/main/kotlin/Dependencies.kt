@@ -1,26 +1,9 @@
 const val appId = "bradley.wilson.rxcurrency"
 private const val kotlinVersion = "1.3.72"
 
-private object Versions {
-    const val jetpack = "1.1.0"
-    const val constraintLayout = "1.1.3"
-    const val ktx = "1.3.0"
-    const val retrofit = "2.6.2"
+private object SharedVersions {
     const val coroutines = "1.3.7"
-    const val junit4 = "4.13"
-    const val mockito = "3.3.0"
-    const val robolectric = "4.3.1"
-    const val testRunner = "1.1.0"
-    const val material = "1.1.0"
-    const val emoji = "1.1.0"
-    const val espresso = "3.2.0"
-    const val testExtensions = "1.1.1"
-    const val testRules = "1.1.0"
-    const val lifecycle = "2.2.0"
-    const val koin = "2.1.6"
     const val room = "2.2.5"
-    const val uiAutomator = "2.2.0"
-    const val testCore = "2.1.0"
 }
 
 object AndroidSdk {
@@ -47,40 +30,71 @@ object Instrumentation {
 
 object Libraries {
     object Retrofit {
+        private object Versions {
+            const val retrofit = "2.6.2"
+        }
+
         const val core = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
         const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     }
 
-    object Ktx {
-        const val core = "androidx.core:core-ktx:${Versions.ktx}"
+    object Kotlin {
+        private object Versions {
+            const val lifecycle = "2.2.0"
+            const val ktx = "1.3.0"
+
+        }
+
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${SharedVersions.coroutines}"
+        const val stdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+        const val ktxCore = "androidx.core:core-ktx:${Versions.ktx}"
+        const val livedataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
+        const val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
     }
 
     object Koin {
+        private object Versions {
+            const val koin = "2.1.6"
+        }
         const val core = "org.koin:koin-android:${Versions.koin}"
         const val viewModel = "org.koin:koin-android-viewmodel:${Versions.koin}"
     }
 
     object Room {
-        const val runtime = "androidx.room:room-runtime:$${Versions.room}"
-        const val compiler = "androidx.room:room-compiler:${Versions.room}"
-        const val ktx = "androidx.room:room-ktx:${Versions.room}"
+        const val runtime = "androidx.room:room-runtime:$${SharedVersions.room}"
+        const val compiler = "androidx.room:room-compiler:${SharedVersions.room}"
+        const val ktx = "androidx.room:room-ktx:${SharedVersions.room}"
     }
 
+    object Emoji {
+        private object Versions {
+            const val emoji = "1.1.0"
+        }
 
-    const val emoji = "androidx.emoji:emoji:${Versions.emoji}"
-    const val emojiBundled = "com.android.support:support-emoji-bundled:${Versions.emoji}"
-    const val material = "com.google.android.material:material:${Versions.material}"
-    const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
-    const val appCompat = "androidx.appcompat:appcompat:${Versions.jetpack}"
-    const val livedataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
-    const val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
-    const val constraint = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
-    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+        const val core = "androidx.emoji:emoji:${Versions.emoji}"
+        const val bundled = "com.android.support:support-emoji-bundled:${Versions.emoji}"
+    }
+
+    object Android {
+        private object Versions {
+            const val jetpack = "1.1.0"
+            const val constraintLayout = "1.1.3"
+            const val material = "1.1.0"
+        }
+
+        const val material = "com.google.android.material:material:${Versions.material}"
+        const val appCompat = "androidx.appcompat:appcompat:${Versions.jetpack}"
+        const val constraint = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+    }
 }
 
 object TestLibraries {
 
     object Espresso {
+        private object Versions {
+            const val espresso = "3.2.0"
+        }
+
         const val core = "androidx.test.espresso:espresso-core:${Versions.espresso}"
         const val contrib = "androidx.test.espresso:espresso-contrib:${Versions.espresso}"
         const val idling = "androidx.test.espresso:espresso-idling-resource:${Versions.espresso}"
@@ -91,23 +105,39 @@ object TestLibraries {
     }
 
     object Mockito {
+        private object Versions {
+            const val mockito = "3.3.0"
+        }
+
         const val inline = "org.mockito:mockito-inline:${Versions.mockito}"
         const val android = "org.mockito:mockito-android:${Versions.mockito}"
     }
 
-    object Android {
-        const val core = "androidx.test:core:1.2.0"
-        const val junit = "androidx.test.ext:junit:1.1.0"
+    object Junit {
+
     }
 
-    const val junit4 = "junit:junit:${Versions.junit4}"
-    const val testRunner = "androidx.test:runner:${Versions.testRunner}"
-    const val testExtJunit = "androidx.test.ext:junit:${Versions.testExtensions}"
-    const val testRules = "androidx.test:rules:${Versions.testRules}"
-    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
-    const val uiAutomator = "androidx.test.uiautomator:uiautomator:${Versions.uiAutomator}"
-    const val room = "androidx.room:room-testing:${Versions.room}"
-    const val testCore = "androidx.arch.core:core-testing:${Versions.testCore}"
+    object Android {
+        private object Versions {
+            const val testRules = "1.1.0"
+            const val testExtensions = "1.1.1"
+            const val testRunner = "1.1.0"
+            const val junit4 = "4.13"
+            const val uiAutomator = "2.2.0"
+            const val testCore = "2.1.0"
+        }
+
+        const val core = "androidx.test:core:1.2.0"
+        const val junit4 = "junit:junit:${Versions.junit4}"
+        const val junitExt = "androidx.test.ext:junit:${Versions.testExtensions}"
+        const val rules = "androidx.test:rules:${Versions.testRules}"
+        const val testRunner = "androidx.test:runner:${Versions.testRunner}"
+        const val uiAutomator = "androidx.test.uiautomator:uiautomator:${Versions.uiAutomator}"
+        const val testCore = "androidx.arch.core:core-testing:${Versions.testCore}"
+    }
+
+    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${SharedVersions.coroutines}"
+    const val room = "androidx.room:room-testing:${SharedVersions.room}"
 }
 
 object ScriptPlugins {

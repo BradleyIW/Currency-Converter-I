@@ -23,9 +23,7 @@ class CurrencyFeedFragment : Fragment(R.layout.fragment_currency_feed) {
 
     private val currencyFeedViewModel: CurrencyFeedViewModel by viewModel()
 
-    private val currencyFeedAdapter by lazy {
-        CurrencyFeedRecyclerAdapter()
-    }
+    private val currencyFeedAdapter by lazy { CurrencyFeedRecyclerAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,9 +34,7 @@ class CurrencyFeedFragment : Fragment(R.layout.fragment_currency_feed) {
         observeLoadingState()
     }
 
-    private fun initScreenTitle() {
-        fragment_currency_feed_title_text_view.headingForAccessibility()
-    }
+    private fun initScreenTitle() = fragment_currency_feed_title_text_view.headingForAccessibility()
 
     private fun observeLoadingState() {
         currencyFeedViewModel.loadingIndicatorLiveData.observe(viewLifecycleOwner) {

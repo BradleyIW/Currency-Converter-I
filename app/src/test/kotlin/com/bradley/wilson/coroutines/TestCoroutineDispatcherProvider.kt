@@ -8,7 +8,7 @@ class TestCoroutineDispatcherProvider : CoroutineDispatcherProvider() {
     override val default: CoroutineDispatcher
         get() = Dispatchers.Unconfined
     override val main: CoroutineDispatcher
-        get() = Dispatchers.Unconfined
+        get() = Dispatchers.Main
     override val io: CoroutineDispatcher
         get() = Dispatchers.Unconfined
 }

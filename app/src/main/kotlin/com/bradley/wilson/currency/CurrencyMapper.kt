@@ -1,7 +1,7 @@
 package com.bradley.wilson.currency
 
 import com.bradley.wilson.currency.data.remote.responses.CurrencyResponse
-import com.bradley.wilson.currency.feed.Currency
+import com.bradley.wilson.currency.usecase.Currency
 import com.bradley.wilson.currency.feed.CurrencyItem
 import com.bradley.wilson.currency.data.local.CurrencyEntity
 import com.bradley.wilson.currency.data.local.CurrencyRate

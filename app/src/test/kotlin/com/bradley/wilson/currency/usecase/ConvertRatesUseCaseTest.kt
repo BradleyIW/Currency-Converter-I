@@ -2,7 +2,6 @@ package com.bradley.wilson.currency.usecase
 
 import com.bradley.wilson.core.UnitTest
 import com.bradley.wilson.core.functional.onSuccess
-import com.bradley.wilson.currency.feed.Currency
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -36,6 +35,26 @@ class ConvertRatesUseCaseTest : UnitTest() {
             response.onSuccess {
                 assertEquals(it.first().rate, ukTestRate.multiply(multiplier))
                 assertEquals(it[1].rate, usTestRate.multiply(multiplier))
+            }
+        }
+    }
+
+    @Test
+    fun `given a multiplier of 0 and a set of rates, then each rate should be 0`() {
+        val ukTestRate = BigDecimal(1.1245547747747444)
+        val usTestRate = BigDecimal(2.7578444456544456)
+        val amount = BigDecimal.ZERO
+
+        val dummyList = listOf(
+            Currency("GBP", ukTestRate, 0L),
+            Currency("USD", usTestRate, 0L)
+        )
+        val params = ConvertRatesParams(dummyList, amount)
+        runBlocking {
+            val response = convertRatesUseCase.run(params)
+            response.onSuccess {
+                assertEquals(it.first().rate, BigDecimal.ZERO)
+                assertEquals(it[1].rate, BigDecimal.ZERO)
             }
         }
     }

@@ -10,7 +10,6 @@ import com.bradley.wilson.core.network.error.Conflict
 import com.bradley.wilson.core.network.error.EmptyResponseBody
 import com.bradley.wilson.core.network.error.Forbidden
 import com.bradley.wilson.core.network.error.InternalServerError
-import com.bradley.wilson.core.network.error.NoConnection
 import com.bradley.wilson.core.network.error.NotFound
 import com.bradley.wilson.core.network.error.ServerError
 import com.bradley.wilson.core.network.error.Unauthorized
@@ -18,7 +17,6 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
-import java.net.SocketTimeoutException
 
 abstract class ApiService {
 
@@ -40,7 +38,6 @@ abstract class ApiService {
             }
         } catch (exception: Exception) {
             when (exception) {
-                is SocketTimeoutException -> Either.Left(NoConnection)
                 is CancellationException -> Either.Left(Cancelled)
                 else -> Either.Left(ServerError)
             }

@@ -1,4 +1,4 @@
-package com.bradley.wilson.core.error
+package com.bradley.wilson.core.ui.error
 
 import androidx.annotation.StringRes
 

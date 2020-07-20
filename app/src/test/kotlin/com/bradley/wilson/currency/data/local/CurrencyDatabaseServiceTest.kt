@@ -24,15 +24,9 @@ class CurrencyDatabaseServiceTest : UnitTest() {
 
     @Before
     fun setup() {
-        currencyDatabaseService =
-            CurrencyDatabaseService(ratesDao)
+        currencyDatabaseService = CurrencyDatabaseService(ratesDao)
 
-        val currencyList = listOf(
-            CurrencyRate(
-                TEST_COUNTRY_CODE,
-                TEST_RATE
-            )
-        )
+        val currencyList = listOf(CurrencyRate(TEST_COUNTRY_CODE, TEST_RATE))
         `when`(currencyEntity.rates).thenReturn(currencyList)
     }
 

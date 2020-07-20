@@ -1,10 +1,10 @@
 package com.bradley.wilson.currency
 
 import com.bradley.wilson.core.UnitTest
-import com.bradley.wilson.currency.data.remote.responses.CurrencyResponse
-import com.bradley.wilson.currency.feed.Currency
 import com.bradley.wilson.currency.data.local.CurrencyEntity
 import com.bradley.wilson.currency.data.local.CurrencyRate
+import com.bradley.wilson.currency.data.remote.responses.CurrencyResponse
+import com.bradley.wilson.currency.usecase.Currency
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -32,17 +32,11 @@ class CurrencyMapperTest : UnitTest() {
 
     @Test
     fun `given a rates entity, when toCurrencyList is called, then map to rates to list of currency objects`() {
-        val rates = listOf(
-            CurrencyRate(
-                GBP_COUNTRY_CODE,
-                GBP_CURRENCY_RATE
-            )
-        )
+        val rates = listOf(CurrencyRate(GBP_COUNTRY_CODE, GBP_CURRENCY_RATE))
         val ratesEntity = CurrencyEntity(
             TEST_BASE_EUR_CURRENCY,
             rates,
-            DEFAULT_TIMESTAMP,
-            DEFAULT_TIMESTAMP
+            DEFAULT_TIMESTAMP, DEFAULT_TIMESTAMP
         )
         val list = currencyMapper.toCurrencyList(ratesEntity)
 
