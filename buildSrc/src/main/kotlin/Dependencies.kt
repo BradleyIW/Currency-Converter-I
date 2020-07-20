@@ -148,9 +148,6 @@ object ScriptPlugins {
 object DevLibraries {
     private object Versions {
         const val leakCanary = "2.3"
-        const val fragment = "1.2.5"
     }
-
-    const val fragmentTesting = "androidx.fragment:fragment-testing:${Versions.fragment}"
     const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
 }

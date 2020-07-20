@@ -1,4 +1,4 @@
-package com.bradley.wilson.mockito
+package com.bradley.wilson.testing.mockito
 
 /*
  * Copyright (C) 2017 The Android Open Source Project

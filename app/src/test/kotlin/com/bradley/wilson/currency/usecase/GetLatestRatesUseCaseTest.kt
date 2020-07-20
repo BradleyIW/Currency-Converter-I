@@ -2,7 +2,7 @@ package com.bradley.wilson.currency.usecase
 
 import com.bradley.wilson.core.UnitTest
 import com.bradley.wilson.currency.data.CurrencyRepository
-import com.bradley.wilson.mockito.eq
+import com.bradley.wilson.testing.mockito.eq
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test

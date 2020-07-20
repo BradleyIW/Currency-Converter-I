@@ -12,13 +12,13 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withHint
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
-import com.bradley.wilson.ActivityTest
+import com.bradley.wilson.testing.ActivityTest
 import com.bradley.wilson.R
 import com.bradley.wilson.core.idling.GlobalIncrementalIdlingResource
-import com.bradley.wilson.currency.RecyclerActions.childMatchesAtPosition
-import com.bradley.wilson.currency.RecyclerActions.childPerformAction
+import com.bradley.wilson.testing.RecyclerActions.childMatchesAtPosition
+import com.bradley.wilson.testing.RecyclerActions.childPerformAction
 import com.bradley.wilson.currency.feed.list.CurrencyFeedRecyclerAdapter
-import com.bradley.wilson.currency.formatting.CurrencyFormatter
+import com.bradley.wilson.currency.feed.formatting.CurrencyFormatter
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -93,7 +93,7 @@ class CurrencyFeedUITest : ActivityTest(CurrencyFeedActivity::class.java) {
 
     @Test
     fun shortInputValueShouldNotChangeWhenScreenIsRotated() {
-        val input = BigDecimal(6.000)
+        val input = BigDecimal(6.00)
 
         replaceCurrencyInput(input = input.toPlainString())
 

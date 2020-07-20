@@ -1,4 +1,4 @@
-package com.bradley.wilson
+package com.bradley.wilson.testing
 
 import android.app.Activity
 import androidx.test.espresso.accessibility.AccessibilityChecks

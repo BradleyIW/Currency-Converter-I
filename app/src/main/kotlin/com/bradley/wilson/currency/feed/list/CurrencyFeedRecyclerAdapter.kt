@@ -14,8 +14,8 @@ import com.bradley.wilson.core.extensions.math.notEqualTo
 import com.bradley.wilson.core.extensions.primitives.empty
 import com.bradley.wilson.core.ui.watchers.CustomTextWatcher
 import com.bradley.wilson.currency.feed.CurrencyItem
-import com.bradley.wilson.currency.flags.CurrencyFlags
-import com.bradley.wilson.currency.formatting.CurrencyFormatter
+import com.bradley.wilson.currency.feed.flags.CurrencyFlags
+import com.bradley.wilson.currency.feed.formatting.CurrencyFormatter
 import kotlinx.android.synthetic.main.item_view_currency_feed.view.*
 import java.math.BigDecimal
 

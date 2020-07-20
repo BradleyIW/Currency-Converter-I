@@ -3,10 +3,8 @@
     <string name="no_connection_error_message">You are now in offline mode.</string>
     <string name="fragment_currency_feed_title">Rates</string>
     <string name="currency_amount_hint">0.00</string>
-    <string name="last_updated_at">Last updated: %s</string>
     <string name="app_name">Currency Converter</string>
     <string name="no_overall_results_error_message">There are no results to display right now.</string>
-    <string name="no_offline_results_error_message">There is no offline data for %1$s.</string>
     <string name="currency_feed_accessibility_click_action_description">make this the base currency</string>
     <string name="base_currency_content_description">Base currency %1$s highlighted with a value of %2$s"</string>
     <string name="base_currency_input_content_description">Base currency value input field with a value of: %1$s"</string>

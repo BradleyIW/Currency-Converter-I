@@ -20,7 +20,7 @@
     <style name="RecyclerView.Item.Input" parent="RecyclerView.Item.Input.Number">
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">@dimen/currency_input_text_size</item>
         <item name="android:maxLength">@integer/currency_input_length</item>
     </style>
 

@@ -1,4 +1,4 @@
-package com.bradley.wilson.currency.formatting
+package com.bradley.wilson.currency.feed.formatting
 
 import com.bradley.wilson.core.extensions.primitives.empty
 import java.math.BigDecimal

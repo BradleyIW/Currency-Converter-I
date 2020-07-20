@@ -13,8 +13,8 @@ import com.bradley.wilson.currency.data.local.source.CurrencyLocalDataSource
 import com.bradley.wilson.currency.data.remote.CurrencyRemoteDataSource
 import com.bradley.wilson.currency.data.remote.responses.CurrencyResponse
 import com.bradley.wilson.currency.usecase.Currency
-import com.bradley.wilson.mockito.any
-import com.bradley.wilson.mockito.eq
+import com.bradley.wilson.testing.mockito.any
+import com.bradley.wilson.testing.mockito.eq
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
