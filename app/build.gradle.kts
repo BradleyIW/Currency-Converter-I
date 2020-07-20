@@ -42,6 +42,7 @@ dependencies {
     implementation(Libraries.material)
     implementation(Libraries.livedataKtx)
     implementation(Libraries.viewModelKtx)
+    implementation(TestLibraries.Espresso.idling)
 
     kapt(Libraries.Room.compiler)
 
@@ -60,9 +61,7 @@ dependencies {
     androidTestImplementation(TestLibraries.uiAutomator)
     androidTestImplementation(TestLibraries.testExtJunit)
     androidTestImplementation(TestLibraries.testRunner)
-    androidTestImplementation(TestLibraries.koinTest)
     androidTestImplementation(TestLibraries.Mockito.android)
-
 
     debugImplementation(DevLibraries.leakCanary)
     debugImplementation(DevLibraries.fragmentTesting)

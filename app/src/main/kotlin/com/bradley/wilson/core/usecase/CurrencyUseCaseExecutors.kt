@@ -4,14 +4,13 @@ import com.bradley.wilson.core.exceptions.Failure
 import com.bradley.wilson.core.functional.Either
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 
 class CurrencyUseCaseExecutors : UseCaseExecutors {
 
@@ -38,20 +37,15 @@ class CurrencyUseCaseExecutors : UseCaseExecutors {
     ) {
         cancelJobs()
         pollingJob = scope.launch {
-            while (true) {
-                val backgroundJob = async(dispatcher) { run(params) }
-
-                //Weird behaviour where it'll throw IllegalStateException in tests
-                //for a null value from await()
+            while (scope.isActive) {
+                val backgroundJob = scope.async(dispatcher) { run(params) }
                 backgroundJob.await()?.let {
                     result(it)
                 }
-
-                withContext(Dispatchers.Default) {
-                    delay(intervalMillis)
-                }
+                delay(intervalMillis)
             }
         }
+
     }
 
     override fun cancelJobs() {

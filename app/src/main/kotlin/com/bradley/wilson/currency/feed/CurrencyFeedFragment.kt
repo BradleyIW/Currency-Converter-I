@@ -8,6 +8,7 @@ import com.bradley.wilson.R
 import com.bradley.wilson.core.extensions.android.gone
 import com.bradley.wilson.core.extensions.android.scrollToTop
 import com.bradley.wilson.core.extensions.android.visible
+import com.bradley.wilson.core.idling.GlobalIncrementalIdlingResource
 import com.bradley.wilson.core.ui.state.ItemClicked
 import com.bradley.wilson.core.ui.state.Loaded
 import com.bradley.wilson.core.ui.state.Loading
@@ -41,8 +42,14 @@ class CurrencyFeedFragment : Fragment(R.layout.fragment_currency_feed) {
     private fun observeLoadingState() {
         currencyFeedViewModel.loadingIndicatorLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is Loading -> currency_feed_loading_indicator.visible()
-                is Loaded -> currency_feed_loading_indicator.gone()
+                is Loading -> {
+                    GlobalIncrementalIdlingResource.increment()
+                    currency_feed_loading_indicator.visible()
+                }
+                is Loaded -> {
+                    GlobalIncrementalIdlingResource.decrement()
+                    currency_feed_loading_indicator.gone()
+                }
             }
         }
     }

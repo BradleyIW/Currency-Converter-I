@@ -83,6 +83,7 @@ object TestLibraries {
     object Espresso {
         const val core = "androidx.test.espresso:espresso-core:${Versions.espresso}"
         const val contrib = "androidx.test.espresso:espresso-contrib:${Versions.espresso}"
+        const val idling = "androidx.test.espresso:espresso-idling-resource:${Versions.espresso}"
 
         //Androidx isn't support yet. Please see:
         //https://github.com/android/android-test/issues/492

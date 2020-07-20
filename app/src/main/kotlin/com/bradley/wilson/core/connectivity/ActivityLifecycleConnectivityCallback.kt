@@ -8,12 +8,14 @@ import android.net.Network
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.FrameLayout
+import androidx.core.content.ContextCompat
 import com.bradley.wilson.R
+import com.bradley.wilson.core.idling.GlobalIncrementalIdlingResource
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
-
 class ActivityLifecycleConnectivityCallback : Application.ActivityLifecycleCallbacks {
+
     private lateinit var connectionSnackbar: Snackbar
 
     private val connectivityListener: ConnectivityListener =
@@ -34,10 +36,12 @@ class ActivityLifecycleConnectivityCallback : Application.ActivityLifecycleCallb
         })
 
     private fun hideConnectivitySnackbar() {
+        GlobalIncrementalIdlingResource.decrement()
         connectionSnackbar.dismiss()
     }
 
     private fun showConnectivitySnackbar() {
+        GlobalIncrementalIdlingResource.increment()
         connectionSnackbar.show()
     }
 
@@ -66,7 +70,7 @@ class ActivityLifecycleConnectivityCallback : Application.ActivityLifecycleCallb
                 getString(R.string.no_connection_error_message),
                 Snackbar.LENGTH_INDEFINITE
             )
-            connectionSnackbar.setTextColor(resources.getColor(R.color.black))
+            connectionSnackbar.setTextColor(ContextCompat.getColor(activity, R.color.black))
             val view = connectionSnackbar.view
             val params = view.layoutParams as FrameLayout.LayoutParams
             params.gravity = Gravity.TOP
