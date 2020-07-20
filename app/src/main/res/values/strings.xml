@@ -7,4 +7,8 @@
     <string name="app_name">Currency Converter</string>
     <string name="no_overall_results_error_message">There are no results to display right now.</string>
     <string name="no_offline_results_error_message">There is no offline data for %1$s.</string>
+    <string name="currency_feed_accessibility_click_action_description">make this the base currency</string>
+    <string name="base_currency_content_description">Base currency %1$s highlighted with a value of %2$s"</string>
+    <string name="base_currency_input_content_description">Base currency value input field with a value of: %1$s"</string>
+    <string name="regular_currency_content_description">%1$s highlighted, which converts to %2$s from %3$s with a value of %4$s</string>
 </resources>

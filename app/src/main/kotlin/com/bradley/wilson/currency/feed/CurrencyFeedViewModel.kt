@@ -1,5 +1,6 @@
 package com.bradley.wilson.currency.feed
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -47,6 +48,10 @@ class CurrencyFeedViewModel(
     val loadingIndicatorLiveData: LiveData<LoadingState> = _loadingIndicatorLiveData
 
     private var itemState: ListItemState = ItemDormant
+
+    init {
+        startFeed()
+    }
 
     fun startFeed() {
         updateLoadingState(Loading)
@@ -100,7 +105,7 @@ class CurrencyFeedViewModel(
     }
 
     private fun updateLoadingState(state: LoadingState) {
-        _loadingIndicatorLiveData.value = state
+        _loadingIndicatorLiveData.postValue(state)
     }
 
     private fun updateListItemState(state: ListItemState) {
@@ -108,14 +113,12 @@ class CurrencyFeedViewModel(
     }
 
     private fun scrollRecyclerView() {
-        _listItemStateLiveData.value = itemState
+        _listItemStateLiveData.postValue(itemState)
         updateListItemState(ItemDormant)
     }
 
     private fun cleanupAndMapCurrencyItems(convertedCurrencies: List<Currency>) {
-        currencyItems = convertedCurrencies.map {
-            currencyMapper.toCurrencyItem(it)
-        }.toMutableList()
-        currencyItems.add(0, baseCurrencyItem)
+        currencyItems = convertedCurrencies.map { currencyMapper.toCurrencyItem(it) }
+            .toMutableList().apply { add(0, baseCurrencyItem) }
     }
 }

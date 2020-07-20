@@ -41,76 +41,94 @@ class CurrencyFeedUITest : ActivityTest(CurrencyFeedActivity::class.java) {
     }
 
     @Test
-    fun givenByDefault_conversionForBaseStartsAt1() {
-        onView(withId(R.id.currency_feed_recycler_view))
-            .check(matches(childMatchesAtPosition(0, hasDescendant(withText("1.00")))))
-    }
-
-    @Test
     fun replaceBaseWithZero_hintOnOtherPositionsShouldBeZero() {
-        onView(withId(R.id.currency_feed_recycler_view))
-            .perform(
-                RecyclerViewActions.actionOnItemAtPosition<CurrencyFeedRecyclerAdapter.CurrencyFeedViewHolder>(
-                    0,
-                    childPerformAction(replaceText("0.00"), R.id.currency_feed_item_view_currency_input)
-                )
-            )
+        replaceCurrencyInput(input = ZERO_INPUT)
 
         //Check early position
-        onView(withId(R.id.currency_feed_recycler_view))
-            .check(matches(childMatchesAtPosition(1, hasDescendant(withHint("0.00")))))
+        scrollAndCheckPositionForHint(1)
 
         //Check middle position
-        onView(withId(R.id.currency_feed_recycler_view))
-            .perform(scrollToPosition<CurrencyFeedRecyclerAdapter.CurrencyFeedViewHolder>(11))
-        onView(withId(R.id.currency_feed_recycler_view))
-            .check(matches(childMatchesAtPosition(11, hasDescendant(withHint("0.00")))))
+        scrollAndCheckPositionForHint(11)
 
         //Check later position
-        onView(withId(R.id.currency_feed_recycler_view))
-            .perform(scrollToPosition<CurrencyFeedRecyclerAdapter.CurrencyFeedViewHolder>(21))
-        onView(withId(R.id.currency_feed_recycler_view))
-            .check(matches(childMatchesAtPosition(21, hasDescendant(withHint("0.00")))))
+        scrollAndCheckPositionForHint(21)
     }
 
     @Test
     fun givenEURIsBase_WhenAUDIsClicked_ThenAUDShouldBeAtPositionZero() {
-        onView(withId(R.id.currency_feed_recycler_view))
-            .check(matches(childMatchesAtPosition(0, hasDescendant(withText("EUR")))))
+        checkDescendantTextAtPosition(text = EURO_CURRENCY_CODE)
 
         onView(withId(R.id.currency_feed_recycler_view))
             .perform(
                 RecyclerViewActions.actionOnItem<CurrencyFeedRecyclerAdapter.CurrencyFeedViewHolder>(
                     hasDescendant(
-                        withText("AUD")
+                        withText(AUD_CURRENCY_CODE)
                     ), click()
                 )
             )
 
-        onView(withId(R.id.currency_feed_recycler_view))
-            .check(matches(childMatchesAtPosition(0, hasDescendant(withText("AUD")))))
+        checkDescendantTextAtPosition(text = AUD_CURRENCY_CODE)
     }
 
     @Test
     fun givenEURIsBase_WhenUSDIsClicked_ThenUSDShouldBeAtPositionZero() {
-        onView(withId(R.id.currency_feed_recycler_view))
-            .check(matches(childMatchesAtPosition(0, hasDescendant(withText("EUR")))))
+        checkDescendantTextAtPosition(text = EURO_CURRENCY_CODE)
 
         onView(withId(R.id.currency_feed_recycler_view))
             .perform(
                 RecyclerViewActions.actionOnItem<CurrencyFeedRecyclerAdapter.CurrencyFeedViewHolder>(
                     hasDescendant(
-                        withText("USD")
+                        withText(USD_CURRENCY_CODE)
                     ), click()
                 )
             )
 
+        checkDescendantTextAtPosition(text = USD_CURRENCY_CODE)
+    }
+
+    @Test
+    fun inputValueShouldNotChangeWhenScreenIsRotated() {
+        replaceCurrencyInput(input = VALID_INPUT)
+
+        uiDevice.setOrientationLeft()
+        uiDevice.setOrientationNatural()
+
+        checkDescendantTextAtPosition(text = VALID_INPUT)
+    }
+
+    private fun replaceCurrencyInput(position: Int = 0, input: String) {
         onView(withId(R.id.currency_feed_recycler_view))
-            .check(matches(childMatchesAtPosition(0, hasDescendant(withText("USD")))))
+            .perform(
+                RecyclerViewActions.actionOnItemAtPosition<CurrencyFeedRecyclerAdapter.CurrencyFeedViewHolder>(
+                    position,
+                    childPerformAction(replaceText(input), R.id.currency_feed_item_view_currency_input)
+                )
+            )
+    }
+
+    private fun checkDescendantTextAtPosition(position: Int = 0, text: String) {
+        onView(withId(R.id.currency_feed_recycler_view))
+            .check(matches(childMatchesAtPosition(position, hasDescendant(withText(text)))))
+    }
+
+    private fun scrollAndCheckPositionForHint(position: Int, input: String = ZERO_INPUT) {
+        onView(withId(R.id.currency_feed_recycler_view))
+            .perform(scrollToPosition<CurrencyFeedRecyclerAdapter.CurrencyFeedViewHolder>(position))
+
+        onView(withId(R.id.currency_feed_recycler_view))
+            .check(matches(childMatchesAtPosition(position, hasDescendant(withHint(input)))))
     }
 
     @After
     fun tearDown() {
         IdlingRegistry.getInstance().unregister(GlobalIncrementalIdlingResource.countingIdlingResource)
+    }
+
+    companion object {
+        private const val VALID_INPUT = "6,00"
+        private const val ZERO_INPUT = "0.00"
+        private const val USD_CURRENCY_CODE = "USD"
+        private const val EURO_CURRENCY_CODE = "EUR"
+        private const val AUD_CURRENCY_CODE = "AUD"
     }
 }

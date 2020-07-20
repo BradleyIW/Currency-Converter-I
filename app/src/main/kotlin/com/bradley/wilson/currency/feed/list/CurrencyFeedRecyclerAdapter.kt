@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bradley.wilson.R
@@ -62,7 +63,6 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
 
         currencyFeedItems.clear()
         currencyFeedItems.addAll(latestRates)
-
     }
 
     inner class CurrencyFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -88,6 +88,8 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
 
         fun bindAll(currencyItem: CurrencyItem) {
             with(itemView) {
+                ViewCompat.setAccessibilityDelegate(this, CurrencyFeedItemActionAccessibilityDelegate(currencyItem.isBateRate))
+
                 val currency = currencyFormatter.currency(currencyItem.country)
                 currency_feed_item_view_currency_code.text = currencyItem.country
                 currency_feed_item_view_currency_display_name.text = currency?.displayName ?: String.empty()
@@ -95,7 +97,25 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
 
                 bindRateForAll(currencyItem)
 
-                setOnClickListener { onItemClicked() }
+                if (!currencyItem.isBateRate) {
+                    setOnClickListener { onItemClicked() }
+                }
+            }
+        }
+
+        private fun defineContentDescription(view: View, baseCurrencyItem: CurrencyItem, currencyItem: CurrencyItem) {
+            val regularRate = currencyFormatter.formatRateToCurrency(currencyItem)
+            val baseRate = currencyFormatter.formatRateToCurrency(baseCurrencyItem)
+            view.contentDescription = when (layoutPosition) {
+                0 -> {
+                    currencyAmount.hint = String.empty()
+                    view.context.getString(R.string.base_currency_content_description, displayName(baseCurrencyItem), baseRate)
+                }
+                else -> view.context.getString(
+                    R.string.regular_currency_content_description,
+                    displayName(currencyItem), regularRate,
+                    displayName(baseCurrencyItem), baseRate
+                )
             }
         }
 
@@ -117,6 +137,7 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
         }
 
         private fun bindRate(currencyItem: CurrencyItem) {
+            defineContentDescription(itemView, currencyFeedItems[0], currencyItem)
             with(currencyAmount) {
                 removeTextChangedListener(baseCurrencyTextWatcher)
                 bindCurrencyData(currencyItem)
@@ -134,10 +155,11 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
             )
         }
 
+        private fun displayName(currencyItem: CurrencyItem) =
+            currencyFormatter.currency(currencyItem.country)?.displayName ?: currencyItem.country
+
         private fun onItemClicked() {
-            layoutPosition.takeIf { it > 0 }?.also { position ->
-                onItemClicked(currencyFeedItems[position])
-            }
+            onItemClicked(currencyFeedItems[layoutPosition])
         }
     }
 }

@@ -13,7 +13,7 @@ tasks.register("staticCodeAnalysis") {
 }
 
 tasks.register("codeCoverage") {
-    group = "Reporting"
+    group = "Quality"
     description = "Infrastructure task for running codeCoverage"
     dependsOn(":app:jacocoReport")
 }
@@ -25,8 +25,14 @@ tasks.register("compileApp") {
 
 tasks.register("runUnitTests") {
     group = "Testing"
-    description = "compiles the codebase."
+    description = "Runs Unit tests within the codebase "
     dependsOn(":app:testDebugUnitTest")
+}
+
+tasks.register("runUiTests") {
+    group = "Testing"
+    description = "Runs the ui tests within the codebase"
+    dependsOn(":app:connectedDebugAndroidTest")
 }
 
 

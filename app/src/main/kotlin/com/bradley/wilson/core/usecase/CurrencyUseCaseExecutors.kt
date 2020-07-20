@@ -36,10 +36,13 @@ class CurrencyUseCaseExecutors : UseCaseExecutors {
         result: (Either<Failure, Type>) -> Unit
     ) {
         cancelJobs()
-        pollingJob = scope.launch {
+        pollingJob = scope.launch(dispatcher) {
             while (scope.isActive) {
                 val backgroundJob = scope.async(dispatcher) { run(params) }
                 backgroundJob.await()?.let {
+                    //Throws Exception in thread ".." java.lang.IllegalArgumentException:
+                    //Parameter specified as non-null is null in test
+                    //if we don't null check .await()
                     result(it)
                 }
                 delay(intervalMillis)

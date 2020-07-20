@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import com.bradley.wilson.R
 import com.bradley.wilson.core.extensions.android.gone
+import com.bradley.wilson.core.extensions.android.headingForAccessibility
 import com.bradley.wilson.core.extensions.android.scrollToTop
 import com.bradley.wilson.core.extensions.android.visible
 import com.bradley.wilson.core.idling.GlobalIncrementalIdlingResource
@@ -28,15 +29,15 @@ class CurrencyFeedFragment : Fragment(R.layout.fragment_currency_feed) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        startFeed()
+        initScreenTitle()
         initCurrencyFeed()
         observeFeed()
         observeErrors()
         observeLoadingState()
     }
 
-    private fun startFeed() {
-        currencyFeedViewModel.startFeed()
+    private fun initScreenTitle() {
+        fragment_currency_feed_title_text_view.headingForAccessibility()
     }
 
     private fun observeLoadingState() {
