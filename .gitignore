@@ -4,9 +4,6 @@
 *.ap_
 *.aab
 
-# Room database schemas
-/schemas
-
 #Signing
 signing.properties
 

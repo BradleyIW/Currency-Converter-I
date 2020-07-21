@@ -1,1 +1,4 @@
 /build
+
+# Room database schemas
+/schemas
