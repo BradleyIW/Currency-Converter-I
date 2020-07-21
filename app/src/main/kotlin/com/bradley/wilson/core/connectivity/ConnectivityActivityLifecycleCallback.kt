@@ -1,6 +1,5 @@
 package com.bradley.wilson.core.connectivity
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.net.ConnectivityManager
@@ -14,7 +13,7 @@ import com.bradley.wilson.core.idling.GlobalIncrementalIdlingResource
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
-class ActivityLifecycleConnectivityCallback : Application.ActivityLifecycleCallbacks {
+class ConnectivityActivityLifecycleCallback : Application.ActivityLifecycleCallbacks {
 
     private lateinit var connectionSnackbar: Snackbar
 
@@ -29,7 +28,6 @@ class ActivityLifecycleConnectivityCallback : Application.ActivityLifecycleCallb
                 showConnectivitySnackbar()
             }
 
-            @SuppressLint("InlinedApi")
             override fun onAvailable(network: Network) {
                 hideConnectivitySnackbar()
             }
@@ -64,20 +62,22 @@ class ActivityLifecycleConnectivityCallback : Application.ActivityLifecycleCallb
         connectivityListener.unregisterListener(activity)
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-        activity.apply {
-            connectionSnackbar = Snackbar.make(
-                findViewById(android.R.id.content),
-                getString(R.string.no_connection_error_message),
-                Snackbar.LENGTH_INDEFINITE
-            )
-            connectionSnackbar.setTextColor(ContextCompat.getColor(activity, R.color.black))
-            val view = connectionSnackbar.view
-            val params = view.layoutParams as FrameLayout.LayoutParams
-            params.gravity = Gravity.TOP
-            view.layoutParams = params
-            connectionSnackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_FADE
-            showConnectivitySnackbar()
-        }
+        initConnectionWarning(activity)
+        showConnectivitySnackbar()
+    }
+
+    private fun initConnectionWarning(activity: Activity) = activity.apply {
+        connectionSnackbar = Snackbar.make(
+            findViewById(android.R.id.content),
+            getString(R.string.no_connection_error_message),
+            Snackbar.LENGTH_INDEFINITE
+        )
+        connectionSnackbar.setTextColor(ContextCompat.getColor(activity, R.color.black))
+        val view = connectionSnackbar.view
+        val params = view.layoutParams as FrameLayout.LayoutParams
+        params.gravity = Gravity.TOP
+        view.layoutParams = params
+        connectionSnackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_FADE
     }
 
     override fun onActivityResumed(activity: Activity) {

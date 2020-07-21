@@ -1,6 +1,6 @@
 package com.bradley.wilson.core.network
 
-import com.bradley.wilson.core.UnitTest
+import com.bradley.wilson.testing.UnitTest
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock

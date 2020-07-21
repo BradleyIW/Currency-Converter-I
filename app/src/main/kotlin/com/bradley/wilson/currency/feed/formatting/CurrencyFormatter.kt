@@ -6,42 +6,31 @@ import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.text.ParseException
-import java.util.Currency
+import java.util.Locale
 
-class CurrencyFormatter {
-
-    private val numberInstance = NumberFormat.getNumberInstance()
+class CurrencyFormatter(private val locale: Locale = CurrencyLocaleRetriever.getDefaultLocale()) {
 
     private val formatter by lazy {
-        numberInstance.apply {
+        NumberFormat.getNumberInstance(locale).apply {
             minimumFractionDigits = 2
             maximumFractionDigits = 2
             roundingMode = RoundingMode.HALF_UP
         }
     }
 
-    fun currency(currencyCode: String): Currency? = currencyInstance(currencyCode)
-
     fun formatRateToCurrency(rate: BigDecimal): String = formatter.format(rate)
 
     fun formatCurrencyToRate(currencyText: String): BigDecimal {
-        val format: DecimalFormat = numberInstance as DecimalFormat
+        val format: DecimalFormat = formatter as DecimalFormat
         format.isParseBigDecimal = true
 
         val formattedCurrency = currencyText.replace(CURRENCY_DELIMITER_REGEX, String.empty())
         return try {
             format.parse(formattedCurrency) as BigDecimal
         } catch (parseException: ParseException) {
-            BigDecimal(0.00)
+            BigDecimal.ZERO
         }
     }
-
-    private fun currencyInstance(countryCode: String) =
-        try {
-            Currency.getInstance(countryCode)
-        } catch (exception: IllegalStateException) {
-            null
-        }
 
     companion object {
         private val CURRENCY_DELIMITER_REGEX = "[^\\d.,]".toRegex()

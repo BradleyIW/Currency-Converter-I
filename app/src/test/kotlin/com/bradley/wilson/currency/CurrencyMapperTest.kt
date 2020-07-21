@@ -1,6 +1,6 @@
 package com.bradley.wilson.currency
 
-import com.bradley.wilson.core.UnitTest
+import com.bradley.wilson.testing.UnitTest
 import com.bradley.wilson.currency.data.local.CurrencyEntity
 import com.bradley.wilson.currency.data.local.CurrencyRate
 import com.bradley.wilson.currency.data.remote.responses.CurrencyResponse
@@ -21,7 +21,7 @@ class CurrencyMapperTest : UnitTest() {
 
     @Test
     fun `given a currency response, when toCurrencyList is called, then map to rates to list of currency objects`() {
-        val rates = mapOf(Pair(GBP_COUNTRY_CODE, GBP_CURRENCY_RATE.toDouble()))
+        val rates = mapOf(GBP_COUNTRY_CODE to GBP_CURRENCY_RATE.toDouble())
         val currencyResponse = CurrencyResponse(TEST_BASE_EUR_CURRENCY, rates)
         val list = currencyMapper.toCurrencyList(currencyResponse)
 

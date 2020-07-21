@@ -16,6 +16,7 @@ import com.bradley.wilson.core.ui.watchers.CustomTextWatcher
 import com.bradley.wilson.currency.feed.CurrencyItem
 import com.bradley.wilson.currency.feed.flags.CurrencyFlags
 import com.bradley.wilson.currency.feed.formatting.CurrencyFormatter
+import com.bradley.wilson.currency.feed.formatting.JavaCurrencyInstanceRetriever
 import kotlinx.android.synthetic.main.item_view_currency_feed.view.*
 import java.math.BigDecimal
 
@@ -88,10 +89,10 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
             with(itemView) {
                 ViewCompat.setAccessibilityDelegate(this, CurrencyFeedItemActionAccessibilityDelegate(currencyItem.isBateRate))
 
-                val currency = currencyFormatter.currency(currencyItem.country)
+                val currency = JavaCurrencyInstanceRetriever.currency(currencyItem.country)
                 currency_feed_item_view_currency_code.text = currencyItem.country
                 currency_feed_item_view_currency_display_name.text = currency?.displayName ?: String.empty()
-                currency_feed_item_view_flag.text = CurrencyFlags.getFlagEmojiForCurrency(currency)
+                currency_feed_item_view_flag.text = CurrencyFlags.getFlagEmojiForCurrency(currency?.currencyCode)
 
                 bindInputSpecs(currencyItem)
 
@@ -103,9 +104,10 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
             val regularRate = currencyFormatter.formatRateToCurrency(currencyItem.rate)
             val baseRate = currencyFormatter.formatRateToCurrency(baseCurrencyItem.rate)
             view.contentDescription = when (layoutPosition) {
-                0 -> {
-                    view.context.getString(R.string.base_currency_content_description, displayName(baseCurrencyItem), baseRate)
-                }
+                0 -> view.context.getString(
+                    R.string.base_currency_content_description,
+                    displayName(baseCurrencyItem), baseRate
+                )
                 else -> view.context.getString(
                     R.string.regular_currency_content_description,
                     displayName(currencyItem), regularRate,
@@ -151,7 +153,7 @@ class CurrencyFeedRecyclerAdapter : RecyclerView.Adapter<CurrencyFeedRecyclerAda
         }
 
         private fun displayName(currencyItem: CurrencyItem) =
-            currencyFormatter.currency(currencyItem.country)?.displayName ?: currencyItem.country
+            JavaCurrencyInstanceRetriever.currency(currencyItem.country)?.displayName ?: currencyItem.country
 
         private fun onItemClicked() {
             onItemClicked(currencyFeedItems[layoutPosition])

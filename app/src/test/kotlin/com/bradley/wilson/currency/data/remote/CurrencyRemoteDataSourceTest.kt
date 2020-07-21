@@ -1,6 +1,6 @@
 package com.bradley.wilson.currency.data.remote
 
-import com.bradley.wilson.core.UnitTest
+import com.bradley.wilson.testing.UnitTest
 import com.bradley.wilson.testing.mockito.eq
 import kotlinx.coroutines.runBlocking
 import org.junit.Before

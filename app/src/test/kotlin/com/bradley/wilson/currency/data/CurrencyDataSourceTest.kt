@@ -1,6 +1,6 @@
 package com.bradley.wilson.currency.data
 
-import com.bradley.wilson.core.UnitTest
+import com.bradley.wilson.testing.UnitTest
 import com.bradley.wilson.core.exceptions.Failure
 import com.bradley.wilson.core.functional.Either
 import com.bradley.wilson.core.functional.onFailure
@@ -46,7 +46,7 @@ class CurrencyDataSourceTest : UnitTest() {
     @Test
     fun `given based currency, when latestCurrencyRates succeeds, then propagate list of currencies and save to database`() {
         runBlocking {
-            val response = CurrencyResponse(TEST_BASE_EUR_CURRENCY, mapOf(Pair(TEST_COUNTRY, TEST_RATE.toDouble())))
+            val response = CurrencyResponse(TEST_BASE_EUR_CURRENCY, mapOf(TEST_COUNTRY to TEST_RATE.toDouble()))
 
             `when`(remoteDataSource.latestCurrencyRates(TEST_BASE_EUR_CURRENCY)).thenReturn(Either.Right(response))
 

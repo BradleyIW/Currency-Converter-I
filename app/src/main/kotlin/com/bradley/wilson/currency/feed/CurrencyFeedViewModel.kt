@@ -64,7 +64,7 @@ class CurrencyFeedViewModel(
     }
 
     fun updateFeed(updatedItem: CurrencyItem) {
-        baseCurrencyItem = CurrencyItem(updatedItem.country, updatedItem.rate, true, updatedItem.lastUpdatedAt)
+        baseCurrencyItem = CurrencyItem(updatedItem.country, updatedItem.rate, true)
         latestCurrencyRates(updatedItem.country, updatedItem.rate)
     }
 

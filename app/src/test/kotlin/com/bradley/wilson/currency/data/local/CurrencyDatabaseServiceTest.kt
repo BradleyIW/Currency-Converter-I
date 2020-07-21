@@ -1,6 +1,6 @@
 package com.bradley.wilson.currency.data.local
 
-import com.bradley.wilson.core.UnitTest
+import com.bradley.wilson.testing.UnitTest
 import com.bradley.wilson.core.functional.onSuccess
 import com.bradley.wilson.currency.data.local.source.CurrencyDatabaseService
 import kotlinx.coroutines.runBlocking

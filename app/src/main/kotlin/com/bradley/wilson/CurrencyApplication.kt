@@ -3,7 +3,7 @@ package com.bradley.wilson
 import android.app.Application
 import androidx.emoji.bundled.BundledEmojiCompatConfig
 import androidx.emoji.text.EmojiCompat
-import com.bradley.wilson.core.connectivity.ActivityLifecycleConnectivityCallback
+import com.bradley.wilson.core.connectivity.ConnectivityActivityLifecycleCallback
 import com.bradley.wilson.core.di.Injector
 
 class CurrencyApplication : Application() {
@@ -11,6 +11,6 @@ class CurrencyApplication : Application() {
         super.onCreate()
         Injector.start(this)
         EmojiCompat.init(BundledEmojiCompatConfig(this))
-        registerActivityLifecycleCallbacks(ActivityLifecycleConnectivityCallback())
+        registerActivityLifecycleCallbacks(ConnectivityActivityLifecycleCallback())
     }
 }

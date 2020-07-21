@@ -1,6 +1,6 @@
 package com.bradley.wilson.currency.usecase
 
-import com.bradley.wilson.core.UnitTest
+import com.bradley.wilson.testing.UnitTest
 import com.bradley.wilson.core.functional.onSuccess
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals

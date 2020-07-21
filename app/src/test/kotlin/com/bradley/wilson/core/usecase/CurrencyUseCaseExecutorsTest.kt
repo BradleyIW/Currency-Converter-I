@@ -1,6 +1,6 @@
 package com.bradley.wilson.core.usecase
 
-import com.bradley.wilson.core.UnitTest
+import com.bradley.wilson.testing.UnitTest
 import com.bradley.wilson.core.functional.Either
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers

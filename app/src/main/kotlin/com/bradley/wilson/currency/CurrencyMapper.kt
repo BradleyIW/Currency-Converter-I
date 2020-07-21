@@ -27,7 +27,7 @@ class CurrencyMapper {
         }, DEFAULT_TIMESTAMP, DEFAULT_TIMESTAMP)
 
     fun toCurrencyItem(it: Currency) =
-        CurrencyItem(it.country, it.rate, lastUpdatedAt = it.lastUpdatedAt)
+        CurrencyItem(it.country, it.rate)
 
     companion object {
         private const val DEFAULT_TIMESTAMP = 0L

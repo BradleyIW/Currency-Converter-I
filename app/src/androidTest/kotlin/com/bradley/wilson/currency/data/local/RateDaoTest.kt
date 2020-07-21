@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.bradley.wilson.testing.FunctionalTest
-import com.bradley.wilson.core.database.currency.CurrencyDatabase
 import com.bradley.wilson.core.extensions.math.equalTo
 import org.junit.After
 import org.junit.Assert.assertEquals

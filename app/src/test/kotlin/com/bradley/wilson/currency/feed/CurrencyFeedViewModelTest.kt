@@ -2,7 +2,7 @@ package com.bradley.wilson.currency.feed
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.bradley.wilson.R
-import com.bradley.wilson.core.UnitTest
+import com.bradley.wilson.testing.UnitTest
 import com.bradley.wilson.core.database.error.NoResultsError
 import com.bradley.wilson.core.functional.Either
 import com.bradley.wilson.core.ui.state.ItemClicked
@@ -191,7 +191,7 @@ class CurrencyFeedViewModelTest : UnitTest() {
     @Test
     fun `given onItemClicked is called, when latestRatesUseCase succeeds and conversion succeeds, then assert base and converted currencies`() {
         runBlocking {
-            val newBaseCurrency = CurrencyItem(SWISS_FRANK_CURRENCY_CODE, BigDecimal.TEN, true, 0L)
+            val newBaseCurrency = CurrencyItem(SWISS_FRANK_CURRENCY_CODE, BigDecimal.TEN, true)
             val currency = Currency(UNITED_STATES_DOLLAR_CURRENCY_CODE, BigDecimal.TEN, 0L)
             val currencies = listOf(currency)
             `when`(latestRatesUseCase.run(any())).thenReturn(Either.Right(currencies))
