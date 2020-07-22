@@ -6,10 +6,12 @@ import java.util.Properties
 object BuildTypes {
     const val RELEASE = "release"
 }
-
-val signingPropertiesFile = rootProject.file("signing.properties")
 val signingProperties = Properties()
-signingProperties.load(FileInputStream(signingPropertiesFile))
+
+if (signingPropertiesExists()) {
+    val signingPropertiesFile = rootProject.file("signing.properties")
+    signingProperties.load(FileInputStream(signingPropertiesFile))
+}
 
 plugins {
     id("com.android.application") apply false
@@ -26,4 +28,11 @@ android {
     }
 }
 
-fun getPropertiesValue(key: String) = (signingProperties[key] as String).trim()
+fun getPropertiesValue(key: String) =
+    if (signingPropertiesExists()) {
+        (signingProperties[key] as String).trim()
+    } else " "
+
+fun signingPropertiesExists() =
+    rootProject.file("signing.properties").exists()
+
