@@ -1,6 +1,6 @@
 # Currency-Converter 
 
-A simple currency converter application
+A simple currency converter application. A predecssor to [Currency Converter II](https://github.com/BradleyIW/Currency-Converter-II).
 
 # Gradle Tasks
  - ```./gradlew checkQuality```: Works as an internal CI task to compile the app, run unit tests, run static code analysis and generate test code coverage report 
